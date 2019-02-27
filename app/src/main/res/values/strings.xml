@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">YourCoastAndroid</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps">YourCoast</string>
     <string name="app_label">Test</string>
     <string name="search_hint">Search Test</string>
+    <string name="permission_rationale_location">permission_rationale_location</string>
+    <string name="permission_required_toast">permission required toast</string>
+    <string name="location_permission_denied">location persmission denied</string>
 </resources>
