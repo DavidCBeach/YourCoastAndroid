@@ -6,6 +6,7 @@ import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -53,7 +54,12 @@ public class MapsActivity extends AppCompatActivity
         LatLng marina = new LatLng(36.6, -121.8);
         mMap.addMarker(new MarkerOptions().position(marina).title("Marker in Marina"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(marina));
-
+        //map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(36.6, -121.8), 5));
+        CameraPosition newCamPos = new CameraPosition(new LatLng(37.2,-120.5),
+                5.7f,
+                map.getCameraPosition().tilt, //use old tilt
+                map.getCameraPosition().bearing); //use old bearing
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(newCamPos), 1000, null);
         enableMyLocation();
     }
 
