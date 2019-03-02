@@ -11,13 +11,14 @@ import android.widget.TextView;
 import com.example.yourcoastandroid.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 //recycler adapter (may need to change name not sure if this is the correct file to implement this)
 public class CCCDataClient extends RecyclerView.Adapter<CCCDataClient.myViewHolder> {
 
-    private ArrayList<CCCAccPtDataStructure> list = new ArrayList<>();
+    private List<CCCAccPtDataStructure> list = new ArrayList<>();
 
-    CCCDataClient(ArrayList<CCCAccPtDataStructure> list){
+    public CCCDataClient(List<CCCAccPtDataStructure> list){
         this.list = list;
     }
 
@@ -32,19 +33,21 @@ public class CCCDataClient extends RecyclerView.Adapter<CCCDataClient.myViewHold
     public void onBindViewHolder(@NonNull myViewHolder viewHolder, int i) {
         viewHolder.ID.setText(Integer.toString(list.get(i).getID()));
         viewHolder.DISTRICT.setText(list.get(i).getDISTRICT());
+        viewHolder.NameMobileWeb.setText(list.get(i).getNameMobileWeb());
     }
 
     @Override
     public int getItemCount() {
-        return 10;//list.size();
+        return 30;//list.size();
     }
 
     public static class myViewHolder extends RecyclerView.ViewHolder {
-        TextView ID, DISTRICT;
+        TextView ID, DISTRICT, NameMobileWeb;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
             ID = (TextView)itemView.findViewById(R.id.id);
             DISTRICT = (TextView)itemView.findViewById(R.id.district);
+            NameMobileWeb = (TextView)itemView.findViewById(R.id.nameMobileWeb);
         }
     }
 }

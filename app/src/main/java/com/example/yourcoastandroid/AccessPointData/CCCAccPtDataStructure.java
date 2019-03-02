@@ -4,7 +4,7 @@ public class CCCAccPtDataStructure {
 
     //variables for testing purposes with recycler view
     private int ID;
-    private String DISTRICT;
+    private String DISTRICT, NameMobileWeb;
 
     public int getID() {
         return ID;
@@ -12,5 +12,9 @@ public class CCCAccPtDataStructure {
 
     public String getDISTRICT() {
         return DISTRICT;
+    }
+
+    public String getNameMobileWeb() {
+        return NameMobileWeb;
     }
 }
