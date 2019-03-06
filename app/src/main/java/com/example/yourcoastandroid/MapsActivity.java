@@ -6,9 +6,12 @@ import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.clustering.ClusterManager;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -18,12 +21,21 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
+import com.example.yourcoastandroid.MyItem;
+import com.example.yourcoastandroid.MyItemReader;
+
+import org.json.JSONException;
+
+import java.io.InputStream;
+import java.util.List;
 
 public class MapsActivity extends AppCompatActivity
         implements
         OnMyLocationButtonClickListener,
         OnMyLocationClickListener,
         OnMapReadyCallback,
+        GoogleMap.OnMarkerClickListener,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
 
@@ -32,6 +44,9 @@ public class MapsActivity extends AppCompatActivity
     private boolean mPermissionDenied = false;
 
     private GoogleMap mMap;
+
+    private ClusterManager<MyItem> mClusterManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +67,9 @@ public class MapsActivity extends AppCompatActivity
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         // Temporary Example pin
         LatLng marina = new LatLng(36.6, -121.8);
-        mMap.addMarker(new MarkerOptions().position(marina).title("Marker in Marina"));
+        //mMap.addMarker(new MarkerOptions().position(marina).title("Marina").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(marina));
+
         //map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(36.6, -121.8), 5));
         CameraPosition newCamPos = new CameraPosition(new LatLng(37.2,-120.5),
                 5.7f,
@@ -61,7 +77,57 @@ public class MapsActivity extends AppCompatActivity
                 map.getCameraPosition().bearing); //use old bearing
         map.animateCamera(CameraUpdateFactory.newCameraPosition(newCamPos), 1000, null);
         enableMyLocation();
+
+
+        mClusterManager = new ClusterManager<>(this, mMap);
+        mMap.setOnCameraIdleListener(mClusterManager);
+
+        try {
+            readItems();
+        } catch (JSONException e) {
+            Toast.makeText(this, "Problem reading list of markers.", Toast.LENGTH_LONG).show();
+        }
+
+
+
+
+
     }
+
+
+
+    private void readItems() throws JSONException {
+        InputStream inputStream = getResources().openRawResource(R.raw.access_points);
+        List<MyItem> items = new MyItemReader().read(inputStream);
+        mClusterManager.addItems(items);
+    }
+
+
+
+
+
+    /** Called when the user clicks a marker. */
+    public boolean onMarkerClick(final Marker marker) {
+        Toast.makeText(this,"wow",Toast.LENGTH_LONG).show();
+        // Retrieve the data from the marker.
+        Integer clickCount = (Integer) marker.getTag();
+
+        // Check if a click count was set, then display the click count.
+        if (clickCount != null) {
+            clickCount = clickCount + 1;
+            marker.setTag(clickCount);
+            Toast.makeText(this,
+                    marker.getTitle() +
+                            " has been clicked " + clickCount + " times.",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        // Return false to indicate that we have not consumed the event and that we wish
+        // for the default behavior to occur (which is for the camera to move such that the
+        // marker is centered and for the marker's info window to open, if it has one).
+        return false;
+    }
+
 
     private void enableMyLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
