@@ -117,8 +117,17 @@ public class MapsActivity extends AppCompatActivity
     /** Called when the user clicks a marker. */
     public boolean onMarkerClick(final Marker marker) {
         //cameraView(marker);
-        Toast.makeText(this,marker.getSnippet() ,Toast.LENGTH_LONG).show();
+
+        if(marker.getSnippet() == null){
+            Toast.makeText(this,marker.getTag().toString() ,Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this,marker.getSnippet() ,Toast.LENGTH_LONG).show();
+            marker.setTag(marker.getSnippet());
+        }
         marker.setSnippet(null);
+
+
+
         return false;
     }
 
