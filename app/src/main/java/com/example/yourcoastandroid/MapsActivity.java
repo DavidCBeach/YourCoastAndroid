@@ -202,9 +202,9 @@ public class MapsActivity extends AppCompatActivity
         }
         String stringOfMarkersCombined = stringsOfMarkers.toString();
         String stringofIDCombined = IDOfMarkers.toString();
-        //Toast.makeText(this,cameraRegion.latLngBounds.toString(),Toast.LENGTH_LONG).show();
-        Toast.makeText(this,stringOfMarkersCombined,Toast.LENGTH_SHORT).show();
-        Toast.makeText(this,stringofIDCombined,Toast.LENGTH_SHORT).show();
+        //uncomment following lines to display proof of concept for ID list of Markers shown
+        //Toast.makeText(this,stringOfMarkersCombined,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,stringofIDCombined,Toast.LENGTH_SHORT).show();
     }
 
     @Override
