@@ -24,12 +24,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-<<<<<<< HEAD
 import android.view.Menu;
 import android.view.MenuItem;
-=======
 import android.view.View;
->>>>>>> da50e2e0fccb9a02a5fa36f8dd1f481f0bfbab84
 import android.widget.Toast;
 import com.example.yourcoastandroid.MyItem;
 import com.example.yourcoastandroid.MyItemReader;
@@ -191,7 +188,6 @@ public class MapsActivity extends AppCompatActivity
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
 
-<<<<<<< HEAD
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -220,8 +216,6 @@ public class MapsActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
 
     }
-
-=======
 
 
     private void cameraView(){
@@ -262,5 +256,4 @@ public class MapsActivity extends AppCompatActivity
     public View getInfoContents(Marker marker) {
         return null;
     }
->>>>>>> da50e2e0fccb9a02a5fa36f8dd1f481f0bfbab84
 }
