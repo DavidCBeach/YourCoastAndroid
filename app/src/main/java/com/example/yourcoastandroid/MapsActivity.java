@@ -15,14 +15,21 @@ import com.google.android.gms.maps.model.VisibleRegion;
 import com.google.maps.android.clustering.ClusterManager;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+<<<<<<< HEAD
+import android.view.Menu;
+import android.view.MenuItem;
+=======
 import android.view.View;
+>>>>>>> da50e2e0fccb9a02a5fa36f8dd1f481f0bfbab84
 import android.widget.Toast;
 import com.example.yourcoastandroid.MyItem;
 import com.example.yourcoastandroid.MyItemReader;
@@ -32,6 +39,8 @@ import org.json.JSONException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.yourcoastandroid.R.menu.menu_maps;
 
 public class MapsActivity extends AppCompatActivity
         implements
@@ -182,6 +191,37 @@ public class MapsActivity extends AppCompatActivity
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
 
+<<<<<<< HEAD
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // Add items to action bar
+        getMenuInflater().inflate(menu_maps, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        // Is item is selected, if so do correlated action
+        switch(item.getItemId())
+        {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+
+                return true;
+
+            case R.id.action_info:
+                startActivity(new Intent(this, InfoActivity.class));
+
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
+=======
 
 
     private void cameraView(){
@@ -222,4 +262,5 @@ public class MapsActivity extends AppCompatActivity
     public View getInfoContents(Marker marker) {
         return null;
     }
+>>>>>>> da50e2e0fccb9a02a5fa36f8dd1f481f0bfbab84
 }
