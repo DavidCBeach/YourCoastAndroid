@@ -5,9 +5,7 @@
     <!-- Activity names -->
     <string name="title_activity_maps">YourCoast</string>
     <string name="title_activity_list">ListActivity</string>
-
-    <!-- Action bar strings -->
-    <string name="action_info">Information</string>
+    <string name="action_info">About</string>
 
     <!-- Warning strings -->
     <string name="app_label">Test</string>

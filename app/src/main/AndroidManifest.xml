@@ -19,7 +19,7 @@
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         <activity
             android:name=".InfoActivity"
-            android:label="Information"
+            android:label="@string/action_info"
             android:parentActivityName=".MapsActivity" >
 
             <meta-data
