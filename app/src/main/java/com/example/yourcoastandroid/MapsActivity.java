@@ -58,6 +58,8 @@ public class MapsActivity extends AppCompatActivity
 
     private ClusterManager<MyItem> mClusterManager;
 
+    private ClusterManager.OnClusterClickListener mClusterClickListener;
+
     private List<MyItem> items;
 
     @Override
@@ -89,11 +91,10 @@ public class MapsActivity extends AppCompatActivity
                 map.getCameraPosition().bearing); //use old bearing
         map.animateCamera(CameraUpdateFactory.newCameraPosition(newCamPos), 1000, null);
         enableMyLocation();
-
         mClusterManager = new ClusterManager<>(this, mMap);
         mMap.setOnCameraIdleListener(this);
         mMap.setOnMarkerClickListener(this);
-
+        //mClusterManager.setOnsetOnClusterClickListener(mClusterClickListener);
         try {
             readItems();
         } catch (JSONException e) {
@@ -121,20 +122,33 @@ public class MapsActivity extends AppCompatActivity
 
 
     /** Called when the user clicks a marker. */
+    @Override
     public boolean onMarkerClick(final Marker marker) {
         //cameraView(marker);
-
-        if(marker.getSnippet() == null){
-            Toast.makeText(this,marker.getTag().toString() ,Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this,marker.getSnippet() ,Toast.LENGTH_LONG).show();
-            marker.setTag(marker.getSnippet());
+        try {
+            String id = "";
+            if (marker.getSnippet() == null) {
+                //Toast.makeText(this,marker.getTag().toString() ,Toast.LENGTH_LONG).show();
+                id = marker.getTag().toString();
+            } else {
+                //Toast.makeText(this,marker.getSnippet() ,Toast.LENGTH_LONG).show();
+                marker.setTag(marker.getSnippet());
+                id = marker.getSnippet();
+            }
+            marker.setSnippet(null);
+            launchDetails(id);
+        } catch(Exception e) {
+            System.out.println("cluster click");
         }
-        marker.setSnippet(null);
 
 
 
         return false;
+    }
+    private void launchDetails(String id){
+        Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
+        intent.putExtra("DATA_ID", id);
+        startActivity(intent);
     }
 
 
