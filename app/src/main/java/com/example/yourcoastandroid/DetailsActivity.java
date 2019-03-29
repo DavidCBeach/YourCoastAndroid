@@ -22,7 +22,7 @@ public class DetailsActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        System.out.println(details.Photo_1);
+        System.out.println(details.RESTROOMS);
 
     }
 

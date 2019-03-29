@@ -57,125 +57,125 @@ public class DetailItemReader {
                 BIKE_PATH = object.getString("BIKE_PATH");
                 BT_FACIL_TYPE = object.getString("BT_FACIL_TYPE");
                 String temp = object.getString("FEE");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     FEE = true;
                 } else {
                     FEE = false;
                 }
                  temp = object.getString("PARKING");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     PARKING = true;
                 } else {
                     PARKING = false;
                 }
                  temp = object.getString("DSABLDACSS");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     DSABLDACSS = true;
                 } else {
                     DSABLDACSS = false;
                 }
                  temp = object.getString("RESTROOMS");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     RESTROOMS = true;
                 } else {
                     RESTROOMS = false;
                 }
                  temp = object.getString("VISTOR_CTR");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     VISTOR_CTR = true;
                 } else {
                     VISTOR_CTR = false;
                 }
                  temp = object.getString("DOG_FRIENDLY");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     DOG_FRIENDLY = true;
                 } else {
                     DOG_FRIENDLY = false;
                 }
                  temp = object.getString("EZ4STROLLERS");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     EZ4STROLLERS = true;
                 } else {
                     EZ4STROLLERS = false;
                 }
                  temp = object.getString("PCNC_AREA");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     PCNC_AREA = true;
                 } else {
                     PCNC_AREA = false;
                 }
                  temp = object.getString("CAMPGROUND");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     CAMPGROUND = true;
                 } else {
                     CAMPGROUND = false;
                 }
                  temp = object.getString("SNDY_BEACH");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     SNDY_BEACH = true;
                 } else {
                     SNDY_BEACH = false;
                 } temp = object.getString("DUNES");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     DUNES = true;
                 } else {
                     DUNES = false;
                 } temp = object.getString("RKY_SHORE");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     RKY_SHORE = true;
                 } else {
                     RKY_SHORE = false;
                 }
                  temp = object.getString("BLUFF");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     BLUFF = true;
                 } else {
                     BLUFF = false;
                 }
                  temp = object.getString("STRS_BEACH");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     STRS_BEACH = true;
                 } else {
                     STRS_BEACH = false;
                 } temp = object.getString("PTH_BEACH");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     PTH_BEACH = true;
                 } else {
                     PTH_BEACH = false;
                 } temp = object.getString("BLFTP_TRLS");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     BLFTP_TRLS = true;
                 } else {
                     BLFTP_TRLS = false;
                 } temp = object.getString("BLFTP_PRK");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     BLFTP_PRK = true;
                 } else {
                     BLFTP_PRK = false;
                 } temp = object.getString("WLDLFE_VWG");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     WLDLFE_VWG = true;
                 } else {
                     WLDLFE_VWG = false;
                 }
                  temp = object.getString("TIDEPOOL");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     TIDEPOOL = true;
                 } else {
                     TIDEPOOL = false;
                 }
                  temp = object.getString("VOLLEYBALL");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     VOLLEYBALL = true;
                 } else {
                     VOLLEYBALL = false;
                 } temp = object.getString("FISHING");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     FISHING = true;
                 } else {
                     FISHING = false;
                 } temp = object.getString("BOATING");
-                if(temp == "Yes"){
+                if(temp.equals("Yes")){
                     BOATING = true;
                 } else {
                     BOATING = false;
