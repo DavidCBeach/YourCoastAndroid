@@ -7,21 +7,6 @@
     <string name="title_activity_list">ListActivity</string>
     <string name="action_info">About</string>
 
-    <!-- About text -->
-    <string name="info_text">
-        To find coastal access ways while on the road,
-        look for the ///// Coastal Access Logo symbol
-        (the Coastal Commission\'\s coastal access
-        logo)that marks many (but not all) coastal
-        access points. The California Constitution
-        guarantees the public\'\s right of access to
-        tidelands, that is the area seaward of the
-        mean high line. When visiting the coast,
-        please observe any posted rules and please do
-        not trespass on any adjacent private lands.
-        Always be alert for sleeper waves and other
-        hazards; stay safe and enjoy the coast.
-    </string>
 
     <!-- Warning strings -->
     <string name="app_label">Test</string>
