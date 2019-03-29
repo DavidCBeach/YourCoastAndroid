@@ -40,17 +40,17 @@ public class MyItemReader {
         JSONArray array = new JSONArray(json);
         for (int i = 0; i < array.length(); i++) {
             String title = null;
-            String snippet = null;
+            //String ssnippet = null;
             JSONObject object = array.getJSONObject(i);
             double lat = object.getDouble("LATITUDE");
             double lng = object.getDouble("LONGITUDE");
+            int id = object.getInt("ID");
+            Integer snippet = object.getInt("ID");
+            String ssnippet = snippet.toString();
             if (!object.isNull("NameMobileWeb")) {
                 title = object.getString("NameMobileWeb");
             }
-            if (!object.isNull("snippet")) {
-                snippet = object.getString("snippet");
-            }
-            items.add(new MyItem(lat, lng, title, snippet));
+            items.add(new MyItem(lat, lng, title, ssnippet, id));
         }
         return items;
     }

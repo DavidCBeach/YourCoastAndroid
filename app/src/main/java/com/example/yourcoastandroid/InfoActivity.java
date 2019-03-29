@@ -9,7 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.webkit.WebView;
+
 
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class InfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info);
         centerTitle();
 
+
         webViewInfoPage = findViewById(R.id.webViewInfoPage);
 
         loadHTMLPage();
@@ -32,6 +35,7 @@ public class InfoActivity extends AppCompatActivity {
     {
         webViewInfoPage.getSettings().setJavaScriptEnabled(true);
         webViewInfoPage.loadUrl("file:///android_asset/index.html");
+
 
     }
 

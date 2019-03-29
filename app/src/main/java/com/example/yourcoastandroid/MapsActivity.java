@@ -11,6 +11,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.VisibleRegion;
 import com.google.maps.android.clustering.ClusterManager;
 
 import android.Manifest;
@@ -25,6 +26,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 import com.example.yourcoastandroid.MyItem;
 import com.example.yourcoastandroid.MyItemReader;
@@ -32,6 +34,7 @@ import com.example.yourcoastandroid.MyItemReader;
 import org.json.JSONException;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.yourcoastandroid.R.menu.menu_maps;
@@ -41,6 +44,8 @@ public class MapsActivity extends AppCompatActivity
         OnMyLocationButtonClickListener,
         OnMyLocationClickListener,
         OnMapReadyCallback,
+        GoogleMap.OnCameraIdleListener,
+        GoogleMap.InfoWindowAdapter,
         GoogleMap.OnMarkerClickListener,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -53,6 +58,7 @@ public class MapsActivity extends AppCompatActivity
 
     private ClusterManager<MyItem> mClusterManager;
 
+    private List<MyItem> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,15 +90,18 @@ public class MapsActivity extends AppCompatActivity
         map.animateCamera(CameraUpdateFactory.newCameraPosition(newCamPos), 1000, null);
         enableMyLocation();
 
-
         mClusterManager = new ClusterManager<>(this, mMap);
-        mMap.setOnCameraIdleListener(mClusterManager);
+        mMap.setOnCameraIdleListener(this);
+        mMap.setOnMarkerClickListener(this);
 
         try {
             readItems();
         } catch (JSONException e) {
             Toast.makeText(this, "Problem reading list of markers.", Toast.LENGTH_LONG).show();
         }
+
+
+        // mMap.setOnMarkerClickListener(mClusterManager.getMarkerManager().getCollection());
 
 
 
@@ -104,33 +113,27 @@ public class MapsActivity extends AppCompatActivity
 
     private void readItems() throws JSONException {
         InputStream inputStream = getResources().openRawResource(R.raw.access_points);
-        List<MyItem> items = new MyItemReader().read(inputStream);
+        items = new MyItemReader().read(inputStream);
         mClusterManager.addItems(items);
     }
 
 
 
 
-
     /** Called when the user clicks a marker. */
     public boolean onMarkerClick(final Marker marker) {
-        Toast.makeText(this,"wow",Toast.LENGTH_LONG).show();
-        // Retrieve the data from the marker.
-        Integer clickCount = (Integer) marker.getTag();
+        //cameraView(marker);
 
-        // Check if a click count was set, then display the click count.
-        if (clickCount != null) {
-            clickCount = clickCount + 1;
-            marker.setTag(clickCount);
-            Toast.makeText(this,
-                    marker.getTitle() +
-                            " has been clicked " + clickCount + " times.",
-                    Toast.LENGTH_SHORT).show();
+        if(marker.getSnippet() == null){
+            Toast.makeText(this,marker.getTag().toString() ,Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this,marker.getSnippet() ,Toast.LENGTH_LONG).show();
+            marker.setTag(marker.getSnippet());
         }
+        marker.setSnippet(null);
 
-        // Return false to indicate that we have not consumed the event and that we wish
-        // for the default behavior to occur (which is for the camera to move such that the
-        // marker is centered and for the marker's info window to open, if it has one).
+
+
         return false;
     }
 
@@ -147,7 +150,7 @@ public class MapsActivity extends AppCompatActivity
 
     @Override
     public boolean onMyLocationButtonClick() {
-
+        //cameraView();
         return false;
     }
 
@@ -214,4 +217,43 @@ public class MapsActivity extends AppCompatActivity
 
     }
 
+
+    private void cameraView(){
+        //CameraPosition cameraPosition = mMap.getCameraPosition();
+        //testing visuals:
+        ArrayList<String> stringsOfMarkers = new ArrayList<>();
+        ArrayList<LatLng> latLngsOfMarkers = new ArrayList<>();
+        ArrayList<Integer> IDOfMarkers = new ArrayList<>();
+        VisibleRegion cameraRegion = mMap.getProjection().getVisibleRegion();
+        for( MyItem item : items){
+
+            LatLng tempItem = item.getPosition();
+            if(cameraRegion.latLngBounds.contains(tempItem)) {
+                latLngsOfMarkers.add(tempItem);
+                stringsOfMarkers.add(item.getTitle());
+                IDOfMarkers.add(item.getID());
+            }
+        }
+        String stringOfMarkersCombined = stringsOfMarkers.toString();
+        String stringofIDCombined = IDOfMarkers.toString();
+        //uncomment following lines to display proof of concept for ID list of Markers shown
+        //Toast.makeText(this,stringOfMarkersCombined,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,stringofIDCombined,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCameraIdle() {
+        cameraView();
+        mClusterManager.onCameraIdle();
+    }
+
+    @Override
+    public View getInfoWindow(Marker marker) {
+        return null;
+    }
+
+    @Override
+    public View getInfoContents(Marker marker) {
+        return null;
+    }
 }
