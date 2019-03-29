@@ -35,6 +35,7 @@ import org.json.JSONException;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static com.example.yourcoastandroid.R.menu.menu_maps;
@@ -47,6 +48,7 @@ public class MapsActivity extends AppCompatActivity
         GoogleMap.OnCameraIdleListener,
         GoogleMap.InfoWindowAdapter,
         GoogleMap.OnMarkerClickListener,
+        GoogleMap.OnInfoWindowClickListener,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
 
@@ -94,6 +96,8 @@ public class MapsActivity extends AppCompatActivity
         mClusterManager = new ClusterManager<>(this, mMap);
         mMap.setOnCameraIdleListener(this);
         mMap.setOnMarkerClickListener(this);
+        mMap.setOnInfoWindowClickListener(this);
+
         //mClusterManager.setOnsetOnClusterClickListener(mClusterClickListener);
         try {
             readItems();
@@ -126,6 +130,7 @@ public class MapsActivity extends AppCompatActivity
     public boolean onMarkerClick(final Marker marker) {
         //cameraView(marker);
         try {
+
             String id = "";
             if (marker.getSnippet() == null) {
                 //Toast.makeText(this,marker.getTag().toString() ,Toast.LENGTH_LONG).show();
@@ -136,7 +141,8 @@ public class MapsActivity extends AppCompatActivity
                 id = marker.getSnippet();
             }
             marker.setSnippet(null);
-            launchDetails(id);
+
+
         } catch(Exception e) {
             System.out.println("cluster click");
         }
@@ -269,5 +275,26 @@ public class MapsActivity extends AppCompatActivity
     @Override
     public View getInfoContents(Marker marker) {
         return null;
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        try {
+
+            String id = "";
+            if (marker.getSnippet() == null) {
+                //Toast.makeText(this,marker.getTag().toString() ,Toast.LENGTH_LONG).show();
+                id = marker.getTag().toString();
+            } else {
+                //Toast.makeText(this,marker.getSnippet() ,Toast.LENGTH_LONG).show();
+                marker.setTag(marker.getSnippet());
+                id = marker.getSnippet();
+            }
+            launchDetails(id);
+
+
+        } catch(Exception e) {
+            System.out.println("cluster click");
+        }
     }
 }
