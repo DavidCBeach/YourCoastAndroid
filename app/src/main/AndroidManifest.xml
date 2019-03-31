@@ -17,11 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+        <activity android:name=".DetailsActivity"></activity>
         <activity
             android:name=".InfoActivity"
             android:label="@string/action_info"
-            android:parentActivityName=".MapsActivity" >
-
+            android:parentActivityName=".MapsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MapsActivity" />
@@ -29,10 +29,8 @@
         <activity
             android:name=".ListActivity"
             android:label="@string/title_activity_list"
-            android:theme="@style/NoActionBar">
-
-        </activity>
-     	<!--
+            android:theme="@style/NoActionBar" />
+        <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
              Note that the API key is linked to the encryption key used to sign the APK.
@@ -46,13 +44,12 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" >
+            android:label="@string/title_activity_maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 
