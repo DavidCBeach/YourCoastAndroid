@@ -2,6 +2,7 @@ package com.example.yourcoastandroid;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import org.json.JSONException;
 
@@ -23,6 +24,8 @@ public class DetailsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         System.out.println(details.RESTROOMS);
+        final TextView textViewToChange = (TextView) findViewById(R.id.title);
+        textViewToChange.setText(details.NameMobileWeb.toString());
 
     }
 
