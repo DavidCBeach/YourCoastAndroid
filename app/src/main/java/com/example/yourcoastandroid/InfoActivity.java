@@ -55,7 +55,7 @@ public class InfoActivity extends AppCompatActivity {
         switch(item.getItemId())
         {
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                onBackPressed();
 
                 return true;
         }
@@ -71,21 +71,6 @@ public class InfoActivity extends AppCompatActivity {
         if(textViews.size() > 0)
         {
             AppCompatTextView appCompatTextView = null;
-            if(textViews.size() == 1)
-            {
-                appCompatTextView = (AppCompatTextView) textViews.get(0);
-            }
-            else
-            {
-                for(View v : textViews)
-                {
-                    if(v.getParent() instanceof Toolbar)
-                    {
-                        appCompatTextView = (AppCompatTextView) v;
-                        break;
-                    }
-                }
-            }
 
             if(appCompatTextView != null)
             {

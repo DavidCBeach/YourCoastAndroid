@@ -15,4 +15,7 @@
     <string name="permission_required_toast">permission required toast</string>
     <string name="location_permission_denied">location permission denied</string>
     <string name="title_activity_details">DetailsActivity</string>
+    <string name="address_label">Address</string>
+    <string name="phone_label">Phone</string>
+    <string name="amenities_label">Amenities</string>
 </resources>
