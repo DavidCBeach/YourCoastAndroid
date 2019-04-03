@@ -94,7 +94,7 @@ public class MapsActivity extends AppCompatActivity
                 5.7f,
                 map.getCameraPosition().tilt, //use old tilt
                 map.getCameraPosition().bearing); //use old bearing
-        map.animateCamera(CameraUpdateFactory.newCameraPosition(newCamPos), 1000, null);
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(newCamPos), 1, null);
         enableMyLocation();
         mClusterManager = new ClusterManager<>(this, mMap);
         mMap.setOnCameraIdleListener(this);

@@ -20,7 +20,8 @@ public class DetailItemReader {
         int CountyNum;
         String COUNTY;
         String NameMobileWeb;
-        String LocationMobileWeb, DescriptionMobileWeb, PHONE_NMBR, LIST_ORDER, GEOGR_AREA, LATITUDE, LONGITUDE,
+        Double LATITUDE, LONGITUDE;
+        String LocationMobileWeb, DescriptionMobileWeb, PHONE_NMBR, LIST_ORDER, GEOGR_AREA,
                 Photo_1,Photo_2,Photo_3,Photo_4, Bch_whlchr, BIKE_PATH, BT_FACIL_TYPE;
         boolean FEE, PARKING, DSABLDACSS, RESTROOMS, VISTOR_CTR, DOG_FRIENDLY, EZ4STROLLERS, PCNC_AREA, CAMPGROUND,
                 SNDY_BEACH, DUNES, RKY_SHORE, BLUFF, STRS_BEACH, PTH_BEACH,BLFTP_TRLS, BLFTP_PRK,WLDLFE_VWG,
@@ -47,8 +48,8 @@ public class DetailItemReader {
                 PHONE_NMBR = object.getString("PHONE_NMBR");
                 LIST_ORDER = object.getString("LIST_ORDER");
                 GEOGR_AREA = object.getString("GEOGR_AREA");
-                LATITUDE = object.getString("LATITUDE");
-                LONGITUDE = object.getString("LONGITUDE");
+                LATITUDE = object.getDouble("LATITUDE");
+                LONGITUDE = object.getDouble("LONGITUDE");
                 Photo_1 = object.getString("Photo_1");
                 Photo_2 = object.getString("Photo_2");
                 Photo_3 = object.getString("Photo_3");
