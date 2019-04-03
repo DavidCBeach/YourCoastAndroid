@@ -2,19 +2,42 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="45dp"
+    android:layout_height="50dp"
     android:elevation="4dp"
-    android:padding="4dp">
+    android:padding="4dp"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:layout_height="wrap_content">
         <ImageView
-            android:id="@+id/searchIcon"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_width="35dp"
-            android:src="@drawable/search_black_24dp"/>
-    </RelativeLayout>
+            android:src="@drawable/search_black_24dp"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/id"
+            />
+        <TextView
+            android:layout_width="1.5in"
+            android:layout_height="match_parent"
+            android:text="LOCATION"
+            android:gravity="center_vertical"
+            android:textSize="18dp"
+            android:layout_marginLeft="25dp"
+            android:layout_toRightOf="@+id/id"
+            android:id="@+id/location"
+            />
+        <TextView
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:text="DISTANCE"
+            android:gravity="center_vertical"
+            android:textSize="18dp"
+            android:layout_marginLeft="1.9in"
+            android:layout_toRightOf="@+id/district"
+            android:id="@+id/nameMobileWeb"
+            />
 
+
+    </RelativeLayout>
 </android.support.v7.widget.CardView>
