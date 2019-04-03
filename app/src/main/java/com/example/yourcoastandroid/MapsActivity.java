@@ -71,7 +71,7 @@ public class MapsActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        setContentView(R.layout.activity_search);
+        //setContentView(R.layout.activity_search);
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -154,12 +154,12 @@ public class MapsActivity extends AppCompatActivity
 
         return false;
     }
+    /*This is to launch the Details activity*/
     private void launchDetails(String id){
         Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
         intent.putExtra("DATA_ID", id);
         startActivity(intent);
     }
-
 
     private void enableMyLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -235,6 +235,9 @@ public class MapsActivity extends AppCompatActivity
                 startActivity(new Intent(this, InfoActivity.class));
 
                 return true;
+
+            case R.id.search_action:
+                startActivity(new Intent(this, SearchActivity.class));
         }
         return super.onOptionsItemSelected(item);
 

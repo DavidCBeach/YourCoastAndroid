@@ -35,7 +35,7 @@
             android:textSize="18dp"
             android:layout_marginLeft="1.9in"
             android:layout_toRightOf="@+id/district"
-            android:id="@+id/nameMobileWeb"
+            android:id="@+id/Distance"
             />
 
 

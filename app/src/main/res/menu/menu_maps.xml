@@ -7,4 +7,11 @@
         android:icon="@mipmap/ic_info"
         android:title="@string/action_info"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/search_action"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="Search"
+        app:showAsAction="always"/>
+
+
 </menu>
