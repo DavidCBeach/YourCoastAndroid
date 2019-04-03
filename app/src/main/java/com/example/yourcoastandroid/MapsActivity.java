@@ -27,6 +27,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 import com.example.yourcoastandroid.MyItem;
 import com.example.yourcoastandroid.MyItemReader;
@@ -63,6 +64,8 @@ public class MapsActivity extends AppCompatActivity
     private ClusterManager.OnClusterClickListener mClusterClickListener;
 
     private List<MyItem> items;
+
+    ListView myList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
