@@ -1,24 +1,38 @@
 package com.example.yourcoastandroid;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewManager;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONException;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class DetailsActivity extends AppCompatActivity {
-
+public class DetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
+    private GoogleMap mMap;
+    private DetailItem details = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +40,6 @@ public class DetailsActivity extends AppCompatActivity {
         String id= getIntent().getStringExtra("DATA_ID");
         DetailItemReader detailItemReader = new DetailItemReader();
         InputStream inputStream = getResources().openRawResource(R.raw.access_points);
-        DetailItem details = null;
         try {
             details = detailItemReader.read( id , inputStream);
         } catch (JSONException e) {
@@ -42,6 +55,19 @@ public class DetailsActivity extends AppCompatActivity {
         textViewToChange.setText(details.PHONE_NMBR.toString());
         setTitle(details.NameMobileWeb.toString());
 
+
+        if(!details.FEE){
+            RelativeLayout item =  findViewById(R.id.FeeLayout);
+            ((ViewManager)item.getParent()).removeView(item);
+        }
+        if(!details.PARKING){
+            RelativeLayout item =  findViewById(R.id.ParkingLayout);
+            ((ViewManager)item.getParent()).removeView(item);
+        }
+
+        SupportMapFragment mapFragment =
+                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
     }
 
@@ -88,4 +114,20 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onMapReady(GoogleMap map) {
+        mMap = map;
+        LatLng point = new LatLng(details.LATITUDE,details.LONGITUDE);
+        Marker mPoint = mMap.addMarker(new MarkerOptions()
+                .position(point)
+                .title(details.NameMobileWeb)
+                );
+        mPoint.showInfoWindow();
+        mMap.getUiSettings().setScrollGesturesEnabled(false);
+        CameraPosition newCamPos = new CameraPosition(new LatLng(details.LATITUDE,details.LONGITUDE),
+                15.7f,
+                mMap.getCameraPosition().tilt, //use old tilt
+                mMap.getCameraPosition().bearing); //use old bearing
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(newCamPos), 1, null);
+    }
 }

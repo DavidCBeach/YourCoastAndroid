@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,30 +13,120 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:orientation="vertical" >
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        tools:context=".MapsActivity" />
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
+        android:paddingTop="10dp"
         android:id="@+id/textbox"
-        android:text="@string/address_label"/>
+        android:text="@string/address_label"
+        android:textSize="16dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/address"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@+id/directionsbutton"
+            android:layout_alignParentLeft="true"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:id="@+id/directionsbutton"
+            android:text="@string/directions"/>
+    </RelativeLayout>
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/address"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:id="@+id/phonelabel"
-        android:text="@string/phone_label"/>
+        android:text="@string/phone_label"
+        android:textSize="16dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:id="@+id/phone"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@+id/callbutton"
+            android:layout_alignParentLeft="true"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:id="@+id/callbutton"
+            android:text="@string/call"/>
+    </RelativeLayout>
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/phone"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:id="@+id/amenitieslabel"
-        android:text="@string/amenities_label"/>
+        android:text="@string/amenities_label"
+        android:textSize="16dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/FeeLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/fee"
+            android:id="@+id/Fee"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Fee"
+            android:layout_marginLeft="9dp"
+            android:text="@string/fee"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ParkingLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/parking"
+            android:id="@+id/Parking"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Parking"
+            android:layout_marginLeft="9dp"
+            android:text="@string/parking"/>
+    </RelativeLayout>
+
+
+
 
 </LinearLayout>
+</ScrollView>

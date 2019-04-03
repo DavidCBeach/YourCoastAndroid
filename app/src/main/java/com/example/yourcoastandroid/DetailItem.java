@@ -9,8 +9,9 @@ public class DetailItem {
     public String District;
     public int CountyNum;
     public String COUNTY;
+    public double LATITUDE, LONGITUDE;
     public String NameMobileWeb;
-    public String LocationMobileWeb, DescriptionMobileWeb, PHONE_NMBR, LIST_ORDER, GEOGR_AREA, LATITUDE, LONGITUDE,
+    public String LocationMobileWeb, DescriptionMobileWeb, PHONE_NMBR, LIST_ORDER, GEOGR_AREA,
             Photo_1,Photo_2,Photo_3,Photo_4, Bch_whlchr, BIKE_PATH, BT_FACIL_TYPE;
     public boolean FEE, PARKING, DSABLDACSS, RESTROOMS, VISTOR_CTR, DOG_FRIENDLY, EZ4STROLLERS, PCNC_AREA, CAMPGROUND,
             SNDY_BEACH, DUNES, RKY_SHORE, BLUFF, STRS_BEACH, PTH_BEACH,BLFTP_TRLS, BLFTP_PRK,WLDLFE_VWG,
@@ -34,7 +35,7 @@ public class DetailItem {
                       String PHONE_NMBR,
                       String LIST_ORDER,
                       String GEOGR_AREA,
-                      String LATITUDE, String LONGITUDE,
+                      double LATITUDE, double LONGITUDE,
                       String Photo_1,
                       String Photo_2,
                       String Photo_3,
