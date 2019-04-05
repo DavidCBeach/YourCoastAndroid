@@ -25,6 +25,47 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:paddingTop="10dp"
+        android:id="@+id/photos"
+        android:text="@string/photos"
+        android:textSize="16dp"/>
+<HorizontalScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/photo1"
+            android:layout_alignParentLeft="true"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/photo2"
+            android:layout_toRightOf="@id/photo1"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/photo3"
+            android:layout_toRightOf="@id/photo2"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/photo4"
+            android:layout_toRightOf="@id/photo3"
+            />
+    </RelativeLayout>
+</HorizontalScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:paddingTop="10dp"
         android:id="@+id/textbox"
         android:text="@string/address_label"
         android:textSize="16dp"/>
@@ -46,7 +87,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:id="@+id/directionsbutton"
-            android:text="@string/directions"/>
+            android:text="@string/directions"
+            android:onClick="DirectionButtonClick"/>
     </RelativeLayout>
 
     <TextView
@@ -57,7 +99,8 @@
         android:textSize="16dp"/>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/phonecon" >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -73,7 +116,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:id="@+id/callbutton"
-            android:text="@string/call"/>
+            android:text="@string/call"
+            android:onClick="CallButtonClick"/>
     </RelativeLayout>
 
     <TextView
@@ -124,6 +168,436 @@
             android:layout_marginLeft="9dp"
             android:text="@string/parking"/>
     </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/DisablityLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/disability"
+            android:id="@+id/Disability"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Disability"
+            android:layout_marginLeft="9dp"
+            android:text="@string/disability"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/RestroomLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/restroom"
+            android:id="@+id/Restroom"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Restroom"
+            android:layout_marginLeft="9dp"
+            android:text="@string/restroom"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/VisitorLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/visitor"
+            android:id="@+id/Visitor"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Visitor"
+            android:layout_marginLeft="9dp"
+            android:text="@string/visitor"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/DogLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/dog"
+            android:id="@+id/Dog"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Dog"
+            android:layout_marginLeft="9dp"
+            android:text="@string/dog"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/StrollerLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/stroller"
+            android:id="@+id/Stroller"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Stroller"
+            android:layout_marginLeft="9dp"
+            android:text="@string/stroller"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/PicnicLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/picnic"
+            android:id="@+id/Picnic"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Picnic"
+            android:layout_marginLeft="9dp"
+            android:text="@string/picnic"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/CampLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/campground"
+            android:id="@+id/Camp"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Camp"
+            android:layout_marginLeft="9dp"
+            android:text="@string/camp"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/SandLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/terrain"
+            android:id="@+id/Sand"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Sand"
+            android:layout_marginLeft="9dp"
+            android:text="@string/sand"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/DuneLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/terrain"
+            android:id="@+id/Dune"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Dune"
+            android:layout_marginLeft="9dp"
+            android:text="@string/dune"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/RockyLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/terrain"
+            android:id="@+id/Rocky"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Rocky"
+            android:layout_marginLeft="9dp"
+            android:text="@string/rocky"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/BluffLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/terrain"
+            android:id="@+id/Bluff"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Bluff"
+            android:layout_marginLeft="9dp"
+            android:text="@string/bluff"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/StairsLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/stairs"
+            android:id="@+id/Stairs"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Stairs"
+            android:layout_marginLeft="9dp"
+            android:text="@string/stairs"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/PathLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/stairs"
+            android:id="@+id/Path"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Path"
+            android:layout_marginLeft="9dp"
+            android:text="@string/path"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/BlufftopTrailLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/hiker"
+            android:id="@+id/BlufftopTrail"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/BlufftopTrail"
+            android:layout_marginLeft="9dp"
+            android:text="@string/blufftopTrail"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/BlufftopParkLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/picnic"
+            android:id="@+id/BlufftopPark"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/BlufftopPark"
+            android:layout_marginLeft="9dp"
+            android:text="@string/blufftopPark"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/WildlifeLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/wildlife"
+            android:id="@+id/Wildlife"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Wildlife"
+            android:layout_marginLeft="9dp"
+            android:text="@string/wildlife"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TidepoolLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/tidepool"
+            android:id="@+id/Tidepool"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Tidepool"
+            android:layout_marginLeft="9dp"
+            android:text="@string/tidepool"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/VolleyballLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/volleyball"
+            android:id="@+id/Volleyball"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Volleyball"
+            android:layout_marginLeft="9dp"
+            android:text="@string/volleyball"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/FishingLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/fishing"
+            android:id="@+id/Fishing"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Fishing"
+            android:layout_marginLeft="9dp"
+            android:text="@string/fishing"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/BoatingLayout">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/boating"
+            android:id="@+id/Boating"
+            android:layout_marginTop="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/Boating"
+            android:layout_marginLeft="9dp"
+            android:text="@string/Boating"/>
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
 
 
 
