@@ -22,4 +22,25 @@
     <string name="call">Call</string>
     <string name="fee">Fee</string>
     <string name="parking">Parking</string>
+    <string name="disability">Disability Access</string>
+    <string name="restroom">Restrooms</string>
+    <string name="visitor">Visitor Center</string>
+    <string name="dog">Dog Friendly</string>
+    <string name="stroller">Stroller Access</string>
+    <string name="picnic">Picnic Area</string>
+    <string name="camp">Campground</string>
+    <string name="sand">Sandy Beach</string>
+    <string name="dune">Dunes</string>
+    <string name="rocky">Rocky Shore</string>
+    <string name="bluff">Bluff</string>
+    <string name="stairs">Stairs to Beach</string>
+    <string name="path">Path to Beach</string>
+    <string name="blufftopTrail">Blufftop Trail</string>
+    <string name="blufftopPark">Blufftop Park</string>
+    <string name="wildlife">Wildlife Viewing</string>
+    <string name="tidepool">Tidepool</string>
+    <string name="volleyball">Volleyball</string>
+    <string name="fishing">Fishing</string>
+    <string name="Boating">Boating</string>
+    <string name="photos">Photos</string>
 </resources>
