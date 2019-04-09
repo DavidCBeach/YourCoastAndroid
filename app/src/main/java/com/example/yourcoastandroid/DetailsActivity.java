@@ -25,6 +25,8 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -56,8 +58,12 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         DetailItemReader detailItemReader = new DetailItemReader();
         InputStream inputStream = getResources().openRawResource(R.raw.access_points);
         try {
-            details = detailItemReader.read( id , inputStream);
+
+            details = detailItemReader.read(id, inputStream );
+
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         centerTitle();
@@ -294,7 +300,14 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         startActivity(intent);
 
     }
+    public void SearchButtonClick(View v) {
+        System.out.println("Search Button Click");
+        String url = "http://www.google.com/search?q="+details.NameMobileWeb;
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
 
+    }
 
 
 
