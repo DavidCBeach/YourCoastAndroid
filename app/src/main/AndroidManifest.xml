@@ -16,9 +16,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-
-        <activity android:name=".DetailsActivity"></activity>
+        android:theme="@style/AppTheme">
+        <activity android:name=".DetailsActivity"
+            android:parentActivityName=".MapsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MapsActivity" />
+        </activity>
         <activity
             android:name=".InfoActivity"
             android:label="@string/action_info"
@@ -66,5 +70,6 @@
             </intent-filter>
         </activity>
     </application>
+
 
 </manifest>
