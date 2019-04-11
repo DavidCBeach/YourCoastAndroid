@@ -31,6 +31,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -266,6 +267,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         Marker mPoint = mMap.addMarker(new MarkerOptions()
                 .position(point)
                 .title(details.NameMobileWeb)
+                .icon(BitmapDescriptorFactory.defaultMarker(60.0f))
                 );
         mPoint.showInfoWindow();
         mMap.getUiSettings().setScrollGesturesEnabled(false);
@@ -293,12 +295,10 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
     }
     public void CallButtonClick(View v) {
-
         Uri gmmIntentUri = Uri.parse("tel:" +details.PHONE_NMBR);
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(gmmIntentUri);
         startActivity(intent);
-
     }
     public void SearchButtonClick(View v) {
         System.out.println("Search Button Click");
@@ -306,7 +306,6 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);
-
     }
 
 
