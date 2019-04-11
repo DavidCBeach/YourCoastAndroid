@@ -17,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+
         <activity android:name=".DetailsActivity"></activity>
         <activity
             android:name=".InfoActivity"
@@ -26,6 +27,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MapsActivity" />
         </activity>
+
+        <activity
+            android:name=".SearchActivity"
+            android:label="Search"
+            android:parentActivityName=".MapsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MapsActivity"/>
+        </activity>
+
         <activity
             android:name=".ListActivity"
             android:label="@string/title_activity_list"
