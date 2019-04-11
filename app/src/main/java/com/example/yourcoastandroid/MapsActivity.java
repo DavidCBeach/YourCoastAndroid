@@ -238,6 +238,8 @@ public class MapsActivity extends AppCompatActivity
 
             case R.id.search_action:
                 startActivity(new Intent(this, SearchActivity.class));
+
+                return true;
         }
         return super.onOptionsItemSelected(item);
 
