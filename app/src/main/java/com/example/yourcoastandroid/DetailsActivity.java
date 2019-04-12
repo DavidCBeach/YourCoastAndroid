@@ -24,11 +24,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -56,8 +60,12 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         DetailItemReader detailItemReader = new DetailItemReader();
         InputStream inputStream = getResources().openRawResource(R.raw.access_points);
         try {
-            details = detailItemReader.read( id , inputStream);
+
+            details = detailItemReader.read(id, inputStream );
+
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         centerTitle();
@@ -260,6 +268,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         Marker mPoint = mMap.addMarker(new MarkerOptions()
                 .position(point)
                 .title(details.NameMobileWeb)
+                .icon(BitmapDescriptorFactory.defaultMarker(58.0f))
                 );
         mPoint.showInfoWindow();
         mMap.getUiSettings().setScrollGesturesEnabled(false);
@@ -287,14 +296,29 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
     }
     public void CallButtonClick(View v) {
-
         Uri gmmIntentUri = Uri.parse("tel:" +details.PHONE_NMBR);
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(gmmIntentUri);
         startActivity(intent);
-
     }
-
+    public void SearchButtonClick(View v) {
+        System.out.println("Search Button Click");
+        String url = "http://www.google.com/search?q="+details.NameMobileWeb;
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
+    }
+    public void PictureButtonClick(View v) {
+        Toast.makeText(this,"Photo Button Coming Soon" ,Toast.LENGTH_LONG).show();
+    }
+    public void ShareButtonClick(View v) {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = details.NameMobileWeb +"\n"+details.LocationMobileWeb+"\nhttps://www.coastal.ca.gov/YourCoast/#/map/location/id/"+details.ID;
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, details.NameMobileWeb);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
 
 
 

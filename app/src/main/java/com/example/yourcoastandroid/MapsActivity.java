@@ -6,17 +6,29 @@ import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.VisibleRegion;
+import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,13 +36,20 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.example.yourcoastandroid.MyItem;
 import com.example.yourcoastandroid.MyItemReader;
+import com.google.maps.android.clustering.view.ClusterRenderer;
+import com.google.maps.android.clustering.view.DefaultClusterRenderer;
+import com.google.maps.android.ui.IconGenerator;
+import com.google.maps.android.ui.SquareTextView;
 
 import org.json.JSONException;
 
@@ -38,6 +57,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 
 import static com.example.yourcoastandroid.R.menu.menu_maps;
 
@@ -97,6 +117,8 @@ public class MapsActivity extends AppCompatActivity
         map.animateCamera(CameraUpdateFactory.newCameraPosition(newCamPos), 1, null);
         enableMyLocation();
         mClusterManager = new ClusterManager<>(this, mMap);
+        CustomRenderer customRenderer = new CustomRenderer();
+        mClusterManager.setRenderer(customRenderer);
         mMap.setOnCameraIdleListener(this);
         mMap.setOnMarkerClickListener(this);
         mMap.setOnInfoWindowClickListener(this);
@@ -116,14 +138,82 @@ public class MapsActivity extends AppCompatActivity
 
 
     }
+    private class CustomRenderer extends DefaultClusterRenderer<MyItem> {
+        private final IconGenerator mIconGenerator = new IconGenerator(getApplicationContext());
+        private final IconGenerator mClusterIconGenerator = new IconGenerator(getApplicationContext());
+        private ShapeDrawable mColoredCircleBackground;
+        private SparseArray<BitmapDescriptor> mIcons = new SparseArray<BitmapDescriptor>();
+        private final float mDensity;
 
 
+        public CustomRenderer() {
+            super(getApplicationContext(), mMap, mClusterManager);
 
-    private void readItems() throws JSONException {
-        InputStream inputStream = getResources().openRawResource(R.raw.access_points);
-        items = new MyItemReader().read(inputStream);
-        mClusterManager.addItems(items);
+            mColoredCircleBackground = new ShapeDrawable(new OvalShape());
+            mIconGenerator.setContentView(makeSquareTextView(getApplicationContext()));
+            mIconGenerator.setTextAppearance(R.style.amu_ClusterIcon_TextAppearance);
+
+            mIconGenerator.setBackground(makeClusterBackground());
+            mDensity = getApplicationContext().getResources().getDisplayMetrics().density;
+
+        }
+
+        private SquareTextView makeSquareTextView(Context context) {
+            SquareTextView squareTextView = new SquareTextView(context);
+            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            squareTextView.setLayoutParams(layoutParams);
+            squareTextView.setId(R.id.amu_text);
+            int twelveDpi = (int) (12 * mDensity);
+            squareTextView.setPadding(twelveDpi, twelveDpi, twelveDpi, twelveDpi);
+            return squareTextView;
+        }
+        private LayerDrawable makeClusterBackground() {
+            mColoredCircleBackground = new ShapeDrawable(new OvalShape());
+            ShapeDrawable outline = new ShapeDrawable(new OvalShape());
+            mColoredCircleBackground.setPadding(40,40,40,40);
+            outline.getPaint().setColor(0x80ffffff); // Transparent white.
+            LayerDrawable background = new LayerDrawable(new Drawable[]{outline, mColoredCircleBackground});
+            int strokeWidth = (int) (mDensity * 3);
+            background.setLayerInset(1, strokeWidth, strokeWidth, strokeWidth, strokeWidth);
+            return background;
+        }
+        @Override
+        protected int getColor(int clusterSize) {
+
+            return Color.HSVToColor(new float[]{
+                    200f, 1f, .6f
+            });
+        }
+        @Override
+        protected void onBeforeClusterItemRendered(MyItem person, MarkerOptions markerOptions) {
+
+
+            //markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.yellow));
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(58.0f));
+
+        }
+        @Override
+        protected void onBeforeClusterRendered(Cluster<MyItem> cluster, MarkerOptions markerOptions) {
+            int bucket = getBucket(cluster);
+            BitmapDescriptor descriptor = mIcons.get(bucket);
+            if (descriptor == null) {
+                mColoredCircleBackground.getPaint().setColor(getColor(bucket));
+                descriptor = BitmapDescriptorFactory.fromBitmap(mIconGenerator.makeIcon(getClusterText(bucket)));
+                mIcons.put(bucket, descriptor);
+            }
+            markerOptions.icon(descriptor);
+        }
     }
+
+
+        private void readItems() throws JSONException {
+            InputStream inputStream = getResources().openRawResource(R.raw.access_points);
+            items = new MyItemReader().read(inputStream);
+            mClusterManager.addItems(items);
+
+
+        }
+
 
 
 

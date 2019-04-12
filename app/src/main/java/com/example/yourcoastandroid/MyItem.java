@@ -25,6 +25,7 @@ public class MyItem implements ClusterItem {
     private String mSnippet;
     private int mID;
 
+
     public MyItem(double lat, double lng) {
         mPosition = new LatLng(lat, lng);
         mTitle = null;

@@ -79,7 +79,7 @@
             android:layout_marginTop="10dp"
             android:layout_toLeftOf="@+id/directionsbutton"
             android:layout_alignParentLeft="true"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             />
         <Button
@@ -88,7 +88,9 @@
             android:layout_alignParentRight="true"
             android:id="@+id/directionsbutton"
             android:text="@string/directions"
-            android:onClick="DirectionButtonClick"/>
+            android:onClick="DirectionButtonClick"
+            android:background="@drawable/custom_button"
+            android:textColor="@color/colorPrimary"/>
     </RelativeLayout>
 
     <TextView
@@ -105,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:id="@+id/phone"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_marginTop="10dp"
             android:layout_toLeftOf="@+id/callbutton"
@@ -117,7 +119,9 @@
             android:layout_alignParentRight="true"
             android:id="@+id/callbutton"
             android:text="@string/call"
-            android:onClick="CallButtonClick"/>
+            android:onClick="CallButtonClick"
+            android:background="@drawable/custom_button"
+            android:textColor="@color/colorPrimary"/>
     </RelativeLayout>
 
     <TextView
@@ -141,7 +145,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Fee"
             android:layout_marginLeft="9dp"
@@ -162,7 +166,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Parking"
             android:layout_marginLeft="9dp"
@@ -183,7 +187,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Disability"
             android:layout_marginLeft="9dp"
@@ -204,7 +208,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Restroom"
             android:layout_marginLeft="9dp"
@@ -225,7 +229,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Visitor"
             android:layout_marginLeft="9dp"
@@ -246,7 +250,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Dog"
             android:layout_marginLeft="9dp"
@@ -267,7 +271,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Stroller"
             android:layout_marginLeft="9dp"
@@ -288,7 +292,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Picnic"
             android:layout_marginLeft="9dp"
@@ -309,7 +313,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Camp"
             android:layout_marginLeft="9dp"
@@ -330,7 +334,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Sand"
             android:layout_marginLeft="9dp"
@@ -351,7 +355,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Dune"
             android:layout_marginLeft="9dp"
@@ -372,7 +376,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Rocky"
             android:layout_marginLeft="9dp"
@@ -393,7 +397,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Bluff"
             android:layout_marginLeft="9dp"
@@ -414,7 +418,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Stairs"
             android:layout_marginLeft="9dp"
@@ -435,7 +439,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Path"
             android:layout_marginLeft="9dp"
@@ -456,7 +460,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/BlufftopTrail"
             android:layout_marginLeft="9dp"
@@ -477,7 +481,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/BlufftopPark"
             android:layout_marginLeft="9dp"
@@ -498,7 +502,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Wildlife"
             android:layout_marginLeft="9dp"
@@ -519,7 +523,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Tidepool"
             android:layout_marginLeft="9dp"
@@ -540,7 +544,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Volleyball"
             android:layout_marginLeft="9dp"
@@ -561,7 +565,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Fishing"
             android:layout_marginLeft="9dp"
@@ -582,15 +586,62 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/Boating"
             android:layout_marginLeft="9dp"
             android:text="@string/Boating"/>
     </RelativeLayout>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:id="@+id/searchbutton"
+        android:text="@string/search"
+        android:onClick="SearchButtonClick"
+        android:background="@drawable/custom_button2"
+        android:textColor="@color/colorPrimary"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal"
+        android:weightSum="1.0"
+        android:layout_marginBottom="30dp">
 
-
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight=".475"
+            android:layout_height="wrap_content"
+            android:id="@+id/picturebutton"
+            android:text="@string/picturebutton"
+            android:onClick="PictureButtonClick"
+            android:background="@drawable/custom_button"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginLeft="5dp"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".05"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight=".475"
+            android:layout_height="wrap_content"
+            android:id="@+id/sharbutton"
+            android:text="@string/sharebutton"
+            android:onClick="ShareButtonClick"
+            android:layout_toRightOf="@id/picturebutton"
+            android:background="@drawable/custom_button"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginRight="5dp"/>
+    </LinearLayout>
 
 
 

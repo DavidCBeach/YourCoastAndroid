@@ -43,4 +43,7 @@
     <string name="fishing">Fishing</string>
     <string name="Boating">Boating</string>
     <string name="photos">Photos</string>
+    <string name="search">Search for info about this location</string>
+    <string name="picturebutton">Submit A Photo</string>
+    <string name="sharebutton">Share Location</string>
 </resources>
