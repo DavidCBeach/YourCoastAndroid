@@ -189,7 +189,7 @@ public class MapsActivity extends AppCompatActivity
 
 
             //markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.yellow));
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(60.0f));
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(58.0f));
 
         }
         @Override

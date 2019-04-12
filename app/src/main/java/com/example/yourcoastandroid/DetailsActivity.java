@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -267,7 +268,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         Marker mPoint = mMap.addMarker(new MarkerOptions()
                 .position(point)
                 .title(details.NameMobileWeb)
-                .icon(BitmapDescriptorFactory.defaultMarker(60.0f))
+                .icon(BitmapDescriptorFactory.defaultMarker(58.0f))
                 );
         mPoint.showInfoWindow();
         mMap.getUiSettings().setScrollGesturesEnabled(false);
@@ -306,6 +307,17 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);
+    }
+    public void PictureButtonClick(View v) {
+        Toast.makeText(this,"Photo Button Coming Soon" ,Toast.LENGTH_LONG).show();
+    }
+    public void ShareButtonClick(View v) {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = details.NameMobileWeb +"\n"+details.LocationMobileWeb+"\nhttps://www.coastal.ca.gov/YourCoast/#/map/location/id/"+details.ID;
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, details.NameMobileWeb);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
 
 
