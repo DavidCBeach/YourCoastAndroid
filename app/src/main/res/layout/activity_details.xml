@@ -30,35 +30,43 @@
         android:textSize="16dp"/>
 <HorizontalScrollView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
+
+
+    <!--all I changed here was wrap_parent to match_parent-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
+        android:layout_height="match_parent">
+
+
+        <!--This is just a reference-->
+
+        <!--<WebView-->
+            <!--android:id="@+id/webViewInfoPage"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
+        
+        <!--all I changed here was TextView to WebView-->
+        <WebView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/photo1"
-            android:layout_alignParentLeft="true"
-            />
-        <ImageView
+            android:layout_alignParentLeft="true" />
+        <WebView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/photo2"
-            android:layout_toRightOf="@id/photo1"
-            />
-        <ImageView
+            android:layout_toRightOf="@id/photo1" />
+        <WebView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/photo3"
-            android:layout_toRightOf="@id/photo2"
-            />
-        <ImageView
+            android:layout_toRightOf="@id/photo2" />
+        <WebView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/photo4"
-            android:layout_toRightOf="@id/photo3"
-            />
+            android:layout_toRightOf="@id/photo3" />
     </RelativeLayout>
 </HorizontalScrollView>
 
