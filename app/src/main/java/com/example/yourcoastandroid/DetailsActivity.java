@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewManager;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -52,6 +53,8 @@ import java.util.ArrayList;
 public class DetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private DetailItem details = null;
+    private WebView webViewDetailsPage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +89,6 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             textViewToChange = (TextView) findViewById(R.id.phone);
             textViewToChange.setText(details.PHONE_NMBR.toString());
         }
-
 
         if(!details.FEE){
             RelativeLayout item =  findViewById(R.id.FeeLayout);
@@ -176,45 +178,68 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             RelativeLayout item =  findViewById(R.id.BoatingLayout);
             ((ViewManager)item.getParent()).removeView(item);
         }
-        TextView scroll =  findViewById(R.id.photos);
-        ((ViewManager)scroll.getParent()).removeView(scroll);
-        if(details.Photo_1.equals("")){
-            ImageView item =  findViewById(R.id.photo1);
-            ((ViewManager)item.getParent()).removeView(item);
-        } else {
-            ImageView item =  findViewById(R.id.photo1);
-            item.setImageDrawable(LoadImageFromWebOperations(details.Photo_1));
-            System.out.println("Photo1");
-        }
-        if(details.Photo_2.equals("")){
-            ImageView item =  findViewById(R.id.photo2);
-            ((ViewManager)item.getParent()).removeView(item);
-        } else {
-            ImageView item =  findViewById(R.id.photo2);
-            item.setImageURI(Uri.parse(details.Photo_2));
-        }
-        if(details.Photo_3.equals("")){
-            ImageView item =  findViewById(R.id.photo3);
-            ((ViewManager)item.getParent()).removeView(item);
-        } else {
-            ImageView item =  findViewById(R.id.photo3);
-            item.setImageURI(Uri.parse(details.Photo_3));
-        }
-        if(details.Photo_4.equals("")){
-            ImageView item =  findViewById(R.id.photo4);
-            ((ViewManager)item.getParent()).removeView(item);
-        } else {
-            ImageView item =  findViewById(R.id.photo4);
-            item.setImageURI(Uri.parse(details.Photo_4));
-        }
+//        TextView scroll =  findViewById(R.id.photos);
+//        ((ViewManager)scroll.getParent()).removeView(scroll);
+//        if(details.Photo_1.equals("")){
+//            ImageView item =  findViewById(R.id.photo1);
+//            ((ViewManager)item.getParent()).removeView(item);
+//        } else {
+//            ImageView item =  findViewById(R.id.photo1);
+//            item.setImageDrawable(LoadImageFromWebOperations(details.Photo_1));
+//            System.out.println("Photo1");
+//        }
+//        if(details.Photo_2.equals("")){
+//            ImageView item =  findViewById(R.id.photo2);
+//            ((ViewManager)item.getParent()).removeView(item);
+//        } else {
+//            ImageView item =  findViewById(R.id.photo2);
+//            item.setImageURI(Uri.parse(details.Photo_2));
+//        }
+//        if(details.Photo_3.equals("")){
+//            ImageView item =  findViewById(R.id.photo3);
+//            ((ViewManager)item.getParent()).removeView(item);
+//        } else {
+//            ImageView item =  findViewById(R.id.photo3);
+//            item.setImageURI(Uri.parse(details.Photo_3));
+//        }
+//        if(details.Photo_4.equals("")){
+//            ImageView item =  findViewById(R.id.photo4);
+//            ((ViewManager)item.getParent()).removeView(item);
+//        } else {
+//            ImageView item =  findViewById(R.id.photo4);
+//            item.setImageURI(Uri.parse(details.Photo_4));
+//        }
+//
+        webViewDetailsPage = findViewById(R.id.webViewInfoPage);
 
-
-
-
+        loadXMLPage();
 
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+    }
+
+    private void loadXMLPage()
+    {
+        webViewDetailsPage.getSettings().setJavaScriptEnabled(true);
+
+//
+//
+//
+//
+//
+//
+//
+        // Create a for loop to get the web links for the images in json
+        webViewDetailsPage.loadUrl("file:///android_asset/index.html");
+//
+//
+//
+//
+//
+//
+//
 
     }
 
