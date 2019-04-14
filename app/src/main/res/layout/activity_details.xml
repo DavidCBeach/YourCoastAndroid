@@ -36,6 +36,7 @@
     <!--all I changed here was wrap_parent to match_parent-->
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
         android:layout_height="match_parent">
 
 
@@ -51,22 +52,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/photo1"
-            android:layout_alignParentLeft="true" />
+            android:layout_alignParentLeft="true"
+            android:layout_marginEnd="5dp"
+            />
         <WebView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/photo2"
-            android:layout_toRightOf="@id/photo1" />
+            android:layout_toRightOf="@id/photo1"
+            android:layout_marginEnd="5dp"/>
         <WebView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/photo3"
-            android:layout_toRightOf="@id/photo2" />
+            android:layout_toRightOf="@id/photo2"
+            android:layout_marginEnd="5dp"/>
         <WebView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/photo4"
-            android:layout_toRightOf="@id/photo3" />
+            android:layout_toRightOf="@id/photo3"
+            android:layout_marginEnd="5dp"/>
     </RelativeLayout>
 </HorizontalScrollView>
 

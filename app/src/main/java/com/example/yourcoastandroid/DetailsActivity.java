@@ -74,7 +74,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         centerTitle();
         //getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        System.out.println(details.RESTROOMS);
+        //System.out.println(details.RESTROOMS);
         TextView textViewToChange = (TextView) findViewById(R.id.address);
         textViewToChange.setText(details.LocationMobileWeb.toString());
 
@@ -84,7 +84,9 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             TextView item =  findViewById(R.id.phonelabel);
             ((ViewManager)item.getParent()).removeView(item);
             Button button = (Button) findViewById(R.id.callbutton);
+            //((ViewManager)item.getParent()).removeView(button);
             button.setVisibility(View.GONE);
+
         } else {
             textViewToChange = (TextView) findViewById(R.id.phone);
             textViewToChange.setText(details.PHONE_NMBR.toString());
@@ -210,7 +212,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 //            item.setImageURI(Uri.parse(details.Photo_4));
 //        }
 //
-        webViewDetailsPage = findViewById(R.id.webViewInfoPage);
+
 
         loadXMLPage();
 
@@ -222,7 +224,8 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
     private void loadXMLPage()
     {
-        webViewDetailsPage.getSettings().setJavaScriptEnabled(true);
+        //webViewDetailsPage = findViewById(R.id.webViewInfoPage);
+        //webViewDetailsPage.getSettings().setJavaScriptEnabled(true);
 
 //
 //
@@ -232,13 +235,52 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 //
 //
         // Create a for loop to get the web links for the images in json
-        webViewDetailsPage.loadUrl("file:///android_asset/index.html");
-//
-//
-//
-//
-//
-//
+       // webViewDetailsPage.loadUrl("file:///android_asset/index.html");
+
+
+
+        if(details.Photo_1.equals("")){
+            TextView scroll =  findViewById(R.id.photos);
+            ((ViewManager)scroll.getParent()).removeView(scroll);
+            WebView item =  findViewById(R.id.photo1);
+            ((ViewManager)item.getParent()).removeView(item);
+        } else {
+            WebView item =  findViewById(R.id.photo1);
+            item.setInitialScale(90);
+            item.loadUrl(details.Photo_1);
+            System.out.println("Photo1");
+        }
+        if(details.Photo_2.equals("")){
+            WebView item =  findViewById(R.id.photo2);
+            ((ViewManager)item.getParent()).removeView(item);
+        } else {
+            WebView item =  findViewById(R.id.photo2);
+            item.setInitialScale(90);
+            item.loadUrl(details.Photo_2);
+            System.out.println("Photo2");
+        }
+        if(details.Photo_3.equals("")){
+            WebView item =  findViewById(R.id.photo3);
+            ((ViewManager)item.getParent()).removeView(item);
+        } else {
+            WebView item =  findViewById(R.id.photo3);
+            item.setInitialScale(90);
+            item.loadUrl(details.Photo_3);
+            System.out.println("Photo3");
+        }
+        if(details.Photo_4.equals("")){
+            WebView item =  findViewById(R.id.photo4);
+            ((ViewManager)item.getParent()).removeView(item);
+        } else {
+            WebView item =  findViewById(R.id.photo4);
+            item.setInitialScale(90);
+            item.loadUrl(details.Photo_4);
+            System.out.println("Photo4");
+        }
+
+
+
+
 //
 
     }
