@@ -58,6 +58,21 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+//migrated from ListActivity
+import android.app.SearchManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.example.yourcoastandroid.AccessPointData.CCCAccPtDataStructure;
+import com.example.yourcoastandroid.AccessPointData.CCCDataClient;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.util.Arrays;
+
+
 
 import static com.example.yourcoastandroid.R.menu.menu_maps;
 
@@ -87,6 +102,14 @@ public class MapsActivity extends AppCompatActivity
 
     ListView myList;
 
+
+    //ListActivity
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    //url for volley request
+    private String locations_url = "https://api.coastal.ca.gov/access/v1/locations";
+    private CCCDataClient adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +118,20 @@ public class MapsActivity extends AppCompatActivity
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        //ListActivity
+        Intent intent = getIntent();
+        if(Intent.ACTION_SEARCH.equals(intent.getAction())){
+            String query = intent.getStringExtra(SearchManager.QUERY);
+
+        }
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        getLocations();
+
     }
 
     @Override
@@ -395,4 +432,34 @@ public class MapsActivity extends AppCompatActivity
             System.out.println("cluster click");
         }
     }
+
+    //ListActivity
+    private void getLocations(){
+        //volley string request
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, locations_url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //response is json object, parse using GSON
+                        GsonBuilder builder = new GsonBuilder();
+                        Gson gson = builder.create();
+                        //original line with error
+                        List<CCCAccPtDataStructure> list = Arrays.asList(gson.fromJson(response, CCCAccPtDataStructure[].class));
+                        //ArrayList<CCCAccPtDataStructure> list = (ArrayList<CCCAccPtDataStructure>) Arrays.asList(gson.fromJson(response, CCCAccPtDataStructure[].class));
+                        adapter = new CCCDataClient(list);
+                        recyclerView.setAdapter(adapter);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
+
 }
+
+
