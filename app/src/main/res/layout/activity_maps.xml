@@ -11,9 +11,9 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        tools:context=".MapsActivity"
-        />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="75dp"
+        tools:context=".MapsActivity" />
 
 
     <android.support.v4.widget.NestedScrollView
@@ -22,7 +22,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/holo_blue_light"
         app:behavior_hideable="false"
-        app:behavior_peekHeight="150dp"
+        app:behavior_peekHeight="75dp"
         app:layout_behavior="@string/bottom_sheet_behavior"
         tools:context=".ListActivity"
         >
@@ -31,7 +31,7 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="75dp"
             android:orientation="vertical"
             android:id="@+id/lintemp"
             android:focusable="true"
