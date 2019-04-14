@@ -2,6 +2,7 @@ package com.example.yourcoastandroid.AccessPointData;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,19 +26,21 @@ public class CCCDataClient extends RecyclerView.Adapter<CCCDataClient.myViewHold
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_view,viewGroup,false);
+
         return new myViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder viewHolder, int i) {
         viewHolder.ID.setText(Integer.toString(list.get(i).getID()));
+        Log.d("ID", Integer.toString(list.get(i).getID()));
         viewHolder.DISTRICT.setText(list.get(i).getDISTRICT());
         viewHolder.NameMobileWeb.setText(list.get(i).getNameMobileWeb());
     }
 
     @Override
     public int getItemCount() {
-        return 30;//list.size();
+        return 30; //list.size();
     }
 
     public static class myViewHolder extends RecyclerView.ViewHolder {

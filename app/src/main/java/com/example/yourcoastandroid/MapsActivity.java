@@ -36,6 +36,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -72,6 +73,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.Arrays;
 
+import android.support.design.widget.BottomSheetBehavior;
 
 
 import static com.example.yourcoastandroid.R.menu.menu_maps;
@@ -125,12 +127,14 @@ public class MapsActivity extends AppCompatActivity
             String query = intent.getStringExtra(SearchManager.QUERY);
 
         }
-
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(false);
+        recyclerView.setNestedScrollingEnabled(false);
         getLocations();
+        findViewById(R.id.recyclerView).setFocusable(false);
+        findViewById(R.id.lintemp).requestFocus();
 
     }
 
@@ -443,9 +447,7 @@ public class MapsActivity extends AppCompatActivity
                         //response is json object, parse using GSON
                         GsonBuilder builder = new GsonBuilder();
                         Gson gson = builder.create();
-                        //original line with error
                         List<CCCAccPtDataStructure> list = Arrays.asList(gson.fromJson(response, CCCAccPtDataStructure[].class));
-                        //ArrayList<CCCAccPtDataStructure> list = (ArrayList<CCCAccPtDataStructure>) Arrays.asList(gson.fromJson(response, CCCAccPtDataStructure[].class));
                         adapter = new CCCDataClient(list);
                         recyclerView.setAdapter(adapter);
                     }

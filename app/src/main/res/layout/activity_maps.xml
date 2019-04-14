@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,23 +12,41 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        tools:context=".MapsActivity" />
+        tools:context=".MapsActivity"
+        />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_gravity="bottom"
-        android:orientation="vertical"
-        tools:context=".ListActivity">
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_blue_light"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="150dp"
+        app:layout_behavior="@string/bottom_sheet_behavior"
+        tools:context=".ListActivity"
+        >
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom" />
+            android:layout_height="150dp"
+            android:orientation="vertical"
+            android:id="@+id/lintemp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            >
 
-    </LinearLayout>
-
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:nestedScrollingEnabled="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
