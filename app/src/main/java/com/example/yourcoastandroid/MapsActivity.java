@@ -1,5 +1,8 @@
 package com.example.yourcoastandroid;
 
+import com.example.yourcoastandroid.AccessPointData.ListItemAdapter;
+import com.example.yourcoastandroid.AccessPointData.ListItemReader;
+import com.example.yourcoastandroid.AccessPointData.ListItemStructure;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
@@ -101,7 +104,7 @@ public class MapsActivity extends AppCompatActivity
     private ClusterManager.OnClusterClickListener mClusterClickListener;
 
     private List<MyItem> items;
-
+    private List<ListItemStructure> jList = null;
     ListView myList;
 
 
@@ -110,7 +113,7 @@ public class MapsActivity extends AppCompatActivity
     private RecyclerView.LayoutManager layoutManager;
     //url for volley request
     private String locations_url = "https://api.coastal.ca.gov/access/v1/locations";
-    private CCCDataClient adapter;
+    private ListItemAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +135,7 @@ public class MapsActivity extends AppCompatActivity
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(false);
         recyclerView.setNestedScrollingEnabled(false);
-        getLocations();
+       // getLocations();
         findViewById(R.id.recyclerView).setFocusable(false);
         findViewById(R.id.lintemp).requestFocus();
 
@@ -250,6 +253,10 @@ public class MapsActivity extends AppCompatActivity
         private void readItems() throws JSONException {
             InputStream inputStream = getResources().openRawResource(R.raw.access_points);
             items = new MyItemReader().read(inputStream);
+
+            InputStream listInputStream = getResources().openRawResource(R.raw.access_points);
+            jList = new ListItemReader().read(listInputStream);
+            getLocations();
             mClusterManager.addItems(items);
 
 
@@ -439,26 +446,44 @@ public class MapsActivity extends AppCompatActivity
 
     //ListActivity
     private void getLocations(){
-        //volley string request
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, locations_url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //response is json object, parse using GSON
-                        GsonBuilder builder = new GsonBuilder();
-                        Gson gson = builder.create();
-                        List<CCCAccPtDataStructure> list = Arrays.asList(gson.fromJson(response, CCCAccPtDataStructure[].class));
-                        adapter = new CCCDataClient(list);
-                        recyclerView.setAdapter(adapter);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+//        InputStream inputStreamList = getResources().openRawResource(R.raw.access_points);
+//        GsonBuilder builder = new GsonBuilder();
+//        Gson gson = builder.create();
+//        Log.d("Json", inputStreamList.toString());
+//        List<CCCAccPtDataStructure> list = Arrays.asList(gson.fromJson(items, CCCAccPtDataStructure[].class));
+//        Log.d("list", list.toString());
+//        adapter = new CCCDataClient(list);
+//        recyclerView.setAdapter(adapter);
+       // jList = new List<ListItemStructure>[]{};
+       // jList = ListItemReader.read(jList);
+        Log.d("jList", jList.toString());
+        adapter = new ListItemAdapter(jList);
+        recyclerView.setAdapter(adapter);
 
-                    }
-                });
-        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+
+
+        //volley string request
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET, locations_url,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        Log.d("Response", response);
+//                        //response is json object, parse using GSON
+//                        GsonBuilder builder = new GsonBuilder();
+//                        Gson gson = builder.create();
+//                        List<CCCAccPtDataStructure> list = Arrays.asList(gson.fromJson(response, CCCAccPtDataStructure[].class));
+//                        Log.d("List", list.toString());
+//                        adapter = new CCCDataClient(list);
+//                        recyclerView.setAdapter(adapter);
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//
+//                    }
+//                });
+//        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
 

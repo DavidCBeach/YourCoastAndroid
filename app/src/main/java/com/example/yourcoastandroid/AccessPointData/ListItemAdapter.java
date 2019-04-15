@@ -13,13 +13,13 @@ import com.example.yourcoastandroid.R;
 import java.util.ArrayList;
 import java.util.List;
 
-//recycler adapter (may need to change name not sure if this is the correct file to implement this)
-public class CCCDataClient extends RecyclerView.Adapter<CCCDataClient.myViewHolder> {
+//recycler adapter
+public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.myViewHolder> {
 
-    private List<CCCAccPtDataStructure> list = new ArrayList<>();
+    private List<ListItemStructure> jList = new ArrayList<>();
 
-    public CCCDataClient(List<CCCAccPtDataStructure> list){
-        this.list = list;
+    public ListItemAdapter(List<ListItemStructure> jList){
+        this.jList = jList;
     }
 
     @NonNull
@@ -32,24 +32,30 @@ public class CCCDataClient extends RecyclerView.Adapter<CCCDataClient.myViewHold
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder viewHolder, int i) {
-        viewHolder.ID.setText(Integer.toString(list.get(i).getID()));
-        Log.d("ID", Integer.toString(list.get(i).getID()));
-        viewHolder.DISTRICT.setText(list.get(i).getDISTRICT());
-        viewHolder.NameMobileWeb.setText(list.get(i).getNameMobileWeb());
+        viewHolder.ID.setText(Integer.toString(jList.get(i).getID()));
+       // Log.d("ID", Integer.toString(list.get(i).getID()));
+        viewHolder.NameMobileWeb.setText(jList.get(i).getName());
+        viewHolder.DescriptionMobileWeb.setText(jList.get(i).getDescription());
+
     }
 
     @Override
     public int getItemCount() {
-        return 30; //list.size();
+        return jList.size();
     }
 
     public static class myViewHolder extends RecyclerView.ViewHolder {
-        TextView ID, DISTRICT, NameMobileWeb;
+        TextView ID, NameMobileWeb, DescriptionMobileWeb;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
             ID = (TextView)itemView.findViewById(R.id.id);
-            DISTRICT = (TextView)itemView.findViewById(R.id.district);
             NameMobileWeb = (TextView)itemView.findViewById(R.id.nameMobileWeb);
+            DescriptionMobileWeb = (TextView)itemView.findViewById(R.id.descriptionMobileWeb);
+
         }
+    }
+
+    public List<ListItemStructure> getjList() {
+        return jList;
     }
 }

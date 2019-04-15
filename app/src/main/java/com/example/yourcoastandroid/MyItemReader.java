@@ -16,6 +16,8 @@
 
 package com.example.yourcoastandroid;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,6 +39,7 @@ public class MyItemReader {
     public List<MyItem> read(InputStream inputStream) throws JSONException {
         List<MyItem> items = new ArrayList<MyItem>();
         String json = new Scanner(inputStream).useDelimiter(REGEX_INPUT_BOUNDARY_BEGINNING).next();
+        Log.d("json", json);
         JSONArray array = new JSONArray(json);
         for (int i = 0; i < array.length(); i++) {
             String title = null;

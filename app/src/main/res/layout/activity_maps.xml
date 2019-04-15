@@ -24,7 +24,7 @@
         app:behavior_hideable="false"
         app:behavior_peekHeight="75dp"
         app:layout_behavior="@string/bottom_sheet_behavior"
-        tools:context=".ListActivity"
+        tools:context=".MapsActivity"
         >
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
