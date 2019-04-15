@@ -32,7 +32,7 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.myView
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder viewHolder, int i) {
-        viewHolder.ID.setText(Integer.toString(jList.get(i).getID()));
+       // viewHolder.ID.setText(Integer.toString(jList.get(i).getID()));
        // Log.d("ID", Integer.toString(list.get(i).getID()));
         viewHolder.NameMobileWeb.setText(jList.get(i).getName());
         viewHolder.DescriptionMobileWeb.setText(jList.get(i).getDescription());

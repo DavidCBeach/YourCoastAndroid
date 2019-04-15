@@ -446,44 +446,10 @@ public class MapsActivity extends AppCompatActivity
 
     //ListActivity
     private void getLocations(){
-//        InputStream inputStreamList = getResources().openRawResource(R.raw.access_points);
-//        GsonBuilder builder = new GsonBuilder();
-//        Gson gson = builder.create();
-//        Log.d("Json", inputStreamList.toString());
-//        List<CCCAccPtDataStructure> list = Arrays.asList(gson.fromJson(items, CCCAccPtDataStructure[].class));
-//        Log.d("list", list.toString());
-//        adapter = new CCCDataClient(list);
-//        recyclerView.setAdapter(adapter);
-       // jList = new List<ListItemStructure>[]{};
-       // jList = ListItemReader.read(jList);
+
         Log.d("jList", jList.toString());
         adapter = new ListItemAdapter(jList);
         recyclerView.setAdapter(adapter);
-
-
-
-        //volley string request
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, locations_url,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Log.d("Response", response);
-//                        //response is json object, parse using GSON
-//                        GsonBuilder builder = new GsonBuilder();
-//                        Gson gson = builder.create();
-//                        List<CCCAccPtDataStructure> list = Arrays.asList(gson.fromJson(response, CCCAccPtDataStructure[].class));
-//                        Log.d("List", list.toString());
-//                        adapter = new CCCDataClient(list);
-//                        recyclerView.setAdapter(adapter);
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//
-//                    }
-//                });
-//        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
 
