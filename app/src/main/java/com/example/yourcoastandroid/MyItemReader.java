@@ -52,14 +52,8 @@ public class MyItemReader {
     Double userLat;
     Double userLon;
     Double distance = 0.0;
-//    public Location latlon(){
-//       // Location userLoc = mapsActivity.getUserLocation();
-//        userLat = userLoc.getLatitude();
-//        userLon = userLoc.getLongitude();
-//        return userLoc;
-//    }
+
     private static final String REGEX_INPUT_BOUNDARY_BEGINNING = "\\A";
-    private static DecimalFormat df2 = new DecimalFormat("#.#");
 
     public List<MyItem> read(InputStream inputStream) throws JSONException {
 
@@ -68,15 +62,12 @@ public class MyItemReader {
         JSONArray array = new JSONArray(json);
         for (int i = 0; i < array.length(); i++) {
             String title = null;
-            //String ssnippet = null;
-
             String name = null;
             String description = null;
 
             JSONObject object = array.getJSONObject(i);
             double lat = object.getDouble("LATITUDE");
             double lng = object.getDouble("LONGITUDE");
-            distance = getDistance(userLat, userLon, lat, lng);
 
             int id = object.getInt("ID");
             Integer snippet = object.getInt("ID");
@@ -89,7 +80,7 @@ public class MyItemReader {
             if (!object.isNull("DescriptionMobileWeb")) {
                 description = object.getString("DescriptionMobileWeb");
             }
-            Log.d("distance", String.valueOf(id) + " " + df2.format(distance));
+            distance = getDistance(userLat, userLon, lat, lng);
             Double dis = round(distance, 1);
             items.add(new MyItem(lat, lng, title, ssnippet, id, name, description, dis));
         }
@@ -98,44 +89,16 @@ public class MyItemReader {
 
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
-
         BigDecimal bd = new BigDecimal(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
 
-        public static double distance(double lat1,
-                                  double lat2, double lon1,
-                                  double lon2)
-    {
-        // The math module contains a function
-        // named toRadians which converts from
-        // degrees to radians.
-        lon1 = Math.toRadians(lon1);
-        lon2 = Math.toRadians(lon2);
-        lat1 = Math.toRadians(lat1);
-        lat2 = Math.toRadians(lat2);
-
-        // Haversine formula
-        double dlon = lon2 - lon1;
-        double dlat = lat2 - lat1;
-        double a = Math.pow(Math.sin(dlat / 2), 2)
-                + Math.cos(lat1) * Math.cos(lat2)
-                * Math.pow(Math.sin(dlon / 2),2);
-        double c = 2 * Math.asin(Math.sqrt(a));
-        // Radius of earth in miles
-        double r = 3956;
-        // calculate the result
-        return((c * r));
-    }
-
-    double earthRadius = 3956;// Approximate radius of the earth in kilometers
+    double earthRadius = 3956;// Approximate radius of the earth in miles
     public double getDistance(double lat1, double long1, double lat2, double long2) {
-        //Log.d("getdistance", lat1 + " " + long1 + " " + lat2 + " " + long2);
         double distance = Math.acos(Math.sin(lat2 * Math.PI / 180.0) * Math.sin(lat1 * Math.PI / 180.0) +
                 Math.cos(lat2 * Math.PI / 180.0) * Math.cos(lat1 * Math.PI / 180.0) *
                         Math.cos((long1 - long2) * Math.PI / 180.0)) * earthRadius;
         return distance;
     }
-
 }

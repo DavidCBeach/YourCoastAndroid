@@ -1,9 +1,6 @@
 package com.example.yourcoastandroid;
 
 import com.example.yourcoastandroid.AccessPointData.ListItemAdapter;
-import com.example.yourcoastandroid.AccessPointData.ListItemReader;
-import com.example.yourcoastandroid.AccessPointData.ListItemStructure;
-import com.google.android.gms.location.FusedLocationProviderApi;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -15,7 +12,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -24,22 +20,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.location.Location;
-import android.location.LocationManager;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -52,41 +42,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
-import com.example.yourcoastandroid.MyItem;
-import com.example.yourcoastandroid.MyItemReader;
-import com.google.maps.android.clustering.view.ClusterRenderer;
 import com.google.maps.android.clustering.view.DefaultClusterRenderer;
 import com.google.maps.android.ui.IconGenerator;
 import com.google.maps.android.ui.SquareTextView;
-
 import org.json.JSONException;
-
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
-//migrated from ListActivity
 import android.app.SearchManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.example.yourcoastandroid.AccessPointData.CCCAccPtDataStructure;
-import com.example.yourcoastandroid.AccessPointData.CCCDataClient;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import java.util.Arrays;
-
-import android.support.design.widget.BottomSheetBehavior;
-import android.location.LocationListener;
-
 
 import static com.example.yourcoastandroid.R.menu.menu_maps;
 
@@ -100,7 +66,6 @@ public class MapsActivity extends AppCompatActivity
         GoogleMap.OnMarkerClickListener,
         GoogleMap.OnInfoWindowClickListener,
         ActivityCompat.OnRequestPermissionsResultCallback {
-
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
@@ -117,15 +82,13 @@ public class MapsActivity extends AppCompatActivity
     public Location userCurrentLocation;
 
     private List<MyItem> items;
-   // private List<ListItemStructure> jList = null;
-    //ListView myList;
 
-
-    //ListActivity
     private RecyclerView recyclerView;
+
     private RecyclerView.LayoutManager layoutManager;
     //url for volley request
     private String locations_url = "https://api.coastal.ca.gov/access/v1/locations";
+
     private ListItemAdapter adapter;
 
     @Override
@@ -137,25 +100,20 @@ public class MapsActivity extends AppCompatActivity
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        //ListActivity
         Intent intent = getIntent();
         if(Intent.ACTION_SEARCH.equals(intent.getAction())){
             String query = intent.getStringExtra(SearchManager.QUERY);
-
         }
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
-        //recyclerView.addOnScrollListener();
         findViewById(R.id.recyclerView).setFocusable(false);
         findViewById(R.id.lintemp).requestFocus();
-
+        //mMap.getLocation() was depricated to using getFusedLocation instead
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         getUserLocation();
-        //userCurrentLocation = setLocation();
-        //Log.d("currloc", userCurrentLocation.toString());
     }
 
     @Override
@@ -184,6 +142,7 @@ public class MapsActivity extends AppCompatActivity
         mMap.setOnMarkerClickListener(this);
         mMap.setOnInfoWindowClickListener(this);
 
+        //moved to getUserLocation function to add location overload
         //mClusterManager.setOnsetOnClusterClickListener(mClusterClickListener);
 //        try {
 //            getUserLocation();
@@ -193,13 +152,7 @@ public class MapsActivity extends AppCompatActivity
 //        }
         getUserLocation();
 
-
         // mMap.setOnMarkerClickListener(mClusterManager.getMarkerManager().getCollection());
-
-
-
-
-
     }
     private class CustomRenderer extends DefaultClusterRenderer<MyItem> {
         private final IconGenerator mIconGenerator = new IconGenerator(getApplicationContext());
@@ -272,17 +225,10 @@ public class MapsActivity extends AppCompatActivity
         private void readItems(Location location) throws JSONException {
             InputStream inputStream = getResources().openRawResource(R.raw.access_points);
             items = new MyItemReader(location).read(inputStream);
-//            InputStream listInputStream = getResources().openRawResource(R.raw.access_points);
-//            jList = new ListItemReader().read(listInputStream);
+            //creates recyclerview
             setList();
             mClusterManager.addItems(items);
-
-
         }
-
-
-
-
 
     /** Called when the user clicks a marker. */
     @Override
@@ -305,9 +251,6 @@ public class MapsActivity extends AppCompatActivity
         } catch(Exception e) {
             System.out.println("cluster click");
         }
-
-
-
         return false;
     }
     /*This is to launch the Details activity*/
@@ -336,14 +279,6 @@ public class MapsActivity extends AppCompatActivity
     @Override
     public void onMyLocationClick(@NonNull Location location) {
     }
-
-
-//    public Double getLoc(){
-//
-//        Double lat = location.getLatitude();
-//        Double lon = location.getLongitude();
-//        return lat + lon;
-//    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
@@ -470,14 +405,18 @@ public class MapsActivity extends AppCompatActivity
         }
     }
 
-    //ListActivity
+    //creates list
     private void setList(){
-        Log.d("jList", items.toString());
+        //Log.d("jList", items.toString());
+        //sorts array by ascending distance
         Collections.sort(items);
-        Log.d("sorted jList", items.toString());
+        //Log.d("sorted jList", items.toString());
         adapter = new ListItemAdapter(items);
         recyclerView.setAdapter(adapter);
     }
+
+    //gets the users current location and calls json parse function
+    //needed in this order to avoid location being null
     public void getUserLocation(){
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         try{
@@ -508,18 +447,6 @@ public class MapsActivity extends AppCompatActivity
             Log.e("locationfound ", e.getMessage());
         }
     }
-//    public void setLocation(Location location){
-//        userCurrentLocation = location;
-//    }
-
-//    public Double getLat(){
-//        return currentLocation.getLatitude();
-//    }
-//    public Double getLon(){
-//        return currentLocation.getLongitude();
-//    }
-
-
 
 }
 

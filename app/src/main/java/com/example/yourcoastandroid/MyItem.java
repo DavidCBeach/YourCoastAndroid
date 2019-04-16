@@ -68,7 +68,6 @@ public class MyItem implements ClusterItem, Comparable<MyItem> {
 
     public int getID() { return mID; }
 
-
     public String getName() { return lNameMobileWeb; }
 
     public String getDescription() { return lDescriptionMobileWeb; }
