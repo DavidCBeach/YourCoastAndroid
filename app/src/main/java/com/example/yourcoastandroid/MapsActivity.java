@@ -3,6 +3,9 @@ package com.example.yourcoastandroid;
 import com.example.yourcoastandroid.AccessPointData.ListItemAdapter;
 import com.example.yourcoastandroid.AccessPointData.ListItemReader;
 import com.example.yourcoastandroid.AccessPointData.ListItemStructure;
+import com.google.android.gms.location.FusedLocationProviderApi;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
@@ -17,6 +20,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.VisibleRegion;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
 
@@ -33,6 +38,8 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.location.Location;
+import android.location.LocationManager;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -60,6 +67,7 @@ import org.json.JSONException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 //migrated from ListActivity
@@ -77,6 +85,7 @@ import com.google.gson.GsonBuilder;
 import java.util.Arrays;
 
 import android.support.design.widget.BottomSheetBehavior;
+import android.location.LocationListener;
 
 
 import static com.example.yourcoastandroid.R.menu.menu_maps;
@@ -99,10 +108,14 @@ public class MapsActivity extends AppCompatActivity
 
     private GoogleMap mMap;
 
+    private FusedLocationProviderClient mFusedLocationProviderClient;
+
     private ClusterManager<MyItem> mClusterManager;
 
     private ClusterManager.OnClusterClickListener mClusterClickListener;
-    
+
+    public Location userCurrentLocation;
+
     private List<MyItem> items;
    // private List<ListItemStructure> jList = null;
     //ListView myList;
@@ -136,10 +149,13 @@ public class MapsActivity extends AppCompatActivity
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
         //recyclerView.addOnScrollListener();
-       // getLocations();
         findViewById(R.id.recyclerView).setFocusable(false);
         findViewById(R.id.lintemp).requestFocus();
 
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        getUserLocation();
+        //userCurrentLocation = setLocation();
+        //Log.d("currloc", userCurrentLocation.toString());
     }
 
     @Override
@@ -169,11 +185,13 @@ public class MapsActivity extends AppCompatActivity
         mMap.setOnInfoWindowClickListener(this);
 
         //mClusterManager.setOnsetOnClusterClickListener(mClusterClickListener);
-        try {
-            readItems();
-        } catch (JSONException e) {
-            Toast.makeText(this, "Problem reading list of markers.", Toast.LENGTH_LONG).show();
-        }
+//        try {
+//            getUserLocation();
+//           // readItems();
+//        } catch (JSONException e) {
+//            Toast.makeText(this, "Problem reading list of markers.", Toast.LENGTH_LONG).show();
+//        }
+        getUserLocation();
 
 
         // mMap.setOnMarkerClickListener(mClusterManager.getMarkerManager().getCollection());
@@ -251,13 +269,12 @@ public class MapsActivity extends AppCompatActivity
     }
 
 
-        private void readItems() throws JSONException {
+        private void readItems(Location location) throws JSONException {
             InputStream inputStream = getResources().openRawResource(R.raw.access_points);
-            items = new MyItemReader().read(inputStream);
-
+            items = new MyItemReader(location).read(inputStream);
 //            InputStream listInputStream = getResources().openRawResource(R.raw.access_points);
 //            jList = new ListItemReader().read(listInputStream);
-            getLocations();
+            setList();
             mClusterManager.addItems(items);
 
 
@@ -318,8 +335,15 @@ public class MapsActivity extends AppCompatActivity
 
     @Override
     public void onMyLocationClick(@NonNull Location location) {
-
     }
+
+
+//    public Double getLoc(){
+//
+//        Double lat = location.getLatitude();
+//        Double lon = location.getLongitude();
+//        return lat + lon;
+//    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
@@ -447,12 +471,54 @@ public class MapsActivity extends AppCompatActivity
     }
 
     //ListActivity
-    private void getLocations(){
-
+    private void setList(){
         Log.d("jList", items.toString());
+        Collections.sort(items);
+        Log.d("sorted jList", items.toString());
         adapter = new ListItemAdapter(items);
         recyclerView.setAdapter(adapter);
     }
+    public void getUserLocation(){
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        try{
+            if(!mPermissionDenied){
+                Task location = mFusedLocationProviderClient.getLastLocation();
+                location.addOnCompleteListener(new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        if(task.isSuccessful()){
+                            Log.d("locationfound", "onComplete found location");
+                            Location currentLocation = (Location) task.getResult();
+                            Log.d("locationfound", currentLocation.toString());
+                            //setLocation(currentLocation);
+                            userCurrentLocation = currentLocation;
+                            try {
+                                readItems(currentLocation);
+                            } catch (JSONException e) {
+                                Log.e("locationfound", e.getMessage());
+                                //Toast.makeText(this, "Problem reading list of markers.", Toast.LENGTH_LONG).show();
+                            }
+                            Log.d("locationfound", userCurrentLocation.toString());
+                        } else {
+                            Log.d("locationfound", "current location is NULL");
+                        }
+                    }
+                });
+        }}catch(SecurityException e) {
+            Log.e("locationfound ", e.getMessage());
+        }
+    }
+//    public void setLocation(Location location){
+//        userCurrentLocation = location;
+//    }
+
+//    public Double getLat(){
+//        return currentLocation.getLatitude();
+//    }
+//    public Double getLon(){
+//        return currentLocation.getLongitude();
+//    }
+
 
 
 }

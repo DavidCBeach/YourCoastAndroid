@@ -21,10 +21,18 @@
             android:textStyle="bold"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_toRightOf="@+id/id"
+            android:layout_marginRight="60dp"
             android:id="@+id/nameMobileWeb"
             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentRight="true"
+            android:text="3000mi"
+            android:layout_marginRight="15dp"
+            android:id="@+id/distance"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="40dp"
