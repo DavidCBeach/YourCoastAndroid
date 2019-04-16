@@ -102,10 +102,10 @@ public class MapsActivity extends AppCompatActivity
     private ClusterManager<MyItem> mClusterManager;
 
     private ClusterManager.OnClusterClickListener mClusterClickListener;
-
+    
     private List<MyItem> items;
-    private List<ListItemStructure> jList = null;
-    ListView myList;
+   // private List<ListItemStructure> jList = null;
+    //ListView myList;
 
 
     //ListActivity
@@ -133,8 +133,9 @@ public class MapsActivity extends AppCompatActivity
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(false);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
+        //recyclerView.addOnScrollListener();
        // getLocations();
         findViewById(R.id.recyclerView).setFocusable(false);
         findViewById(R.id.lintemp).requestFocus();
@@ -254,8 +255,8 @@ public class MapsActivity extends AppCompatActivity
             InputStream inputStream = getResources().openRawResource(R.raw.access_points);
             items = new MyItemReader().read(inputStream);
 
-            InputStream listInputStream = getResources().openRawResource(R.raw.access_points);
-            jList = new ListItemReader().read(listInputStream);
+//            InputStream listInputStream = getResources().openRawResource(R.raw.access_points);
+//            jList = new ListItemReader().read(listInputStream);
             getLocations();
             mClusterManager.addItems(items);
 
@@ -400,6 +401,7 @@ public class MapsActivity extends AppCompatActivity
                 IDOfMarkers.add(item.getID());
             }
         }
+        Log.d("idofmarkers", IDOfMarkers.toString());
         String stringOfMarkersCombined = stringsOfMarkers.toString();
         String stringofIDCombined = IDOfMarkers.toString();
         //uncomment following lines to display proof of concept for ID list of Markers shown
@@ -447,8 +449,8 @@ public class MapsActivity extends AppCompatActivity
     //ListActivity
     private void getLocations(){
 
-        Log.d("jList", jList.toString());
-        adapter = new ListItemAdapter(jList);
+        Log.d("jList", items.toString());
+        adapter = new ListItemAdapter(items);
         recyclerView.setAdapter(adapter);
     }
 

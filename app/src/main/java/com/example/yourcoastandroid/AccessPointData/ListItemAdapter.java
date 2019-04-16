@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.yourcoastandroid.MyItem;
 import com.example.yourcoastandroid.R;
 
 import java.util.ArrayList;
@@ -16,9 +17,9 @@ import java.util.List;
 //recycler adapter
 public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.myViewHolder> {
 
-    private List<ListItemStructure> jList = new ArrayList<>();
-
-    public ListItemAdapter(List<ListItemStructure> jList){
+   // private List<ListItemStructure> jList = new ArrayList<>();
+    private List<MyItem> jList = new ArrayList<>();
+    public ListItemAdapter(List<MyItem> jList){
         this.jList = jList;
     }
 
@@ -41,21 +42,18 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.myView
 
     @Override
     public int getItemCount() {
-        return jList.size();
+        return 20;//jList.size();
     }
+
 
     public static class myViewHolder extends RecyclerView.ViewHolder {
         TextView ID, NameMobileWeb, DescriptionMobileWeb;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
-            ID = (TextView)itemView.findViewById(R.id.id);
+           // ID = (TextView)itemView.findViewById(R.id.id);
             NameMobileWeb = (TextView)itemView.findViewById(R.id.nameMobileWeb);
             DescriptionMobileWeb = (TextView)itemView.findViewById(R.id.descriptionMobileWeb);
 
         }
-    }
-
-    public List<ListItemStructure> getjList() {
-        return jList;
     }
 }

@@ -39,11 +39,14 @@ public class MyItemReader {
     public List<MyItem> read(InputStream inputStream) throws JSONException {
         List<MyItem> items = new ArrayList<MyItem>();
         String json = new Scanner(inputStream).useDelimiter(REGEX_INPUT_BOUNDARY_BEGINNING).next();
-        Log.d("json", json);
         JSONArray array = new JSONArray(json);
         for (int i = 0; i < array.length(); i++) {
             String title = null;
             //String ssnippet = null;
+
+            String name = null;
+            String description = null;
+
             JSONObject object = array.getJSONObject(i);
             double lat = object.getDouble("LATITUDE");
             double lng = object.getDouble("LONGITUDE");
@@ -52,8 +55,14 @@ public class MyItemReader {
             String ssnippet = snippet.toString();
             if (!object.isNull("NameMobileWeb")) {
                 title = object.getString("NameMobileWeb");
+                name = object.getString("NameMobileWeb");
             }
-            items.add(new MyItem(lat, lng, title, ssnippet, id));
+
+            if (!object.isNull("DescriptionMobileWeb")) {
+                description = object.getString("DescriptionMobileWeb");
+            }
+
+            items.add(new MyItem(lat, lng, title, ssnippet, id, name, description));
         }
         return items;
     }

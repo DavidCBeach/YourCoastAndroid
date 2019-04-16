@@ -25,19 +25,31 @@ public class MyItem implements ClusterItem {
     private String mSnippet;
     private int mID;
 
+    private String lNameMobileWeb;
+    private String lDescriptionMobileWeb;
+    private int lID;
+
 
     public MyItem(double lat, double lng) {
         mPosition = new LatLng(lat, lng);
         mTitle = null;
         mSnippet = null;
         mID = 0;
+
+        lNameMobileWeb = null;
+        lDescriptionMobileWeb = null;
+        lID = 0;
     }
 
-    public MyItem(double lat, double lng, String title, String snippet, int id) {
+    public MyItem(double lat, double lng, String title, String snippet, int id, String name, String description) {
         mPosition = new LatLng(lat, lng);
         mTitle = title;
         mSnippet = snippet;
         mID = id;
+
+        lNameMobileWeb = name;
+        lDescriptionMobileWeb = description;
+        lID = id;
     }
 
     @Override
@@ -52,6 +64,11 @@ public class MyItem implements ClusterItem {
     public String getSnippet() { return mSnippet; }
 
     public int getID() { return mID; }
+
+
+    public String getName() { return lNameMobileWeb; }
+
+    public String getDescription() { return lDescriptionMobileWeb; }
 
     /**
      * Set the title of the marker
