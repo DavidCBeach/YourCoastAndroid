@@ -113,7 +113,7 @@ public class MapsActivity extends AppCompatActivity
         findViewById(R.id.lintemp).requestFocus();
         //mMap.getLocation() was depricated to using getFusedLocation instead
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        getUserLocation();
+        //getUserLocation();
     }
 
     @Override

@@ -26,12 +26,6 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.myView
         return new myViewHolder(view);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull myViewHolder viewHolder, int i) {
-        viewHolder.NameMobileWeb.setText(jList.get(i).getName());
-        viewHolder.DescriptionMobileWeb.setText(jList.get(i).getDescription());
-        viewHolder.Distance.setText(jList.get(i).getDistance() + "mi");
-    }
 
     @Override
     //set this to return jList.size() to return full array
@@ -51,4 +45,12 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.myView
             Distance = (TextView)itemView.findViewById(R.id.distance);
         }
     }
+
+    @Override
+    public void onBindViewHolder(@NonNull myViewHolder viewHolder, int i) {
+        viewHolder.NameMobileWeb.setText(jList.get(i).getName());
+        viewHolder.DescriptionMobileWeb.setText(jList.get(i).getDescription());
+        viewHolder.Distance.setText(jList.get(i).getDistance() + "mi");
+    }
+
 }
