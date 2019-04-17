@@ -4,14 +4,15 @@
 
     <item
         android:id="@+id/action_info"
-        android:icon="@mipmap/ic_info"
+        android:icon="@drawable/ic_info_24dp"
         android:title="@string/action_info"
         app:showAsAction="always" />
     <item
         android:id="@+id/search_action"
         android:icon="@drawable/ic_search_black_24dp"
         android:title="Search"
-        app:showAsAction="always"/>
+        app:showAsAction="always"
+        />
 
 
 </menu>
