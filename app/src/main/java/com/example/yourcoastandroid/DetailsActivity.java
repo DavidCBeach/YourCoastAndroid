@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,6 +56,8 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     private GoogleMap mMap;
     private DetailItem details = null;
     private WebView webViewDetailsPage;
+    private FragmentManager fm = getSupportFragmentManager();
+    private PhotoInfoDialog photoDialogFragment = new PhotoInfoDialog();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,14 +75,20 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         } catch (Exception e) {
             e.printStackTrace();
         }
-        centerTitle();
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
+        //centerTitle();
+        //getActionBar().setDisplayHomeAsUpEnabled(false);
 
         //System.out.println(details.RESTROOMS);
         TextView textViewToChange = (TextView) findViewById(R.id.address);
         textViewToChange.setText(details.LocationMobileWeb.toString());
-
+        textViewToChange = (TextView) findViewById(R.id.titlecard);
+        textViewToChange.setText(details.NameMobileWeb.toString());
+        textViewToChange.setTypeface(null, Typeface.BOLD);
         setTitle(details.NameMobileWeb.toString());
+        textViewToChange = (TextView) findViewById(R.id.titlecard2);
+        textViewToChange.setText(details.DescriptionMobileWeb);
+
+        //DescriptionMobileWeb
 
         if(details.PHONE_NMBR.equals("")){
             TextView item =  findViewById(R.id.phonelabel);
@@ -337,7 +347,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
                 .title(details.NameMobileWeb)
                 .icon(BitmapDescriptorFactory.defaultMarker(58.0f))
                 );
-        mPoint.showInfoWindow();
+        //mPoint.showInfoWindow();
         mMap.getUiSettings().setScrollGesturesEnabled(false);
         CameraPosition newCamPos = new CameraPosition(new LatLng(details.LATITUDE,details.LONGITUDE),
                 15.7f,
@@ -376,7 +386,9 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         startActivity(i);
     }
     public void PictureButtonClick(View v) {
-        Toast.makeText(this,"Photo Button Coming Soon" ,Toast.LENGTH_LONG).show();
+
+
+        photoDialogFragment.show(fm, "photo");
     }
     public void ShareButtonClick(View v) {
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -385,6 +397,9 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, details.NameMobileWeb);
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+    public void ClickOk (View v){
+        photoDialogFragment.dismisser();
     }
 
 

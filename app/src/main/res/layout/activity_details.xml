@@ -10,8 +10,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
+
     android:orientation="vertical" >
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -20,7 +19,36 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         tools:context=".MapsActivity" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="40dp"
+        android:id="@+id/titlecard"
 
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
+        android:textAlignment="center"
+        android:text="@string/example"
+        android:textSize="25sp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/titlecard2"
+        android:paddingBottom="40dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
+        android:textAlignment="center"
+        android:text="@string/examplesmall"
+        android:textSize="15sp"
+        />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical" >
     <TextView
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -79,7 +107,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:paddingTop="10dp"
+        android:layout_marginTop="30dp"
         android:id="@+id/textbox"
         android:text="@string/address_label"
         android:textSize="16dp"/>
@@ -110,6 +138,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:layout_marginTop="30dp"
         android:id="@+id/phonelabel"
         android:text="@string/phone_label"
         android:textSize="16dp"/>
@@ -142,6 +171,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:id="@+id/amenitieslabel"
+        android:layout_marginTop="30dp"
         android:text="@string/amenities_label"
         android:textSize="16dp"/>
 
@@ -668,4 +698,6 @@
 
 
 </LinearLayout>
+</LinearLayout>
 </ScrollView>
+

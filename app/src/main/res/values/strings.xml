@@ -46,4 +46,9 @@
     <string name="search">Search for info about this location</string>
     <string name="picturebutton">Submit A Photo</string>
     <string name="sharebutton">Share Location</string>
+    <string name="example">Example Location</string>
+    <string name="examplesmall">small words about this</string>
+    <string name="photoinfotitle">Sharing Photos</string>
+    <string name="photoinfocontent">This app currently does not support photo sharing.</string>
+    <string name="ok">OK</string>
 </resources>
