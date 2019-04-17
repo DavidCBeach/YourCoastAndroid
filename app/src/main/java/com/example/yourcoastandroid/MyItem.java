@@ -19,11 +19,16 @@ package com.example.yourcoastandroid;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.ClusterItem;
 
-public class MyItem implements ClusterItem {
+public class MyItem implements ClusterItem, Comparable<MyItem> {
     private final LatLng mPosition;
     private String mTitle;
     private String mSnippet;
     private int mID;
+
+    private String lNameMobileWeb;
+    private String lDescriptionMobileWeb;
+    private int lID;
+    private Double lDistance;
 
 
     public MyItem(double lat, double lng) {
@@ -31,13 +36,23 @@ public class MyItem implements ClusterItem {
         mTitle = null;
         mSnippet = null;
         mID = 0;
+
+        lNameMobileWeb = null;
+        lDescriptionMobileWeb = null;
+        lID = 0;
+        lDistance = 0.0;
     }
 
-    public MyItem(double lat, double lng, String title, String snippet, int id) {
+    public MyItem(double lat, double lng, String title, String snippet, int id, String name, String description, Double distance) {
         mPosition = new LatLng(lat, lng);
         mTitle = title;
         mSnippet = snippet;
         mID = id;
+
+        lNameMobileWeb = name;
+        lDescriptionMobileWeb = description;
+        lID = id;
+        lDistance = distance;
     }
 
     @Override
@@ -53,6 +68,12 @@ public class MyItem implements ClusterItem {
 
     public int getID() { return mID; }
 
+    public String getName() { return lNameMobileWeb; }
+
+    public String getDescription() { return lDescriptionMobileWeb; }
+
+    public Double getDistance(){return lDistance;}
+
     /**
      * Set the title of the marker
      * @param title string to be set as title
@@ -67,5 +88,13 @@ public class MyItem implements ClusterItem {
      */
     public void setSnippet(String snippet) {
         mSnippet = snippet;
+    }
+
+    @Override
+    public int compareTo(MyItem item) {
+        if (getDistance() == null || item.getDistance() == null) {
+            return 0;
+        }
+        return getDistance().compareTo(item.getDistance());
     }
 }
