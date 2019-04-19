@@ -66,7 +66,8 @@ public class MapsActivity extends AppCompatActivity
         GoogleMap.InfoWindowAdapter,
         GoogleMap.OnMarkerClickListener,
         GoogleMap.OnInfoWindowClickListener,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+        ActivityCompat.OnRequestPermissionsResultCallback,
+        ListItemAdapter.onItemListener {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
@@ -157,6 +158,9 @@ public class MapsActivity extends AppCompatActivity
 
         // mMap.setOnMarkerClickListener(mClusterManager.getMarkerManager().getCollection());
     }
+
+
+
     private class CustomRenderer extends DefaultClusterRenderer<MyItem> {
         private final IconGenerator mIconGenerator = new IconGenerator(getApplicationContext());
         private final IconGenerator mClusterIconGenerator = new IconGenerator(getApplicationContext());
@@ -411,13 +415,19 @@ public class MapsActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    public void onClick(int position) {
+        String id = String.valueOf(itemsInView.get(position).getID());
+        launchDetails(id);
+    }
+
     //creates list
     private void setList(){
         //Log.d("jList", items.toString());
         //sorts array by ascending distance
         Collections.sort(itemsInView);
         //Log.d("sorted jList", items.toString());
-        adapter = new ListItemAdapter(itemsInView);
+        adapter = new ListItemAdapter(itemsInView, this);
         recyclerView.setAdapter(adapter);
     }
 

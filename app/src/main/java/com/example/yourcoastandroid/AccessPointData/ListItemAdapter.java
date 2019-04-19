@@ -15,19 +15,20 @@ import java.util.List;
 
 //recycler adapter
 public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.myViewHolder> {
-
+private onItemListener onItemListener;
     private List<MyItem> jList = new ArrayList<>();
    // private List<MyItem> onScreenjList = new ArrayList<>();
     //private ArrayList<Integer> IDOfMarkers = new ArrayList<>();
-    public ListItemAdapter(List<MyItem> jList){
+    public ListItemAdapter(List<MyItem> jList, onItemListener onItemListener){
         this.jList = jList;
+        this.onItemListener = onItemListener;
     }
 
     @NonNull
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item_view,viewGroup,false);
-        return new myViewHolder(view);
+        return new myViewHolder(view, onItemListener);
     }
 
 
@@ -44,37 +45,32 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.myView
     }
 
 
-    public static class myViewHolder extends RecyclerView.ViewHolder {
+    public static class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView NameMobileWeb, DescriptionMobileWeb, Distance;
-        public myViewHolder(@NonNull View itemView) {
+        onItemListener onItemListener;
+        public myViewHolder(@NonNull View itemView, onItemListener onItemListener) {
             super(itemView);
             NameMobileWeb = (TextView)itemView.findViewById(R.id.nameMobileWeb);
             DescriptionMobileWeb = (TextView)itemView.findViewById(R.id.descriptionMobileWeb);
             Distance = (TextView)itemView.findViewById(R.id.distance);
+            this.onItemListener = onItemListener;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            onItemListener.onClick(getAdapterPosition());
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder viewHolder, int i) {
-
-        //Object obj = IDOfMarkers.get(i);
-        //Object newList = jList.get(IDOfMarkers.get(i));
-       // IDOfMarkers[i]
-          //  Log.d("getID", String.valueOf(IDOfMarkers.get(i)));
-//            for(int j = 0; j < jList.size(); j++){
-//                if
-//            }
-
-        //Log.d("testIDOF", IDOfMarkers.get(i).toString());
-        //Log.d("testjLISt", Integer.toString(jList.get(IDOfMarkers.get(i)).getID()) + " " + jList.get(IDOfMarkers.get(i)).getName());
-        //Log.d("testNEWLIST", ((MyItem) newList).getName());
-        //viewHolder.NameMobileWeb.setText(((MyItem) newList).getName());
-       // viewHolder.DescriptionMobileWeb.setText(((MyItem) newList).getDescription());
-        //String dis = Double.toString(((MyItem) newList).getDistance());
-       // viewHolder.Distance.setText(dis + "mi");
         viewHolder.NameMobileWeb.setText(jList.get(i).getName());
         viewHolder.DescriptionMobileWeb.setText(jList.get(i).getDescription());
         viewHolder.Distance.setText(jList.get(i).getDistance() + "mi");
     }
 
+    public interface onItemListener{
+        void onClick(int position);
+    }
 }
