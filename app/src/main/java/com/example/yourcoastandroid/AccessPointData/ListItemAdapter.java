@@ -1,5 +1,7 @@
 package com.example.yourcoastandroid.AccessPointData;
 
+import android.graphics.Color;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -58,8 +60,15 @@ private onItemListener onItemListener;
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(final View v) {
             onItemListener.onClick(getAdapterPosition());
+            v.setBackgroundColor(Color.parseColor("#f0f0f0"));
+            v.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    v.setBackgroundColor(Color.WHITE);
+                }
+            }, 100);
         }
     }
 
