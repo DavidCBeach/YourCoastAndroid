@@ -1,7 +1,10 @@
 package com.example.yourcoastandroid.AccessPointData;
 
+import android.graphics.Color;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,21 +12,25 @@ import android.widget.TextView;
 import com.example.yourcoastandroid.MyItem;
 import com.example.yourcoastandroid.R;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 //recycler adapter
 public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.myViewHolder> {
-
+private onItemListener onItemListener;
     private List<MyItem> jList = new ArrayList<>();
-    public ListItemAdapter(List<MyItem> jList){
+   // private List<MyItem> onScreenjList = new ArrayList<>();
+    //private ArrayList<Integer> IDOfMarkers = new ArrayList<>();
+    public ListItemAdapter(List<MyItem> jList, onItemListener onItemListener){
         this.jList = jList;
+        this.onItemListener = onItemListener;
     }
 
     @NonNull
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item_view,viewGroup,false);
-        return new myViewHolder(view);
+        return new myViewHolder(view, onItemListener);
     }
 
 
@@ -31,18 +38,37 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.myView
     //set this to return jList.size() to return full array
     //TODO: paginate list to reduce startup time
     public int getItemCount() {
-        return 30;
+        //return 30;
         //return jList.size();
+        if(jList.size() < 20)
+            return jList.size();
+        else
+            return 20;
     }
 
 
-    public static class myViewHolder extends RecyclerView.ViewHolder {
+    public static class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView NameMobileWeb, DescriptionMobileWeb, Distance;
-        public myViewHolder(@NonNull View itemView) {
+        onItemListener onItemListener;
+        public myViewHolder(@NonNull View itemView, onItemListener onItemListener) {
             super(itemView);
             NameMobileWeb = (TextView)itemView.findViewById(R.id.nameMobileWeb);
             DescriptionMobileWeb = (TextView)itemView.findViewById(R.id.descriptionMobileWeb);
             Distance = (TextView)itemView.findViewById(R.id.distance);
+            this.onItemListener = onItemListener;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(final View v) {
+            onItemListener.onClick(getAdapterPosition());
+            v.setBackgroundColor(Color.parseColor("#f0f0f0"));
+            v.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    v.setBackgroundColor(Color.WHITE);
+                }
+            }, 100);
         }
     }
 
@@ -53,4 +79,7 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.myView
         viewHolder.Distance.setText(jList.get(i).getDistance() + "mi");
     }
 
+    public interface onItemListener{
+        void onClick(int position);
+    }
 }
