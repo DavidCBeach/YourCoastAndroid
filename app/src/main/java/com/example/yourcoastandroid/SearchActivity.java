@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
+import android.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 
@@ -20,6 +20,7 @@ import com.google.maps.android.clustering.ClusterManager;
 import org.json.JSONException;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -41,6 +42,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        searchView = (SearchView) findViewById(R.id.searchView);
         getUserLocation();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(this);
@@ -49,29 +51,42 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
         findViewById(R.id.recyclerView).setFocusable(false);
-
-        initQueryTextListener(searchView);
     }
 
-    @NonNull
-    private void initQueryTextListener(SearchView searchView) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_maps,menu);
+        //searchView.findViewById(R.id.searchView);
 
-        System.out.print("Here");
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                // filter recycler view when query submitted
-//                adapter.getFilter().filter(query);
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                // filter recycler view when text is changed
-//                adapter.getFilter().filter(newText);
-//                return true;
-//            }
-//        });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                if(!searchView.isIconified()){
+                    searchView.setIconified(true);
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                final List<MyItem> filter = filter(items,s);
+                adapter.setFilter(filter);
+                return false;
+            }
+        });
+        return true;
+    }
+
+    private List<MyItem> filter(List<MyItem> list, String query){
+        query=query.toLowerCase();
+        final List<MyItem> filter = new ArrayList<>();
+        for(MyItem item : list){
+            final String text = item.getName().toLowerCase();
+            if(text.startsWith(query)){
+                filter.add(item);
+            }
+        }
+        return filter;
     }
 
     //gets the users current location and calls json parse function
@@ -105,13 +120,6 @@ public class SearchActivity extends AppCompatActivity {
             }}catch(SecurityException e) {
             Log.e("locationfound ", e.getMessage());
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_maps, menu);
-        return true;
     }
 
     private void readItems(Location location) throws JSONException {

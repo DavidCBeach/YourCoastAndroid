@@ -18,6 +18,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.My
 
     private List<MyItem> list = new ArrayList<>();
     private List<MyItem> filteredList = new ArrayList<>();
+    private String distance = "mi";
 
     public SearchItemAdapter(List<MyItem> list){
         this.list = list;
@@ -42,12 +43,18 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.My
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder viewHolder, int i) {
         viewHolder.NameMobileWeb.setText(list.get(i).getName());
-        viewHolder.Distance.setText(list.get(i).getDistance() + "mi");
+        viewHolder.Distance.setText(String.valueOf(list.get(i).getDistance()) + distance);
     }
 
     @Override
     public int getItemCount() {
         return 15;
+    }
+
+    public void setFilter(List<MyItem> itemList){
+        list=new ArrayList<>();
+        list.addAll(itemList);
+        notifyDataSetChanged();
     }
 
     public Filter getFilter(){
