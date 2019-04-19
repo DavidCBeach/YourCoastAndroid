@@ -53,6 +53,7 @@ import java.util.List;
 import android.app.SearchManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import static com.example.yourcoastandroid.R.menu.menu_maps;
 
@@ -82,6 +83,8 @@ public class MapsActivity extends AppCompatActivity
     public Location userCurrentLocation;
 
     private List<MyItem> items;
+
+    private List<MyItem> itemsInView = new ArrayList<>();
 
     private RecyclerView recyclerView;
 
@@ -226,7 +229,7 @@ public class MapsActivity extends AppCompatActivity
             InputStream inputStream = getResources().openRawResource(R.raw.access_points);
             items = new MyItemReader(location).read(inputStream);
             //creates recyclerview
-            setList();
+            //setList();
             mClusterManager.addItems(items);
         }
 
@@ -343,13 +346,15 @@ public class MapsActivity extends AppCompatActivity
 
     }
 
+    //ArrayList<Integer> IDOfMarkers = new ArrayList<>();
 
     private void cameraView(){
         //CameraPosition cameraPosition = mMap.getCameraPosition();
         //testing visuals:
+        if(itemsInView != null)
+        itemsInView.clear();
         ArrayList<String> stringsOfMarkers = new ArrayList<>();
         ArrayList<LatLng> latLngsOfMarkers = new ArrayList<>();
-        ArrayList<Integer> IDOfMarkers = new ArrayList<>();
         VisibleRegion cameraRegion = mMap.getProjection().getVisibleRegion();
         for( MyItem item : items){
 
@@ -357,12 +362,13 @@ public class MapsActivity extends AppCompatActivity
             if(cameraRegion.latLngBounds.contains(tempItem)) {
                 latLngsOfMarkers.add(tempItem);
                 stringsOfMarkers.add(item.getTitle());
-                IDOfMarkers.add(item.getID());
+                itemsInView.add(item);
             }
         }
-        Log.d("idofmarkers", IDOfMarkers.toString());
-        String stringOfMarkersCombined = stringsOfMarkers.toString();
-        String stringofIDCombined = IDOfMarkers.toString();
+        setList();
+        //Log.d("idofmarkers", IDOfMarkers.toString());
+        //String stringOfMarkersCombined = stringsOfMarkers.toString();
+        //String stringofIDCombined = IDOfMarkers.toString();
         //uncomment following lines to display proof of concept for ID list of Markers shown
         //Toast.makeText(this,stringOfMarkersCombined,Toast.LENGTH_SHORT).show();
         //Toast.makeText(this,stringofIDCombined,Toast.LENGTH_SHORT).show();
@@ -409,9 +415,9 @@ public class MapsActivity extends AppCompatActivity
     private void setList(){
         //Log.d("jList", items.toString());
         //sorts array by ascending distance
-        Collections.sort(items);
+        Collections.sort(itemsInView);
         //Log.d("sorted jList", items.toString());
-        adapter = new ListItemAdapter(items);
+        adapter = new ListItemAdapter(itemsInView);
         recyclerView.setAdapter(adapter);
     }
 
