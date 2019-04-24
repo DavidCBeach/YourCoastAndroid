@@ -19,11 +19,18 @@ import java.util.List;
 public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.myViewHolder> {
 private onItemListener onItemListener;
     private List<MyItem> jList = new ArrayList<>();
-   // private List<MyItem> onScreenjList = new ArrayList<>();
-    //private ArrayList<Integer> IDOfMarkers = new ArrayList<>();
+
     public ListItemAdapter(List<MyItem> jList, onItemListener onItemListener){
         this.jList = jList;
         this.onItemListener = onItemListener;
+
+        if(jList.size() == 0){
+            //TODO: replace with bottomsheet fragment!
+            //bad because crashes onclick, has 0.0 distance, cant do custom actions like return to default map
+            System.out.println("empty!");
+            MyItem e = new MyItem(0.0, 0.0, "", "", 0, "Nothing to see here!", "Tap to return to California", null);
+            jList.add(e);
+        }
     }
 
     @NonNull
@@ -76,7 +83,11 @@ private onItemListener onItemListener;
     public void onBindViewHolder(@NonNull myViewHolder viewHolder, int i) {
         viewHolder.NameMobileWeb.setText(jList.get(i).getName());
         viewHolder.DescriptionMobileWeb.setText(jList.get(i).getDescription());
-        viewHolder.Distance.setText(jList.get(i).getDistance() + "mi");
+        String distanceS = jList.get(i).getDistance() + "mi";
+        if(distanceS.equals("nullmi"))
+            viewHolder.Distance.setText("");
+        else
+        viewHolder.Distance.setText(distanceS);
     }
 
     public interface onItemListener{

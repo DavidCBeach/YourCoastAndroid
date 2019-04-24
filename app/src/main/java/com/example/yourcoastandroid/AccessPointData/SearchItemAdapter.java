@@ -29,6 +29,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.My
             super(itemView);
             NameMobileWeb = (TextView)itemView.findViewById(R.id.location);
             Distance = (TextView)itemView.findViewById(R.id.Distance);
+            Distance = (TextView)itemView.findViewById(R.id.Distance);
         }
     }
 
@@ -42,7 +43,8 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.My
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder viewHolder, int i) {
         viewHolder.NameMobileWeb.setText(list.get(i).getName());
-        viewHolder.Distance.setText(list.get(i).getDistance() + "mi");
+        String distanceS = list.get(i).getDistance() + "mi";
+        viewHolder.Distance.setText(distanceS);
     }
 
     @Override

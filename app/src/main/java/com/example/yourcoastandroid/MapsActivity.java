@@ -130,7 +130,7 @@ public class MapsActivity extends AppCompatActivity
         // Temporary Example pin
         LatLng marina = new LatLng(36.6, -121.8);
         //mMap.addMarker(new MarkerOptions().position(marina).title("Marina").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(marina));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(marina));
 
         //map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(36.6, -121.8), 5));
         CameraPosition newCamPos = new CameraPosition(new LatLng(37.2,-120.5),
@@ -369,6 +369,14 @@ public class MapsActivity extends AppCompatActivity
                 itemsInView.add(item);
             }
         }
+        if(itemsInView.size()==0){
+            //BottomSheetFragment fragment = new BottomSheetFragment();
+            //fragment.setCancelable(false);
+
+            //fragment.show(getSupportFragmentManager(), "TAG");
+
+        }
+
         setList();
         //Log.d("idofmarkers", IDOfMarkers.toString());
         //String stringOfMarkersCombined = stringsOfMarkers.toString();
@@ -418,6 +426,14 @@ public class MapsActivity extends AppCompatActivity
     @Override
     public void onClick(int position) {
         String id = String.valueOf(itemsInView.get(position).getID());
+        String distance = String.valueOf(itemsInView.get(position).getDistance());
+        if(distance.equals("null")){
+            CameraPosition newCamPos = new CameraPosition(new LatLng(37.2,-120.5),
+                    5.7f,
+                    mMap.getCameraPosition().tilt, //use old tilt
+                    mMap.getCameraPosition().bearing); //use old bearing
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(newCamPos), 1, null);
+        }else
         launchDetails(id);
     }
 
