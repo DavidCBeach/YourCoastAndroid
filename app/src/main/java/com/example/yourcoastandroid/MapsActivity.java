@@ -32,6 +32,8 @@ import android.graphics.drawable.shapes.OvalShape;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
@@ -53,7 +55,10 @@ import java.util.List;
 import android.app.SearchManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+
+
 
 import static com.example.yourcoastandroid.R.menu.menu_maps;
 
@@ -95,6 +100,11 @@ public class MapsActivity extends AppCompatActivity
 
     private ListItemAdapter adapter;
 
+    //CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorlayout);
+    //LinearLayout linearLayout;
+    View layoutBottomSheet;
+    BottomSheetBehavior sheetBehavior;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +128,44 @@ public class MapsActivity extends AppCompatActivity
         //mMap.getLocation() was depricated to using getFusedLocation instead
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         //getUserLocation();
+
+        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorlayout);
+        View bottomSheet = coordinatorLayout.findViewById(R.id.bottom_sheet);
+        //linearLayout = (LinearLayout) findViewById(R.id.lintemp);
+        //layoutBottomSheet = layoutBottomSheet.findViewById(R.id.bottom_sheet);
+        sheetBehavior = BottomSheetBehavior.from(bottomSheet);
+
+        sheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                switch (newState) {
+                    case BottomSheetBehavior.STATE_HIDDEN:
+                        break;
+                    case BottomSheetBehavior.STATE_EXPANDED: {
+                       // btnBottomSheet.setText("Close Sheet");
+                        Log.d("state", "expanded");
+                    }
+                    break;
+                    case BottomSheetBehavior.STATE_COLLAPSED: {
+                        //btnBottomSheet.setText("Expand Sheet");
+                        Log.d("state", "collapsed");
+
+                    }
+                    break;
+                    case BottomSheetBehavior.STATE_DRAGGING:
+                        break;
+                    case BottomSheetBehavior.STATE_SETTLING:
+                        break;
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View view, float v) {
+
+            }
+        });
+
+
     }
 
     @Override
@@ -428,10 +476,11 @@ public class MapsActivity extends AppCompatActivity
         String id = String.valueOf(itemsInView.get(position).getID());
         String distance = String.valueOf(itemsInView.get(position).getDistance());
         if(distance.equals("null")){
+            //TODO: Fix render bug - When zoomed all the way in and then quickly zooming out, all markers render and lag the app
             CameraPosition newCamPos = new CameraPosition(new LatLng(37.2,-120.5),
                     5.7f,
-                    mMap.getCameraPosition().tilt, //use old tilt
-                    mMap.getCameraPosition().bearing); //use old bearing
+                    0, //use default tilt
+                    0); //use default bearing
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(newCamPos), 1, null);
         }else
         launchDetails(id);
@@ -439,6 +488,7 @@ public class MapsActivity extends AppCompatActivity
 
     //creates list
     private void setList(){
+        //TODO: Fix list bug - list doesn't seem to respect tilt/bearing, still showing some items when camera is rotated and no markers visible
         //Log.d("jList", items.toString());
         //sorts array by ascending distance
         Collections.sort(itemsInView);
@@ -478,6 +528,20 @@ public class MapsActivity extends AppCompatActivity
         }}catch(SecurityException e) {
             Log.e("locationfound ", e.getMessage());
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+
+
+
+       // if(recyclerView.getHeight())
+        Log.d("back", "backpressed");
+        if(sheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED){
+            sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
+        else
+        super.onBackPressed();
     }
 
 }

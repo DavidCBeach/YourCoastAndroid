@@ -26,7 +26,6 @@ private onItemListener onItemListener;
 
         if(jList.size() == 0){
             //TODO: replace with bottomsheet fragment!
-            //bad because crashes onclick, has 0.0 distance, cant do custom actions like return to default map
             System.out.println("empty!");
             MyItem e = new MyItem(0.0, 0.0, "", "", 0, "Nothing to see here!", "Tap to return to California", null);
             jList.add(e);
