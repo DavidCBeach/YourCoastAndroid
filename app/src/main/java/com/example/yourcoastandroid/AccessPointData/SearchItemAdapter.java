@@ -3,6 +3,7 @@ package com.example.yourcoastandroid.AccessPointData;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,16 +46,22 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder viewHolder, int i) {
-        if(list.size()>=i) {
+//        if(list.size()== 0) {
+//            viewHolder.NameMobileWeb.setText("empty");
+//            viewHolder.Distance.setText("empty");
+//        }else {
+            Log.d("list", list.toString());
+            //throw new IndexOutOfBoundsException("Accessing invalid index");}
+            Log.d("list", "index: " + i + " id: " + list.get(i).getID() + " name: " + list.get(i).getName());
             viewHolder.NameMobileWeb.setText(list.get(i).getName());
             viewHolder.Distance.setText(new StringBuilder().append(String.valueOf(list.get(i).getDistance())).append(distance).toString());
-        }else{throw new IndexOutOfBoundsException("Accessing invalid index");}
 
+       // }
     }
 
     @Override
     public int getItemCount() {
-        return 15;
+        return list.size();
     }
 
     public void setFilter(List<MyItem> itemList){

@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.SearchView;
 
 import com.example.yourcoastandroid.AccessPointData.SearchItemAdapter;
@@ -28,7 +29,8 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity {
 
     private List<MyItem> items;
-    private List<MyItem> filtered = new ArrayList<>();
+    //private List<MyItem> filtered = new ArrayList<>();
+    private List<MyItem> filteredList = new ArrayList<>();
     private ClusterManager<MyItem> mClusterManager;
     private SearchItemAdapter adapter;
     private RecyclerView recyclerView;
@@ -61,13 +63,17 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
         findViewById(R.id.recyclerView).setFocusable(false);
-
+        Collections.sort(items);
+        //Log.d("sorted jList", items.toString());
+        adapter = new SearchItemAdapter(this, items);
+        recyclerView.setAdapter(adapter);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 if(!searchView.isIconified()){
                     //searchView.setIconified(true);
-                    adapter.getFilter().filter(s);
+                    //adapter.getFilter().filter(s);
+                    getFilter().filter(s);
                     //recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                     return false;
@@ -78,8 +84,9 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String s) {
                 Log.d("inner", "hereinner");
-                adapter.getFilter().filter(s);
-                recyclerView.setAdapter(adapter);
+                //adapter.getFilter().filter(s);
+                getFilter().filter(s);
+                //recyclerView.setAdapter(adapter);
                // adapter.notifyDataSetChanged();
                 Log.d("inner","filtered");
                 return false;
@@ -87,24 +94,61 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    private List<MyItem> filter(List<MyItem> list, String query){
-
-        final List<MyItem> filter = new ArrayList<>();
-        int i = list.size()-1;
-        if(list.size()>0) {
-            for (MyItem item : list) {
-                final String text = item.getName().toLowerCase();
-                if (text.startsWith(query)) {
-                    filter.add(item);
-                    setList();
-                    //Log.d("Filtering location",filter.get(i).getName().toString());
-                    //                filter.remove(filter.get(i));
-                    //i--;
+    public Filter getFilter(){
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if(charString.isEmpty()){
+                    filteredList = items;
+                }else{
+                    List<MyItem> filtered = new ArrayList<>();
+                    for(MyItem item : items){
+                        try {
+                            //name match condition
+                            if (item.getName().toLowerCase().contains(charString.toLowerCase())) {
+                                filtered.add(item);
+                            }
+                        }catch(IndexOutOfBoundsException index){
+                            throw index;
+                        }
+                    }
+                    filteredList = filtered;
                 }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredList;
+                //notifyDataSetChanged();
+                return filterResults;
             }
-        }else{throw new IndexOutOfBoundsException("Access an invalid index");}
-        return filter;
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                filteredList = (ArrayList<MyItem>) filterResults.values;
+                setList();
+                //refresh the list with filtered data
+                //notifyDataSetChanged();
+            }
+        };
     }
+//    private List<MyItem> filter(List<MyItem> list, String query){
+//       // Log.d();
+//        //final List<MyItem> filter = new ArrayList<>();
+//        int i = list.size()-1;
+//        if(list.size()>0) {
+//            for (MyItem item : list) {
+//                final String text = item.getName().toLowerCase();
+//                if (text.startsWith(query)) {
+//                    filtered.add(item);
+//                    setList();
+//                    //Log.d("Filtering location",filter.get(i).getName().toString());
+//                    //                filter.remove(filter.get(i));
+//                    //i--;
+//                }
+//            }
+//        }else{throw new IndexOutOfBoundsException("Access an invalid index");}
+//        return filtered;
+//    }
 
     //gets the users current location and calls json parse function
     //needed in this order to avoid location being null
@@ -143,7 +187,7 @@ public class SearchActivity extends AppCompatActivity {
         InputStream inputStream = getResources().openRawResource(R.raw.access_points);
         items = new MyItemReader(location).read(inputStream);
         //creates recyclerview
-        setList();
+        //setList();
         //mClusterManager.addItems(items);
     }
 
@@ -151,9 +195,9 @@ public class SearchActivity extends AppCompatActivity {
     private void setList(){
         //Log.d("jList", items.toString());
         //sorts array by ascending distance
-        Collections.sort(items);
+        Collections.sort(filteredList);
         //Log.d("sorted jList", items.toString());
-        adapter = new SearchItemAdapter(this, items);
+        adapter = new SearchItemAdapter(this, filteredList);
         recyclerView.setAdapter(adapter);
     }
 }
