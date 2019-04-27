@@ -1,5 +1,6 @@
 package com.example.yourcoastandroid;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.SearchView;
 
@@ -26,10 +26,9 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements SearchItemAdapter.onItemListener{
 
     private List<MyItem> items;
-    //private List<MyItem> filtered = new ArrayList<>();
     private List<MyItem> filteredList = new ArrayList<>();
     private ClusterManager<MyItem> mClusterManager;
     private SearchItemAdapter adapter;
@@ -39,42 +38,30 @@ public class SearchActivity extends AppCompatActivity {
     private boolean mPermissionDenied = false;
     public Location userCurrentLocation;
     private SearchView searchView;
-    private EditText editSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-//        Intent intent = getIntent();
-//        if(Intent.ACTION_SEARCH.equals(intent.getAction())){
-//            String query = intent.getStringExtra(SearchManager.QUERY);
-//            searchView.setOnQueryTextListener((SearchView.OnQueryTextListener) this);
-//            adapter.getFilter().filter(query);
-//        }
         searchView = (SearchView) findViewById(R.id.searchView);
-        getUserLocation();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
         items = new ArrayList<>();
-        adapter = new SearchItemAdapter(this, items);
+        getUserLocation();
+        setList((ArrayList<MyItem>) items);
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
         findViewById(R.id.recyclerView).setFocusable(false);
-        Collections.sort(items);
-        //Log.d("sorted jList", items.toString());
-        adapter = new SearchItemAdapter(this, items);
-        recyclerView.setAdapter(adapter);
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 if(!searchView.isIconified()){
-                    //searchView.setIconified(true);
-                    //adapter.getFilter().filter(s);
                     getFilter().filter(s);
-                    //recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                     return false;
                 }
@@ -83,15 +70,22 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                Log.d("inner", "hereinner");
-                //adapter.getFilter().filter(s);
                 getFilter().filter(s);
-                //recyclerView.setAdapter(adapter);
-               // adapter.notifyDataSetChanged();
-                Log.d("inner","filtered");
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onClick(int position){
+        String id = String.valueOf(filteredList.get(position).getID());
+        launchDetails(id);
+    }
+
+    private void launchDetails(String id){
+        Intent intent = new Intent(getBaseContext(),  DetailsActivity.class);
+        intent.putExtra("DATA_ID", id);
+        startActivity(intent);
     }
 
     public Filter getFilter(){
@@ -99,16 +93,13 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
                 String charString = charSequence.toString();
-                if(charString.isEmpty()){
-                    filteredList = items;
-                }else{
+                if(charString.isEmpty()){ filteredList = items; }
+                else{
                     List<MyItem> filtered = new ArrayList<>();
                     for(MyItem item : items){
                         try {
                             //name match condition
-                            if (item.getName().toLowerCase().contains(charString.toLowerCase())) {
-                                filtered.add(item);
-                            }
+                            if (item.getName().toLowerCase().contains(charString.toLowerCase())) { filtered.add(item); }
                         }catch(IndexOutOfBoundsException index){
                             throw index;
                         }
@@ -118,37 +109,16 @@ public class SearchActivity extends AppCompatActivity {
 
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = filteredList;
-                //notifyDataSetChanged();
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 filteredList = (ArrayList<MyItem>) filterResults.values;
-                setList();
-                //refresh the list with filtered data
-                //notifyDataSetChanged();
+                setList((ArrayList<MyItem>) filteredList);
             }
         };
     }
-//    private List<MyItem> filter(List<MyItem> list, String query){
-//       // Log.d();
-//        //final List<MyItem> filter = new ArrayList<>();
-//        int i = list.size()-1;
-//        if(list.size()>0) {
-//            for (MyItem item : list) {
-//                final String text = item.getName().toLowerCase();
-//                if (text.startsWith(query)) {
-//                    filtered.add(item);
-//                    setList();
-//                    //Log.d("Filtering location",filter.get(i).getName().toString());
-//                    //                filter.remove(filter.get(i));
-//                    //i--;
-//                }
-//            }
-//        }else{throw new IndexOutOfBoundsException("Access an invalid index");}
-//        return filtered;
-//    }
 
     //gets the users current location and calls json parse function
     //needed in this order to avoid location being null
@@ -173,31 +143,22 @@ public class SearchActivity extends AppCompatActivity {
                                 //Toast.makeText(this, "Problem reading list of markers.", Toast.LENGTH_LONG).show();
                             }
                             Log.d("locationfound", userCurrentLocation.toString());
-                        } else {
-                            Log.d("locationfound", "current location is NULL");
-                        }
+                        } else { Log.d("locationfound", "current location is NULL"); }
                     }
                 });
-            }}catch(SecurityException e) {
-            Log.e("locationfound ", e.getMessage());
-        }
+            }}catch(SecurityException e) { Log.e("locationfound ", e.getMessage()); }
     }
 
     private void readItems(Location location) throws JSONException {
         InputStream inputStream = getResources().openRawResource(R.raw.access_points);
         items = new MyItemReader(location).read(inputStream);
-        //creates recyclerview
-        //setList();
-        //mClusterManager.addItems(items);
     }
 
     //creates list
-    private void setList(){
-        //Log.d("jList", items.toString());
+    private void setList(ArrayList<MyItem> list){
         //sorts array by ascending distance
-        Collections.sort(filteredList);
-        //Log.d("sorted jList", items.toString());
-        adapter = new SearchItemAdapter(this, filteredList);
+        Collections.sort(list);
+        adapter = new SearchItemAdapter(list, this);
         recyclerView.setAdapter(adapter);
     }
 }

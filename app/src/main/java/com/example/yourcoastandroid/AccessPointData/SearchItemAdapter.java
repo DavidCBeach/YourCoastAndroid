@@ -1,13 +1,13 @@
 package com.example.yourcoastandroid.AccessPointData;
 
-import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
 import android.widget.TextView;
 
 import com.example.yourcoastandroid.MyItem;
@@ -19,92 +19,61 @@ import java.util.List;
 public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.MyViewHolder> {
 
     private List<MyItem> list = new ArrayList<>();
-    private List<MyItem> filteredList = new ArrayList<>();
     private String distance = "mi";
-    private Context context;
+    private onItemListener onItemListener;
 
-    public SearchItemAdapter(Context context, List<MyItem> list){
-        this.context = context;
+    public SearchItemAdapter(List<MyItem> list, onItemListener onItemListener){
         this.list = list;
-    }
-
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView NameMobileWeb, Distance;
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-            NameMobileWeb = (TextView)itemView.findViewById(R.id.location);
-            Distance = (TextView)itemView.findViewById(R.id.Distance);
-        }
+        this.onItemListener = onItemListener;
     }
 
     @NonNull
     @Override
     public SearchItemAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.search_item,viewGroup,false);
-        return new MyViewHolder(view);
+        return new MyViewHolder(view, onItemListener);
+    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        TextView NameMobileWeb, Distance;
+        onItemListener onItemListener;
+        CardView cardView;
+
+        public MyViewHolder(@NonNull View itemView, onItemListener onItemListener) {
+            super(itemView);
+
+            NameMobileWeb = (TextView)itemView.findViewById(R.id.location);
+            Distance = (TextView)itemView.findViewById(R.id.Distance);
+            this.onItemListener = onItemListener;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(final View v){
+            onItemListener.onClick(getAdapterPosition());
+            v.setBackgroundColor(Color.parseColor("#f0f0f0"));
+            v.postDelayed(new Runnable() {
+                @Override
+                public void run() { v.setBackgroundColor(Color.WHITE); }
+            },100);
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder viewHolder, int i) {
-//        if(list.size()== 0) {
-//            viewHolder.NameMobileWeb.setText("empty");
-//            viewHolder.Distance.setText("empty");
-//        }else {
             Log.d("list", list.toString());
-            //throw new IndexOutOfBoundsException("Accessing invalid index");}
             Log.d("list", "index: " + i + " id: " + list.get(i).getID() + " name: " + list.get(i).getName());
             viewHolder.NameMobileWeb.setText(list.get(i).getName());
             viewHolder.Distance.setText(new StringBuilder().append(String.valueOf(list.get(i).getDistance())).append(distance).toString());
-
-       // }
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        if(list != null) {return list.size(); }
+        else{return 0;}
     }
 
-    public void setFilter(List<MyItem> itemList){
-        list=new ArrayList<>();
-        list.addAll(itemList);
-        notifyDataSetChanged();
-    }
-
-    public Filter getFilter(){
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence) {
-                String charString = charSequence.toString();
-                if(charString.isEmpty()){
-                    filteredList = list;
-                }else{
-                    List<MyItem> filtered = new ArrayList<>();
-                    for(MyItem item : list){
-                        try {
-                            //name match condition
-                            if (item.getName().toLowerCase().contains(charString.toLowerCase())) {
-                                filtered.add(item);
-                            }
-                        }catch(IndexOutOfBoundsException index){
-                            throw index;
-                        }
-                    }
-                    filteredList = filtered;
-                }
-
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = filteredList;
-                //notifyDataSetChanged();
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                list = (ArrayList<MyItem>) filterResults.values;
-
-                //refresh the list with filtered data
-                notifyDataSetChanged();
-            }
-        };
+    public interface onItemListener{
+        void onClick(int position);
     }
 }
