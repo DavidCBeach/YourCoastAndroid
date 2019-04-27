@@ -6,9 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.SearchView;
 import android.util.Log;
-import android.view.Menu;
+import android.widget.EditText;
+import android.widget.SearchView;
 
 import com.example.yourcoastandroid.AccessPointData.SearchItemAdapter;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -28,6 +28,7 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity {
 
     private List<MyItem> items;
+    private List<MyItem> filtered = new ArrayList<>();
     private ClusterManager<MyItem> mClusterManager;
     private SearchItemAdapter adapter;
     private RecyclerView recyclerView;
@@ -36,56 +37,72 @@ public class SearchActivity extends AppCompatActivity {
     private boolean mPermissionDenied = false;
     public Location userCurrentLocation;
     private SearchView searchView;
+    private EditText editSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+//        Intent intent = getIntent();
+//        if(Intent.ACTION_SEARCH.equals(intent.getAction())){
+//            String query = intent.getStringExtra(SearchManager.QUERY);
+//            searchView.setOnQueryTextListener((SearchView.OnQueryTextListener) this);
+//            adapter.getFilter().filter(query);
+//        }
         searchView = (SearchView) findViewById(R.id.searchView);
         getUserLocation();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        items = new ArrayList<>();
+        adapter = new SearchItemAdapter(this, items);
+
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
         findViewById(R.id.recyclerView).setFocusable(false);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_maps,menu);
-        //searchView.findViewById(R.id.searchView);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 if(!searchView.isIconified()){
-                    searchView.setIconified(true);
+                    //searchView.setIconified(true);
+                    adapter.getFilter().filter(s);
+                    //recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                    return false;
                 }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                final List<MyItem> filter = filter(items,s);
-                adapter.setFilter(filter);
+                Log.d("inner", "hereinner");
+                adapter.getFilter().filter(s);
+                recyclerView.setAdapter(adapter);
+               // adapter.notifyDataSetChanged();
+                Log.d("inner","filtered");
                 return false;
             }
         });
-        return true;
     }
 
     private List<MyItem> filter(List<MyItem> list, String query){
-        query=query.toLowerCase();
+
         final List<MyItem> filter = new ArrayList<>();
-        for(MyItem item : list){
-            final String text = item.getName().toLowerCase();
-            if(text.startsWith(query)){
-                filter.add(item);
+        int i = list.size()-1;
+        if(list.size()>0) {
+            for (MyItem item : list) {
+                final String text = item.getName().toLowerCase();
+                if (text.startsWith(query)) {
+                    filter.add(item);
+                    setList();
+                    //Log.d("Filtering location",filter.get(i).getName().toString());
+                    //                filter.remove(filter.get(i));
+                    //i--;
+                }
             }
-        }
+        }else{throw new IndexOutOfBoundsException("Access an invalid index");}
         return filter;
     }
 
@@ -136,7 +153,7 @@ public class SearchActivity extends AppCompatActivity {
         //sorts array by ascending distance
         Collections.sort(items);
         //Log.d("sorted jList", items.toString());
-        adapter = new SearchItemAdapter(items);
+        adapter = new SearchItemAdapter(this, items);
         recyclerView.setAdapter(adapter);
     }
 }
