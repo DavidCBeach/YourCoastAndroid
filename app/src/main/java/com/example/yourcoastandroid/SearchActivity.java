@@ -1,14 +1,15 @@
 package com.example.yourcoastandroid;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.view.Menu;
+import android.widget.Filter;
+import android.widget.SearchView;
 
 import com.example.yourcoastandroid.AccessPointData.SearchItemAdapter;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -20,13 +21,15 @@ import com.google.maps.android.clustering.ClusterManager;
 import org.json.JSONException;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements SearchItemAdapter.onItemListener{
 
     private List<MyItem> items;
+    private List<MyItem> filteredList = new ArrayList<>();
     private ClusterManager<MyItem> mClusterManager;
     private SearchItemAdapter adapter;
     private RecyclerView recyclerView;
@@ -41,37 +44,80 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        getUserLocation();
+        searchView = (SearchView) findViewById(R.id.searchView);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        items = new ArrayList<>();
+        getUserLocation();
+        setList((ArrayList<MyItem>) items);
+
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
         findViewById(R.id.recyclerView).setFocusable(false);
 
-        initQueryTextListener(searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                if(!searchView.isIconified()){
+                    getFilter().filter(s);
+                    adapter.notifyDataSetChanged();
+                    return false;
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                getFilter().filter(s);
+                return false;
+            }
+        });
     }
 
-    @NonNull
-    private void initQueryTextListener(SearchView searchView) {
+    @Override
+    public void onClick(int position){
+        String id = String.valueOf(filteredList.get(position).getID());
+        launchDetails(id);
+    }
 
-        System.out.print("Here");
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                // filter recycler view when query submitted
-//                adapter.getFilter().filter(query);
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                // filter recycler view when text is changed
-//                adapter.getFilter().filter(newText);
-//                return true;
-//            }
-//        });
+    private void launchDetails(String id){
+        Intent intent = new Intent(getBaseContext(),  DetailsActivity.class);
+        intent.putExtra("DATA_ID", id);
+        startActivity(intent);
+    }
+
+    public Filter getFilter(){
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if(charString.isEmpty()){ filteredList = items; }
+                else{
+                    List<MyItem> filtered = new ArrayList<>();
+                    for(MyItem item : items){
+                        try {
+                            //name match condition
+                            if (item.getName().toLowerCase().contains(charString.toLowerCase())) { filtered.add(item); }
+                        }catch(IndexOutOfBoundsException index){
+                            throw index;
+                        }
+                    }
+                    filteredList = filtered;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                filteredList = (ArrayList<MyItem>) filterResults.values;
+                setList((ArrayList<MyItem>) filteredList);
+            }
+        };
     }
 
     //gets the users current location and calls json parse function
@@ -97,38 +143,22 @@ public class SearchActivity extends AppCompatActivity {
                                 //Toast.makeText(this, "Problem reading list of markers.", Toast.LENGTH_LONG).show();
                             }
                             Log.d("locationfound", userCurrentLocation.toString());
-                        } else {
-                            Log.d("locationfound", "current location is NULL");
-                        }
+                        } else { Log.d("locationfound", "current location is NULL"); }
                     }
                 });
-            }}catch(SecurityException e) {
-            Log.e("locationfound ", e.getMessage());
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_maps, menu);
-        return true;
+            }}catch(SecurityException e) { Log.e("locationfound ", e.getMessage()); }
     }
 
     private void readItems(Location location) throws JSONException {
         InputStream inputStream = getResources().openRawResource(R.raw.access_points);
         items = new MyItemReader(location).read(inputStream);
-        //creates recyclerview
-        setList();
-        //mClusterManager.addItems(items);
     }
 
     //creates list
-    private void setList(){
-        //Log.d("jList", items.toString());
+    private void setList(ArrayList<MyItem> list){
         //sorts array by ascending distance
-        Collections.sort(items);
-        //Log.d("sorted jList", items.toString());
-        adapter = new SearchItemAdapter(items);
+        Collections.sort(list);
+        adapter = new SearchItemAdapter(list, this);
         recyclerView.setAdapter(adapter);
     }
 }
