@@ -46,6 +46,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.My
             Distance = (TextView)itemView.findViewById(R.id.Distance);
             this.onItemListener = onItemListener;
             itemView.setOnClickListener(this);
+
         }
 
         @Override
@@ -60,13 +61,13 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder viewHolder, int i) {
+   public void onBindViewHolder(@NonNull MyViewHolder viewHolder, int i) {
             Log.d("list", list.toString());
             Log.d("list", "index: " + i + " id: " + list.get(i).getID() + " name: " + list.get(i).getName());
             viewHolder.NameMobileWeb.setText(list.get(i).getName());
             viewHolder.Distance.setText(new StringBuilder().append(String.valueOf(list.get(i).getDistance())).append(distance).toString());
     }
-
+  
     @Override
     public int getItemCount() {
         if(list != null) {return list.size(); }
