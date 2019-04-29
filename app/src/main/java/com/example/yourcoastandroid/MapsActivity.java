@@ -1,5 +1,9 @@
 package com.example.yourcoastandroid;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.yourcoastandroid.AccessPointData.ListItemAdapter;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -46,7 +50,15 @@ import com.google.maps.android.clustering.view.DefaultClusterRenderer;
 import com.google.maps.android.ui.IconGenerator;
 import com.google.maps.android.ui.SquareTextView;
 import org.json.JSONException;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -230,12 +242,73 @@ public class MapsActivity extends AppCompatActivity
 
 
         private void readItems(Location location) throws JSONException {
-            InputStream inputStream = getResources().openRawResource(R.raw.access_points);
-            items = new MyItemReader(location).read(inputStream);
-            //creates recyclerview
-            //setList();
+        //TODO: run a check for the last time file was updated
+            //if it has been more than 3 days, run the volley request and update the json file with a new one
+            String locations_url = "https://api.coastal.ca.gov/access/v1/locations";
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, locations_url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Log.d("storage", "create");
+                            create(MapsActivity.this, response);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    });
+            VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+
+            String json = read(MapsActivity.this, "storage.json");
+            Log.d("storage", "json string " + json);
+
+            InputStream jsonStream = new ByteArrayInputStream(json.getBytes());
+            items = new MyItemReader(location).read(jsonStream);
+
+            //InputStream inputStream = getResources().openRawResource(R.raw.access_points);
+            //items = new MyItemReader(location).read(inputStream);
             mClusterManager.addItems(items);
         }
+
+    private boolean create(Context context, String jsonString){
+        String fileName = "storage.json";
+        try {
+            FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+            if (jsonString != null) {
+                fos.write(jsonString.getBytes());
+                Log.d("storage", "write");
+            }
+            fos.close();
+            return true;
+        } catch (FileNotFoundException fileNotFound) {
+            Log.d("storage", "filenotfound");
+            return false;
+        } catch (IOException ioException) {
+            Log.d("storage", "exception");
+            return false;
+        }
+
+    }
+
+    private String read(Context context, String fileName) {
+        try {
+            FileInputStream fis = context.openFileInput(fileName);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader bufferedReader = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line);
+            }
+            return sb.toString();
+        } catch (FileNotFoundException fileNotFound) {
+            return null;
+        } catch (IOException ioException) {
+            return null;
+        }
+    }
 
     /** Called when the user clicks a marker. */
     @Override
