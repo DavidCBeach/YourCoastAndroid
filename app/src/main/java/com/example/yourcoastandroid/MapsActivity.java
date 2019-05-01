@@ -34,6 +34,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -214,6 +215,7 @@ public class MapsActivity extends AppCompatActivity
 //        } catch (JSONException e) {
 //            Toast.makeText(this, "Problem reading list of markers.", Toast.LENGTH_LONG).show();
 //        }
+
         getUserLocation();
 
         // mMap.setOnMarkerClickListener(mClusterManager.getMarkerManager().getCollection());
@@ -292,31 +294,31 @@ public class MapsActivity extends AppCompatActivity
         private void readItems(Location location) throws JSONException {
         //TODO: run a check for the last time file was updated
             //if it has been more than 3 days, run the volley request and update the json file with a new one
-            String locations_url = "https://api.coastal.ca.gov/access/v1/locations";
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, locations_url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            Log.d("storage", "create");
-                            create(MapsActivity.this, response);
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-
-                        }
-                    });
-            VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+//            String locations_url = "https://api.coastal.ca.gov/access/v1/locations";
+//            StringRequest stringRequest = new StringRequest(Request.Method.GET, locations_url,
+//                    new Response.Listener<String>() {
+//                        @Override
+//                        public void onResponse(String response) {
+//                            Log.d("storage", "create");
+//                            create(MapsActivity.this, response);
+//                        }
+//                    },
+//                    new Response.ErrorListener() {
+//                        @Override
+//                        public void onErrorResponse(VolleyError error) {
+//
+//                        }
+//                    });
+//            VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
 
             String json = read(MapsActivity.this, "storage.json");
             Log.d("storage", "json string " + json);
 
-            InputStream jsonStream = new ByteArrayInputStream(json.getBytes());
-            items = new MyItemReader(location).read(jsonStream);
+            //InputStream jsonStream = new ByteArrayInputStream(json.getBytes());
+            //items = new MyItemReader(location).read(jsonStream);
 
-            //InputStream inputStream = getResources().openRawResource(R.raw.access_points);
-            //items = new MyItemReader(location).read(inputStream);
+            InputStream inputStream = getResources().openRawResource(R.raw.access_points);
+            items = new MyItemReader(location).read(inputStream);
             mClusterManager.addItems(items);
         }
 
@@ -388,15 +390,6 @@ public class MapsActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    private void enableMyLocation() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
-                    Manifest.permission.ACCESS_FINE_LOCATION, true);
-        } else if (mMap != null) {
-            mMap.setMyLocationEnabled(true);
-        }
-    }
 
     @Override
     public boolean onMyLocationButtonClick() {
@@ -423,13 +416,25 @@ public class MapsActivity extends AppCompatActivity
         }
     }
 
+    private void enableMyLocation() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
+                    Manifest.permission.ACCESS_FINE_LOCATION, true);
+            getUserLocation();
+        } else if (mMap != null) {
+            mMap.setMyLocationEnabled(true);
+            getUserLocation();
+        }
+    }
+
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();
-        if (mPermissionDenied) {
-            showMissingPermissionError();
-            mPermissionDenied = false;
-        }
+//        if (mPermissionDenied) {
+//            showMissingPermissionError();
+//            mPermissionDenied = false;
+//        }
     }
 
     private void showMissingPermissionError() {
@@ -594,12 +599,34 @@ public class MapsActivity extends AppCompatActivity
                             }
                             Log.d("locationfound", userCurrentLocation.toString());
                         } else {
-                            Log.d("locationfound", "current location is NULL");
+                            Log.d("locationfound", "current location is NULL, set to default marina");
+                            Location temp = new Location(LocationManager.GPS_PROVIDER);
+                            temp.setLatitude(36.6);
+                            temp.setLongitude(-121.8);
+                            System.out.println("default location");
+                            //    LatLng marina = new LatLng(36.6, -121.8);
+                            userCurrentLocation = temp;
+                            try {
+                                readItems(temp);
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
+                            }
                         }
                     }
                 });
         }}catch(SecurityException e) {
             Log.e("locationfound ", e.getMessage());
+            Location temp = new Location(LocationManager.GPS_PROVIDER);
+            temp.setLatitude(36.6);
+            temp.setLongitude(-121.8);
+            System.out.println("default location");
+                    //    LatLng marina = new LatLng(36.6, -121.8);
+            userCurrentLocation = temp;
+            try {
+                readItems(temp);
+            } catch (JSONException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
