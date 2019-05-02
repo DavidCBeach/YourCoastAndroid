@@ -55,9 +55,6 @@ import java.util.ArrayList;
 public class DetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private DetailItem details = null;
-    private WebView webViewDetailsPage;
-    private FragmentManager fm = getSupportFragmentManager();
-    private PhotoInfoDialog photoDialogFragment = new PhotoInfoDialog();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,39 +187,6 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             RelativeLayout item =  findViewById(R.id.BoatingLayout);
             ((ViewManager)item.getParent()).removeView(item);
         }
-//        TextView scroll =  findViewById(R.id.photos);
-//        ((ViewManager)scroll.getParent()).removeView(scroll);
-//        if(details.Photo_1.equals("")){
-//            ImageView item =  findViewById(R.id.photo1);
-//            ((ViewManager)item.getParent()).removeView(item);
-//        } else {
-//            ImageView item =  findViewById(R.id.photo1);
-//            item.setImageDrawable(LoadImageFromWebOperations(details.Photo_1));
-//            System.out.println("Photo1");
-//        }
-//        if(details.Photo_2.equals("")){
-//            ImageView item =  findViewById(R.id.photo2);
-//            ((ViewManager)item.getParent()).removeView(item);
-//        } else {
-//            ImageView item =  findViewById(R.id.photo2);
-//            item.setImageURI(Uri.parse(details.Photo_2));
-//        }
-//        if(details.Photo_3.equals("")){
-//            ImageView item =  findViewById(R.id.photo3);
-//            ((ViewManager)item.getParent()).removeView(item);
-//        } else {
-//            ImageView item =  findViewById(R.id.photo3);
-//            item.setImageURI(Uri.parse(details.Photo_3));
-//        }
-//        if(details.Photo_4.equals("")){
-//            ImageView item =  findViewById(R.id.photo4);
-//            ((ViewManager)item.getParent()).removeView(item);
-//        } else {
-//            ImageView item =  findViewById(R.id.photo4);
-//            item.setImageURI(Uri.parse(details.Photo_4));
-//        }
-//
-
 
         loadXMLPage();
 
@@ -234,21 +198,6 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
     private void loadXMLPage()
     {
-        //webViewDetailsPage = findViewById(R.id.webViewInfoPage);
-        //webViewDetailsPage.getSettings().setJavaScriptEnabled(true);
-
-//
-//
-//
-//
-//
-//
-//
-        // Create a for loop to get the web links for the images in json
-       // webViewDetailsPage.loadUrl("file:///android_asset/index.html");
-
-
-
         if(details.Photo_1.equals("")){
             TextView scroll =  findViewById(R.id.photos);
             ((ViewManager)scroll.getParent()).removeView(scroll);
@@ -287,12 +236,6 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             item.loadUrl(details.Photo_4);
             System.out.println("Photo4");
         }
-
-
-
-
-//
-
     }
 
     @Override
@@ -385,10 +328,13 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         i.setData(Uri.parse(url));
         startActivity(i);
     }
-    public void PictureButtonClick(View v) {
-
-
-        photoDialogFragment.show(fm, "photo");
+    public void PictureButtonClick(View v)
+    {
+        System.out.println("Search Button Click");
+        String url = "mailto:publicaccess@coastal.ca.gov?"+details.NameMobileWeb;
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
     public void ShareButtonClick(View v) {
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -398,11 +344,5 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
-    public void ClickOk (View v){
-        photoDialogFragment.dismisser();
-    }
-
-
-
 
 }
