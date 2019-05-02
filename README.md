@@ -13,7 +13,7 @@ YourCoast Android is an application that shows over 1,500 California coastal loc
 - [x] User can get directions to each location.
 - [x] User can read information about the California Coastal Commission.
 - [x] User can email the California Coastal Commission.
-- [ ] User can upload a photo as a request for submission to the database.
+- [x] User can upload a photo as a request for submission to the database.
 - [ ] User can filter locations according to their ammenities.
 
 ## Video Walkthrough
@@ -24,4 +24,3 @@ Here's a walkthrough of implemented user stories:
 <img src='http://g.recordit.co/OmJiSDCOyF.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 <img src='http://g.recordit.co/SLRIEstfH7.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />   
 <img src='http://g.recordit.co/mU1uUGxmC1.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
