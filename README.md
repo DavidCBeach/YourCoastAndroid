@@ -19,4 +19,5 @@ YourCoast Android is an application that shows over 1,500 California coastal loc
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://g.recordit.co/yqwVeJCxiJ.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' /> <img src='http://g.recordit.co/yqwVeJCxiJ.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://g.recordit.co/yqwVeJCxiJ.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' /> <img src='http://g.recordit.co/fVy3FnuNAw.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://g.recordit.co/fVy3FnuNAw.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
