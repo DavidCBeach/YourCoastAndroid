@@ -32,8 +32,6 @@ public class InfoActivity extends AppCompatActivity {
     {
         webViewInfoPage.getSettings().setJavaScriptEnabled(true);
         webViewInfoPage.loadUrl("file:///android_asset/index.html");
-
-
     }
 
     @Override

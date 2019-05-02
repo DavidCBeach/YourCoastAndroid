@@ -17,8 +17,7 @@
         android:roundIcon="@mipmap/custom_ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailsActivity"
-            >
+        <activity android:name=".DetailsActivity">
         </activity>
         <activity
             android:name=".InfoActivity"
