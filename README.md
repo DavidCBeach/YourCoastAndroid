@@ -1,18 +1,18 @@
 # YourCoastAndroid
-*Created in part by: David Beach, Joseph Antongiovanni, Brian Martinez, and Ariel McCarthy.*
+*Created in part by: Joseph Antongiovanni, David Beach, Morgan Hamilton, and Brian Martinez.*
 
-YourCoast Android is an application that shows over 1500 coastal locations, and allows users to discover and search for ammenities and relevant information on any particular location.
+YourCoast Android is an application that shows over 1,500 California coastal locations, and allows users to discover and search for ammenities like parking, disabled access, restrooms, and more.
 
 ## User Stories
 
-The following functionality is completed:
-
-- [X] YourCoast Database is integrated
-- [X] An interactive map of California’s coastal locations is displayed
-- [X] Info page is implemented
-- [] Locations are searchable
-- [] Locations are filterable
-- [] Detailed overview is displayable 
+- [x] User can search a location by name.
+- [x] User can search a location via plotted map points.
+- [x] User can view photos of each location.
+- [x] User can view ammenities of each location.
+- [x] User can get directions to each location.
+- [x] User can read information about the California Coastal Commission.
+- [x] User can email the California Coastal Commission.
+- [ ] User can upload a photo as a request for submission to the database.
 
 ## Video Walkthrough
 
