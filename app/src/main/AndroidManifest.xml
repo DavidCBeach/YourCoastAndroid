@@ -28,7 +28,8 @@
 
         <activity
             android:name=".SearchActivity"
-            android:label="Search"  >
+            android:label="Search"
+            android:windowSoftInputMode="stateVisible">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>
