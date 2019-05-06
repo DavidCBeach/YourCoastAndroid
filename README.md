@@ -21,8 +21,8 @@ YourCoast Android is an application that shows over 1,500 California coastal loc
 Here's a walkthrough of implemented user stories:
 
 
-<img src="vw1" width="100" height="auto" />
-![](vw2.gif | width=100)
-![](vw3.gif | width=100)
-![](vw4.gif | width=100)
+![](vw1.gif)
+![](vw2.gif|width=100)
+![](vw3.gif| width=100)
+![](vw4.gif=100x100)
 ![](vw5.gif | width=100)
