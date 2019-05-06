@@ -22,7 +22,7 @@ Here's a walkthrough of implemented user stories:
 
 
 ![](vw1.gif)
-![](vw2.gif|width=100)
-![](vw3.gif| width=100)
-![](vw4.gif=100x100)
-![](vw5.gif | width=100)
+![](vw2.gif)
+![](vw3.gif)
+![](vw4.gif)
+![](vw5.gif)
