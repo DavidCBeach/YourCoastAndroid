@@ -49,6 +49,6 @@
     <string name="example">Example Location</string>
     <string name="examplesmall">small words about this</string>
     <string name="photoinfotitle">Sharing Photos</string>
-    <string name="photoinfocontent">This app currently does not support photo sharing.</string>
+    <string name="photoinfocontent">Photos are shared via email. Once you click OK your email client will be opened to compose an email to the California Coastal Commission. Please attach the photos you wish you submit in the email and specify the location</string>
     <string name="ok">OK</string>
 </resources>

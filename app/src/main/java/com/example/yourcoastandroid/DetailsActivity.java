@@ -55,6 +55,8 @@ import java.util.ArrayList;
 public class DetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private DetailItem details = null;
+    private FragmentManager fm = getSupportFragmentManager();
+    private PhotoInfoDialog photoDialogFragment = new PhotoInfoDialog();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -330,11 +332,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     }
     public void PictureButtonClick(View v)
     {
-        System.out.println("Search Button Click");
-        String url = "mailto:publicaccess@coastal.ca.gov?"+details.NameMobileWeb;
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
-        startActivity(i);
+        photoDialogFragment.show(fm, "photo");
     }
     public void ShareButtonClick(View v) {
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -343,6 +341,13 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, details.NameMobileWeb);
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+    public void ClickOk (View v){
+        photoDialogFragment.dismisser();
+        String url = "mailto:publicaccess@coastal.ca.gov?"+details.NameMobileWeb;
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 
 }
