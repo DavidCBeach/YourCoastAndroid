@@ -25,4 +25,3 @@ Here's a walkthrough of implemented user stories:
 ![](vw2.gif)
 ![](vw3.gif)
 ![](vw4.gif)
-![](vw5.gif)
