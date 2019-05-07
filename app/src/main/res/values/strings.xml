@@ -48,7 +48,14 @@
     <string name="sharebutton">Share Location</string>
     <string name="example">Example Location</string>
     <string name="examplesmall">small words about this</string>
-    <string name="photoinfotitle">Sharing Photos</string>
-    <string name="photoinfocontent">Photos are shared via email. Once you click OK your email client will be opened to compose an email to the California Coastal Commission. Please attach the photos you wish you submit in the email and specify the location</string>
+    <string name="photoinfotitle">Accept Terms and Conditions</string>
+    <string name="photoinfocontent">Instructions: Photos are shared via email. Once you click "I Accept" your email client will be opened to compose an email to the California Coastal Commission. Please attach the photos you wish you submit in the email and specify the location</string>
     <string name="ok">OK</string>
+    <string name="p1">By accepting you agree to the following terms:</string>
+    <string name="p2">1. You took the photograph and have rights to the image.</string>
+    <string name="p3">2. The Coastal Commission may use the image pursuant to the Coastal Commission\'s Terms of Use and Private Policy.</string>
+    <string name="p4">3. The image does not contain objectionable imagery.</string>
+    <string name="p5">4. There is no guarantee that the image will be used, or that the Coastal Commission will respond to the submittal</string>
+    <string name="no">No</string>
+    <string name="accept">I Accept</string>
 </resources>

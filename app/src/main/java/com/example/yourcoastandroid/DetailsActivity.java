@@ -349,5 +349,9 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         i.setData(Uri.parse(url));
         startActivity(i);
     }
+    public void ClickNo (View v){
+        photoDialogFragment.dismisser();
+
+    }
 
 }
