@@ -1,0 +1,100 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/photoinfo"
+    android:layout_width="300dp" android:layout_height="540dp"
+    android:layout_gravity="center"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/title_pi"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:text="@string/photoinfotitle"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:padding="5dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/content_pi1"
+        android:text="@string/p1"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/title_pi"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/content_pi2"
+        android:text="@string/p2"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/content_pi1"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/content_pi3"
+        android:text="@string/p3"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/content_pi2"
+
+        android:padding="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/content_pi4"
+        android:text="@string/p4"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/content_pi3"
+
+        android:padding="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/content_pi5"
+        android:text="@string/p5"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/content_pi4"
+
+        android:padding="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/content_p6"
+        android:text="@string/photoinfocontent"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/content_pi5"
+
+        android:padding="5dp"/>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal"
+        android:weightSum="1.0"
+        android:layout_below="@id/content_p6"
+        >
+    <Button
+        android:layout_width="0dp"
+        android:layout_weight=".475"
+
+        android:layout_height="wrap_content"
+        android:text="@string/no"
+        android:id="@+id/notaccept"
+        android:layout_marginTop="30dp"
+        android:onClick="ClickNo"/>
+    <Button
+        android:layout_width="0dp"
+        android:layout_weight=".475"
+        android:layout_height="wrap_content"
+        android:text="@string/accept"
+        android:layout_below="@id/content_p6"
+        android:layout_toRightOf="@id/notaccept"
+        android:layout_marginTop="30dp"
+        android:onClick="ClickOk"/>
+    </LinearLayout>
+
+
+</RelativeLayout>
