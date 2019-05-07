@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="Money" type="id">Money</item>
+    <item name="Park" type="id">Park</item>
+</resources>
