@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="icons">
+        <item>@drawable/money</item>
+        <item>@drawable/parking</item>
+    </array>
+</resources>
