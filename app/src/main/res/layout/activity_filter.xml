@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10sp" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/money"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/Money"/>
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_toRightOf="@+id/Money"
+            android:checked="false"
+            android:text="No Fees"
+            android:textSize="20dp"
+            android:paddingRight="30dp"
+            android:thumbTint="@color/colorPrimary"
+            android:id="@+id/feeSwitch"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/parking"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/Parking"/>
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_toRightOf="@+id/Parking"
+            android:checked="false"
+            android:text="Parking"
+            android:textSize="20dp"
+            android:paddingRight="30dp"
+            android:thumbTint="@color/colorPrimary"
+            android:id="@+id/parkingSwitch"/>
+    </RelativeLayout>
+</LinearLayout>

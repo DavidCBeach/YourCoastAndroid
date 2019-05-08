@@ -38,6 +38,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
@@ -99,6 +100,8 @@ public class MapsActivity extends AppCompatActivity
     private String locations_url = "https://api.coastal.ca.gov/access/v1/locations";
 
     private ListItemAdapter adapter;
+
+    private AppCompatButton filterButton;
 
     //CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorlayout);
     //LinearLayout linearLayout;
@@ -165,7 +168,18 @@ public class MapsActivity extends AppCompatActivity
             }
         });
 
+        filterButtonActions();
 
+    }
+
+    public void filterButtonActions(){
+        filterButton = findViewById(R.id.roundFilterButton);
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MapsActivity.this, FilterActivity.class));
+            }
+        });
     }
 
     @Override
