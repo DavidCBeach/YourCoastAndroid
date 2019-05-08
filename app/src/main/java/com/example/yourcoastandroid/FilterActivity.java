@@ -36,11 +36,11 @@ public class FilterActivity extends AppCompatActivity {
     public void viewById() {
         moneyImage = findViewById(R.id.Money);
         feeSwitch = findViewById(R.id.feeSwitch);
-        feeSwitch.setChecked(true);
+        feeSwitch.setChecked(false);
 
         parkingImage = findViewById(R.id.Parking);
         parkingSwitch = findViewById(R.id.parkingSwitch);
-        parkingSwitch.setChecked(true);
+        parkingSwitch.setChecked(false);
     }
 }
 

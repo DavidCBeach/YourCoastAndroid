@@ -19,12 +19,11 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_toRightOf="@+id/Money"
-            android:checked="true"
+            android:checked="false"
             android:text="No Fees"
             android:textSize="20dp"
             android:paddingRight="30dp"
             android:thumbTint="@color/colorPrimary"
-            android:trackTint="@color/colorAccent"
             android:id="@+id/feeSwitch"/>
     </RelativeLayout>
 
@@ -43,12 +42,11 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_toRightOf="@+id/Parking"
-            android:checked="true"
+            android:checked="false"
             android:text="Parking"
             android:textSize="20dp"
             android:paddingRight="30dp"
             android:thumbTint="@color/colorPrimary"
-            android:trackTint="@color/colorAccent"
             android:id="@+id/parkingSwitch"/>
     </RelativeLayout>
 </LinearLayout>

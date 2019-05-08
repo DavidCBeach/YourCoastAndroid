@@ -16,7 +16,7 @@
         android:layout_marginBottom="75dp"
         tools:context=".MapsActivity" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/roundFilterButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -25,7 +25,7 @@
         android:background="@drawable/round_button"
         android:drawableTop="@drawable/filter"
         android:paddingTop="13dp"
-        android:onClick="onClickBtn"
+        android:onClick="onClick"
         app:layout_anchor="@+id/map"
         app:layout_anchorGravity="end|top"/>
 
