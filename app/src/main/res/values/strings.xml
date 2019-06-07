@@ -58,4 +58,7 @@
     <string name="p5">4. There is no guarantee that the image will be used, or that the Coastal Commission will respond to the submittal</string>
     <string name="no">No</string>
     <string name="accept">I Accept</string>
+    <string name="phonenumber"><u>415-561-4323;</u></string>
+    <string name="disabletext">chair must be reserved ahead for delivery; visit</string>
+    <string name="disabledlink"><u>www.nps.gov/goga/planyourvisit/accessibility.htm</u></string>
 </resources>

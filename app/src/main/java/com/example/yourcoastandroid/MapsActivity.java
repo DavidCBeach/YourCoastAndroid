@@ -422,15 +422,18 @@ public class MapsActivity extends AppCompatActivity
         ArrayList<String> stringsOfMarkers = new ArrayList<>();
         ArrayList<LatLng> latLngsOfMarkers = new ArrayList<>();
         VisibleRegion cameraRegion = mMap.getProjection().getVisibleRegion();
-        for( MyItem item : items){
+        if(items != null){
+            for( MyItem item : items){
 
-            LatLng tempItem = item.getPosition();
-            if(cameraRegion.latLngBounds.contains(tempItem)) {
-                latLngsOfMarkers.add(tempItem);
-                stringsOfMarkers.add(item.getTitle());
-                itemsInView.add(item);
+                LatLng tempItem = item.getPosition();
+                if(cameraRegion.latLngBounds.contains(tempItem)) {
+                    latLngsOfMarkers.add(tempItem);
+                    stringsOfMarkers.add(item.getTitle());
+                    itemsInView.add(item);
+                }
             }
         }
+
         if(itemsInView.size()==0){
             //BottomSheetFragment fragment = new BottomSheetFragment();
             //fragment.setCancelable(false);
