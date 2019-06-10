@@ -58,4 +58,5 @@
     <string name="p5">4. There is no guarantee that the image will be used, or that the Coastal Commission will respond to the submittal</string>
     <string name="no">No</string>
     <string name="accept">I Accept</string>
+    <string name="image_placeholder">Image Placeholder</string>
 </resources>
