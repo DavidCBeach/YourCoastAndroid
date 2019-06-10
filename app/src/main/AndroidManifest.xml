@@ -6,38 +6,38 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/custom_ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/custom_ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailsActivity">
-        </activity>
+        <activity android:name=".PhotoPickActivity"></activity>
+        <activity android:name=".DetailsActivity"></activity>
         <activity
             android:name=".InfoActivity"
-            android:label="@string/action_info"
-            >
-        </activity>
-
+            android:label="@string/action_info"></activity>
         <activity
             android:name=".SearchActivity"
-            android:label="Search"  >
+            android:label="Search">
             <intent-filter>
-                <action android:name="android.intent.action.SEARCH"/>
+                <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-
         </activity>
-
-        <activity android:name=".FilterActivity"
-            android:label="Filter" >
-        </activity>
-
+        <activity
+            android:name=".FilterActivity"
+            android:label="Filter"></activity>
         <activity
             android:name=".ListActivity"
             android:label="@string/title_activity_list"
@@ -63,7 +63,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
 
+    </application>
 
 </manifest>

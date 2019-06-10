@@ -57,6 +57,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     private DetailItem details = null;
     private FragmentManager fm = getSupportFragmentManager();
     private PhotoInfoDialog photoDialogFragment = new PhotoInfoDialog();
+    private PhotoPickActivity photoPicker = new PhotoPickActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -344,11 +345,26 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     }
     public void ClickOk (View v){
         photoDialogFragment.dismisser();
-        String url = "mailto:publicaccess@coastal.ca.gov?"+details.NameMobileWeb;
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
-        startActivity(i);
+
+
+       // startActivity(Intent photoPicker);
+
+        // Go straight to email to choose photo
+
+//        String url = "mailto:publicaccess@coastal.ca.gov?"+details.NameMobileWeb;
+//        Intent i = new Intent(Intent.ACTION_VIEW);
+//        i.setData(Uri.parse(url));
+//        startActivity(i);
+
+
+        // This launches the PhotoPickActivity
+
+            Intent intent = new Intent(getBaseContext(), PhotoPickActivity.class);
+            startActivity(intent);
+
     }
+
+
     public void ClickNo (View v){
         photoDialogFragment.dismisser();
 

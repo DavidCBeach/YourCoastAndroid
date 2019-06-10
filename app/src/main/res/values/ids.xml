@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="Money" type="id"/>
+    <item name="btn_take" type="id"/>
+    <item name="btn_list" type="id"/>
+    <item name="btn_load" type="id"/>
+    <item name="tv_message" type="id"/>
+    <item name="iv_photo" type="id"/>
 </resources>
