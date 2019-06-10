@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -397,8 +398,22 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         ScrollView sv = findViewById(R.id.scroll);
         sv.setVisibility(View.GONE);
         WebView item =  findViewById(R.id.photobig);
-        item.setVisibility(View.VISIBLE);
+        RelativeLayout layout = findViewById(R.id.photobigcon);
+        layout.setVisibility(View.VISIBLE);
         item.loadUrl(details.Photo_1);
+        item.getSettings().setBuiltInZoomControls(true);
+        item.getSettings().setDisplayZoomControls(false);
+        zoom(item);
+
+    }
+    private void zoom(final WebView item){
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                item.zoomBy(0.1f);
+            }
+        }, 100);
 
     }
     public void photo2click(View view) {
@@ -406,30 +421,42 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         ScrollView sv = findViewById(R.id.scroll);
         sv.setVisibility(View.GONE);
         WebView item =  findViewById(R.id.photobig);
-        item.setVisibility(View.VISIBLE);
+        RelativeLayout layout = findViewById(R.id.photobigcon);
+        layout.setVisibility(View.VISIBLE);
         item.loadUrl(details.Photo_2);
+        item.getSettings().setBuiltInZoomControls(true);
+        item.getSettings().setDisplayZoomControls(false);
+        zoom(item);
     }
     public void photo3click(View view) {
 
         ScrollView sv = findViewById(R.id.scroll);
         sv.setVisibility(View.GONE);
         WebView item =  findViewById(R.id.photobig);
-        item.setVisibility(View.VISIBLE);
+        RelativeLayout layout = findViewById(R.id.photobigcon);
+        layout.setVisibility(View.VISIBLE);
         item.loadUrl(details.Photo_3);
+        item.getSettings().setBuiltInZoomControls(true);
+        item.getSettings().setDisplayZoomControls(false);
+        zoom(item);
     }
     public void photo4click(View view) {
 
         ScrollView sv = findViewById(R.id.scroll);
         sv.setVisibility(View.GONE);
         WebView item =  findViewById(R.id.photobig);
-        item.setVisibility(View.VISIBLE);
+        RelativeLayout layout = findViewById(R.id.photobigcon);
+        layout.setVisibility(View.VISIBLE);
         item.loadUrl(details.Photo_4);
+        item.getSettings().setBuiltInZoomControls(true);
+        item.getSettings().setDisplayZoomControls(false);
+        zoom(item);
     }
 
     public void photobigno(View view) {
         ScrollView sv = findViewById(R.id.scroll);
         sv.setVisibility(View.VISIBLE);
-        WebView item =  findViewById(R.id.photobig);
+        RelativeLayout item =  findViewById(R.id.photobigcon);
         item.setVisibility(View.GONE);
 
     }

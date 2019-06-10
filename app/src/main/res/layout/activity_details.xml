@@ -5,18 +5,26 @@
     android:layout_height="match_parent"
 
     android:orientation="vertical" >
-<WebView
-    android:id="@+id/photobig"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:visibility="gone">
-    <Button
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/close_black_24dp"
-        android:onClick="photobigno"
-        />
-</WebView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:id="@+id/photobigcon">
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/close_black_24dp"
+            android:onClick="photobigno"
+            />
+        <WebView
+            android:id="@+id/photobig"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        </WebView>
+    </RelativeLayout>
+
+
 <ScrollView
 
     android:id="@+id/scroll"
