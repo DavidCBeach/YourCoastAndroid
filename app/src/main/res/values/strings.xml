@@ -63,4 +63,15 @@
     <string name="disabledlink"><u>www.nps.gov/goga/planyourvisit/accessibility.htm</u></string>
     <string name="image_placeholder">Image Placeholder</string>
 
+
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">YourCoast</string>
+    <string name="slide_1_desc">YourCoast makes it easy to explore the beautiful California Coast</string>
+
+    <string name="slide_2_title"></string>
+    <string name="slide_2_desc">Find the closest access points to you, or search new areas to explore.</string>
+    <string name="slide_3_desc">Refine with filters to find exactly what you\'re looking for.</string>
 </resources>
