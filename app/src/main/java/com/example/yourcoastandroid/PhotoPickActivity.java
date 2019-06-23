@@ -214,7 +214,7 @@ public class PhotoPickActivity extends AppCompatActivity
 //    i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"publicaccess@coastal.ca.gov"});
 //    i.putExtra(Intent.EXTRA_SUBJECT, " Photo of ____ ");
 //    i.putExtra(Intent.EXTRA_TEXT   , "????");
-      // must be a .png File
+    // must be a .png File
 //    i.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(destinationFile));
 
 

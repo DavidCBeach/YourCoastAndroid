@@ -58,5 +58,20 @@
     <string name="p5">4. There is no guarantee that the image will be used, or that the Coastal Commission will respond to the submittal</string>
     <string name="no">No</string>
     <string name="accept">I Accept</string>
+    <string name="phonenumber"><u>415-561-4323;</u></string>
+    <string name="disabletext">chair must be reserved ahead for delivery; visit</string>
+    <string name="disabledlink"><u>www.nps.gov/goga/planyourvisit/accessibility.htm</u></string>
     <string name="image_placeholder">Image Placeholder</string>
+
+
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">YourCoast</string>
+    <string name="slide_1_desc">YourCoast makes it easy to explore the beautiful California Coast</string>
+
+    <string name="slide_2_title"></string>
+    <string name="slide_2_desc">Find the closest access points to you, or search new areas to explore.</string>
+    <string name="slide_3_desc">Refine with filters to find exactly what you\'re looking for.</string>
 </resources>

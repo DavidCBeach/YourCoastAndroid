@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -206,11 +207,13 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             ((ViewManager)scroll.getParent()).removeView(scroll);
             WebView item =  findViewById(R.id.photo1);
             ((ViewManager)item.getParent()).removeView(item);
+            //((ViewManager)item.getParent()).removeView(button);
         } else {
             WebView item =  findViewById(R.id.photo1);
             item.setInitialScale(90);
             item.loadUrl(details.Photo_1);
             System.out.println("Photo1");
+
         }
         if(details.Photo_2.equals("")){
             WebView item =  findViewById(R.id.photo2);
@@ -239,6 +242,10 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             item.loadUrl(details.Photo_4);
             System.out.println("Photo4");
         }
+
+
+
+
     }
 
     @Override
@@ -370,4 +377,103 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
     }
 
+    public void DisableCall(View view) {
+        Uri gmmIntentUri = Uri.parse("tel:4155614323");
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(gmmIntentUri);
+        startActivity(intent);
+    }
+
+    public void DisableLink(View view) {
+        String url = "http://www.nps.gov/goga/planyourvisit/accessibility.htm";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
+    }
+
+
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            System.out.println(myBitmap);
+            return myBitmap;
+        } catch (IOException e) {
+            // Log exception
+            return null;
+        }
+    }
+
+
+    public void photo1click(View view) {
+
+        ScrollView sv = findViewById(R.id.scroll);
+        sv.setVisibility(View.GONE);
+        WebView item =  findViewById(R.id.photobig);
+        RelativeLayout layout = findViewById(R.id.photobigcon);
+        layout.setVisibility(View.VISIBLE);
+        item.loadUrl(details.Photo_1);
+        item.getSettings().setBuiltInZoomControls(true);
+        item.getSettings().setDisplayZoomControls(false);
+        zoom(item);
+
+    }
+    private void zoom(final WebView item){
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                item.zoomBy(0.1f);
+            }
+        }, 100);
+
+    }
+    public void photo2click(View view) {
+
+        ScrollView sv = findViewById(R.id.scroll);
+        sv.setVisibility(View.GONE);
+        WebView item =  findViewById(R.id.photobig);
+        RelativeLayout layout = findViewById(R.id.photobigcon);
+        layout.setVisibility(View.VISIBLE);
+        item.loadUrl(details.Photo_2);
+        item.getSettings().setBuiltInZoomControls(true);
+        item.getSettings().setDisplayZoomControls(false);
+        zoom(item);
+    }
+    public void photo3click(View view) {
+
+        ScrollView sv = findViewById(R.id.scroll);
+        sv.setVisibility(View.GONE);
+        WebView item =  findViewById(R.id.photobig);
+        RelativeLayout layout = findViewById(R.id.photobigcon);
+        layout.setVisibility(View.VISIBLE);
+        item.loadUrl(details.Photo_3);
+        item.getSettings().setBuiltInZoomControls(true);
+        item.getSettings().setDisplayZoomControls(false);
+        zoom(item);
+    }
+    public void photo4click(View view) {
+
+        ScrollView sv = findViewById(R.id.scroll);
+        sv.setVisibility(View.GONE);
+        WebView item =  findViewById(R.id.photobig);
+        RelativeLayout layout = findViewById(R.id.photobigcon);
+        layout.setVisibility(View.VISIBLE);
+        item.loadUrl(details.Photo_4);
+        item.getSettings().setBuiltInZoomControls(true);
+        item.getSettings().setDisplayZoomControls(false);
+        zoom(item);
+    }
+
+    public void photobigno(View view) {
+        ScrollView sv = findViewById(R.id.scroll);
+        sv.setVisibility(View.VISIBLE);
+        RelativeLayout item =  findViewById(R.id.photobigcon);
+        item.setVisibility(View.GONE);
+
+    }
 }

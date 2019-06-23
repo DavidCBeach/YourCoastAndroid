@@ -1,17 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scroll"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
     android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:id="@+id/photobigcon">
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/close_black_24dp"
+            android:onClick="photobigno"
+            />
+        <WebView
+            android:id="@+id/photobig"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        </WebView>
+    </RelativeLayout>
+
+
+<ScrollView
+
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical" >
+
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
@@ -74,34 +98,80 @@
             <!--android:id="@+id/webViewInfoPage"-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="match_parent" />-->
-        
+
         <!--all I changed here was TextView to WebView-->
+
         <WebView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/photo1"
             android:layout_alignParentLeft="true"
             android:layout_marginEnd="5dp"
-            />
+            >
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/expand_read_24dp"
+                android:onClick="photo1click"
+                android:id="@+id/photo1button"
+                />
+        </WebView>
+
+
         <WebView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/photo2"
             android:layout_toRightOf="@id/photo1"
-            android:layout_marginEnd="5dp"/>
+            android:layout_marginEnd="5dp">
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/expand_read_24dp"
+                android:onClick="photo2click"
+                android:id="@+id/photo2button"
+                />
+        </WebView>
+
+
         <WebView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/photo3"
             android:layout_toRightOf="@id/photo2"
-            android:layout_marginEnd="5dp"/>
+            android:layout_marginEnd="5dp">
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/expand_read_24dp"
+                android:onClick="photo3click"
+                android:id="@+id/photo3button"
+                />
+        </WebView>
+
+
         <WebView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/photo4"
             android:layout_toRightOf="@id/photo3"
-            android:layout_marginEnd="5dp"/>
+            android:layout_marginEnd="5dp">
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/expand_read_24dp"
+                android:onClick="photo4click"
+                android:id="@+id/photo4button"
+                />
+        </WebView>
+
+
     </RelativeLayout>
+
+
 </HorizontalScrollView>
 
     <TextView
@@ -221,21 +291,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/DisablityLayout">
+
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@mipmap/disability"
             android:id="@+id/Disability"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="30dp"
             />
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:textColor="@android:color/black"
-            android:layout_toRightOf="@id/Disability"
             android:layout_marginLeft="9dp"
-            android:text="@string/disability"/>
+            android:layout_toRightOf="@id/Disability"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/disability"
+                android:textColor="@android:color/black"
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phonenumber"
+                android:textColor="@android:color/black"
+                android:textSize="14dp"
+                android:onClick="DisableCall"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/disabletext"
+                android:textColor="@android:color/black"
+                android:textSize="14dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/disabledlink"
+                android:textColor="@android:color/black"
+                android:textSize="14dp"
+                android:onClick="DisableLink"/>
+        </LinearLayout>
+
     </RelativeLayout>
     <RelativeLayout
 
@@ -700,4 +801,7 @@
 </LinearLayout>
 </LinearLayout>
 </ScrollView>
+</LinearLayout>
+
+
 

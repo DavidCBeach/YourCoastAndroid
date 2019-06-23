@@ -23,6 +23,7 @@ import com.google.maps.android.clustering.ClusterManager;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -103,6 +104,8 @@ public class MapsActivity extends AppCompatActivity
 
     private AppCompatButton filterButton;
 
+    SharedPreferences prefs = null;
+
     //CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorlayout);
     //LinearLayout linearLayout;
     View layoutBottomSheet;
@@ -121,6 +124,8 @@ public class MapsActivity extends AppCompatActivity
         if(Intent.ACTION_SEARCH.equals(intent.getAction())){
             String query = intent.getStringExtra(SearchManager.QUERY);
         }
+        prefs = getSharedPreferences("com.exmample.yourcoastandroid", MODE_PRIVATE);
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -422,15 +427,18 @@ public class MapsActivity extends AppCompatActivity
         ArrayList<String> stringsOfMarkers = new ArrayList<>();
         ArrayList<LatLng> latLngsOfMarkers = new ArrayList<>();
         VisibleRegion cameraRegion = mMap.getProjection().getVisibleRegion();
-        for( MyItem item : items){
+        if(items != null){
+            for( MyItem item : items){
 
-            LatLng tempItem = item.getPosition();
-            if(cameraRegion.latLngBounds.contains(tempItem)) {
-                latLngsOfMarkers.add(tempItem);
-                stringsOfMarkers.add(item.getTitle());
-                itemsInView.add(item);
+                LatLng tempItem = item.getPosition();
+                if(cameraRegion.latLngBounds.contains(tempItem)) {
+                    latLngsOfMarkers.add(tempItem);
+                    stringsOfMarkers.add(item.getTitle());
+                    itemsInView.add(item);
+                }
             }
         }
+
         if(itemsInView.size()==0){
             //BottomSheetFragment fragment = new BottomSheetFragment();
             //fragment.setCancelable(false);
@@ -447,7 +455,17 @@ public class MapsActivity extends AppCompatActivity
         //Toast.makeText(this,stringOfMarkersCombined,Toast.LENGTH_SHORT).show();
         //Toast.makeText(this,stringofIDCombined,Toast.LENGTH_SHORT).show();
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        if (prefs.getBoolean("firstrun", true)) {
+            // Do first run stuff here then set 'firstrun' as false
+            startActivity(new Intent(this, StartActivity.class));
+            // using the following line to edit/commit prefs
+            prefs.edit().putBoolean("firstrun", false).commit();
+        }
+    }
     @Override
     public void onCameraIdle() {
         cameraView();

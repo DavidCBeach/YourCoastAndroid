@@ -44,6 +44,7 @@ public class SearchActivity extends AppCompatActivity implements SearchItemAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+
         searchView = (SearchView) findViewById(R.id.searchView);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
