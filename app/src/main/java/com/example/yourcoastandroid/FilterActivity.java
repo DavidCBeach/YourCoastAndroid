@@ -68,7 +68,9 @@ public class FilterActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-
+        switch(item.getItemId()){
+            case android.R.id
+        }
     }
 
     public void viewById() {
