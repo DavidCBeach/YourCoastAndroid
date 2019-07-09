@@ -524,7 +524,7 @@ public class MapsActivity extends AppCompatActivity
                         if(task.isSuccessful()){
                             Log.d("locationfound", "onComplete found location");
                             Location currentLocation = (Location) task.getResult();
-                            Log.d("locationfound", currentLocation.toString());
+                            //Log.d("locationfound", currentLocation.toString());
                             //setLocation(currentLocation);
                             userCurrentLocation = currentLocation;
                             try {
