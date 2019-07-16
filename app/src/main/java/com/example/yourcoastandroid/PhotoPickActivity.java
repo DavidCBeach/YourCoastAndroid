@@ -69,38 +69,35 @@ public class PhotoPickActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-//                Intent i = new Intent(Intent.ACTION_SEND);
-//                i.setType("text/plain");
-//                i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"publicaccess@coastal.ca.gov"});
-//                i.putExtra(Intent.EXTRA_SUBJECT, " Photo of ____ ");
-//                i.putExtra(Intent.EXTRA_TEXT   , "????");
-//                // must be a .png File
-//                i.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(currentPhotoPath)));
-
-
-                // Go straight to email to choose photo
+        // Go to email to choose photo just taken
 
                 String url = "mailto:publicaccess@coastal.ca.gov?";
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
 
-                //this line isn't working correctly.. trying to add photo to email
-                // i.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(currentPhotoPath)));
+                //***************************
+
+                i.putExtra(Intent.EXTRA_SUBJECT, " Photo of ____ "+Uri.fromFile(new File(currentPhotoPath)));
+                // Only works if trying to add photo path to email from a taken photo (not actual photo?)
+//            i.putExtra(Intent.EXTRA_STREAM,"Photo: " + Uri.fromFile(new File(currentPhotoPath)));
+//
+//
+//                i.putExtra(Intent.EXTRA_SUBJECT, " Photo of ____ "+ );
+                // Doesn't work to upload image, also doesn't work from selected images
+                String imagePath = Environment.getExternalStorageDirectory() + File.separator + "test.png";
+
+                File imageFileToShare = new File(imagePath);
+                Uri uri = Uri.fromFile(imageFileToShare);
+                // Uri uri = Uri.parse("file://" + Uri.fromFile(new File(currentPhotoPath)));
+                i.putExtra(Intent.EXTRA_STREAM, uri);
+                //****************************
+
+
+
                 startActivity(i);
             }
         });
     }
-
-
-//    private void dispatchTakePictureIntent()
-//    {
-//        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//
-//        if (takePictureIntent.resolveActivity(getPackageManager()) != null)
-//        {   // Enable camera
-//            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//        }
-//    }
 
     private void dispatchTakePictureIntent()
     {
@@ -130,36 +127,11 @@ public class PhotoPickActivity extends AppCompatActivity
         }
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-
-//        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK)
-//        {   // Get/set bitmap for thumbnail
-//            Bundle extras = data.getExtras();
-//            Bitmap imageBitmap = (Bitmap) extras.get("data");
-//
-//            // Set photo to bitmap & return thumbnail
-//            iv_photo.setImageBitmap(imageBitmap);
-//        }
-
-//        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK)
-//        {
-//            // Get bitmap from file
-//            Bitmap takenImage = BitmapFactory.decodeFile(currentPhotoPath);
-//
-//            // Set image in image view
-//            ImageView iv_photo = findViewById(R.id.iv_photo);
-//            iv_photo.setImageBitmap(takenImage);
-//
-//            // Show file name in text view
-//            TextView tv_message = findViewById(R.id.tv_message);
-//            tv_message.setText(currentPhotoPath);
-//        }
-
         ImageView iv_photo = findViewById(R.id.iv_photo);
-        TextView tv_message = findViewById(R.id.tv_message);
+        //TextView tv_message = findViewById(R.id.tv_message);
 
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK)
         {
@@ -168,7 +140,7 @@ public class PhotoPickActivity extends AppCompatActivity
             Glide.with(this).load(currentPhotoPath).into(iv_photo);
 
             // Show file name in text view
-            //tv_message.setText(currentPhotoPath);
+            // tv_message.setText(currentPhotoPath);
         }
 
         if (requestCode == SELECT_A_PHOTO && resultCode == RESULT_OK)
@@ -181,7 +153,7 @@ public class PhotoPickActivity extends AppCompatActivity
             Glide.with(this).load(selectedPhoto).into(iv_photo);
 
             // Show file name in text view
-            //tv_message.setText(selectedPhoto.toString());
+            // tv_message.setText(selectedPhoto.toString());
         }
     }
 
@@ -206,21 +178,4 @@ public class PhotoPickActivity extends AppCompatActivity
 
         return image;
     }
-
-
-    //To send email?
-//    Intent i = new Intent(Intent.ACTION_SEND);
-//    i.setType("text/plain");
-//    i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"publicaccess@coastal.ca.gov"});
-//    i.putExtra(Intent.EXTRA_SUBJECT, " Photo of ____ ");
-//    i.putExtra(Intent.EXTRA_TEXT   , "????");
-    // must be a .png File
-//    i.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(destinationFile));
-
-
-
-//        startActivity(Intent.createChooser(i, "Send mail..."));
-//    Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
-//    startActivity(intent);
-
 }

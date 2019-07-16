@@ -10,13 +10,7 @@ import android.view.WindowManager;
 
 public class PhotoInfoDialog extends DialogFragment {
 
-
-
-
-    public PhotoInfoDialog() {
-
-    }
-
+    public PhotoInfoDialog() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,8 +21,6 @@ public class PhotoInfoDialog extends DialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
     }
     public void dismisser(){
         dismiss();
