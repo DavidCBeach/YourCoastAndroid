@@ -50,6 +50,7 @@ import com.google.maps.android.ui.IconGenerator;
 import com.google.maps.android.ui.SquareTextView;
 import org.json.JSONException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -103,6 +104,12 @@ public class MapsActivity extends AppCompatActivity
 
     private AppCompatButton filterButton;
 
+    private ArrayList<Integer> fList = new ArrayList<>();
+
+    private ArrayList<MyItem> finalList = new ArrayList<>();
+
+    private InputStream inputStream;
+
     //CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorlayout);
     //LinearLayout linearLayout;
     View layoutBottomSheet;
@@ -121,6 +128,7 @@ public class MapsActivity extends AppCompatActivity
         if(Intent.ACTION_SEARCH.equals(intent.getAction())){
             String query = intent.getStringExtra(SearchManager.QUERY);
         }
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -169,7 +177,32 @@ public class MapsActivity extends AppCompatActivity
         });
 
         filterButtonActions();
+    }
 
+    private void filtering(){
+        Log.d("Run Location", "I'm here at filtering()");
+        try {
+            Intent filterIntent = getIntent();
+            fList = filterIntent.getIntegerArrayListExtra("filter");
+            logCheck();
+        }catch(NullPointerException e) {System.out.println("Serialization is null");}
+        try{
+            if( fList!=null) {
+                if (!fList.isEmpty())
+                    filterIdToMyItem(userCurrentLocation);
+            }
+        } catch (JSONException e) { e.printStackTrace(); }
+    }
+
+    private void logCheck(){
+        try {
+            if(fList.isEmpty() && fList!=null)
+                Log.d("Null","FilterList is empty");
+            else {
+                for (int i=0;i<fList.size();i++)
+                    Log.d("LocationsFees", "filterList: " + fList.get(i));
+            }
+        }catch(NullPointerException e){System.out.println("NullPointerException triggered");}
     }
 
     public void filterButtonActions(){
@@ -216,6 +249,7 @@ public class MapsActivity extends AppCompatActivity
 //        } catch (JSONException e) {
 //            Toast.makeText(this, "Problem reading list of markers.", Toast.LENGTH_LONG).show();
 //        }
+        inputStream = getResources().openRawResource(R.raw.access_points);
         getUserLocation();
 
         // mMap.setOnMarkerClickListener(mClusterManager.getMarkerManager().getCollection());
@@ -291,13 +325,19 @@ public class MapsActivity extends AppCompatActivity
     }
 
 
-        private void readItems(Location location) throws JSONException {
-            InputStream inputStream = getResources().openRawResource(R.raw.access_points);
+    private void readItems(Location location) throws JSONException {
+        logCheck();
+        if(!finalList.isEmpty()) {
+            Log.d("FinalListSize", "finalList Size: " + finalList.size());
+            mClusterManager.addItems(finalList);
+        }
+        else {
             items = new MyItemReader(location).read(inputStream);
             //creates recyclerview
             //setList();
             mClusterManager.addItems(items);
         }
+    }
 
     /** Called when the user clicks a marker. */
     @Override
@@ -527,6 +567,7 @@ public class MapsActivity extends AppCompatActivity
                             //Log.d("locationfound", currentLocation.toString());
                             //setLocation(currentLocation);
                             userCurrentLocation = currentLocation;
+                            filtering();
                             try {
                                 readItems(currentLocation);
                             } catch (JSONException e) {
@@ -558,6 +599,19 @@ public class MapsActivity extends AppCompatActivity
         super.onBackPressed();
     }
 
+
+    public void filterIdToMyItem(Location location) throws JSONException{
+        MyItem item;
+        //items = new MyItemReader(location).read(inputStream);
+
+        Log.d("Running Location","I'm at the filterIdToMyItem()");
+        for(int i=0;i<fList.size();i++){
+
+            Log.d("Index Location: ", "index: " + i);
+            item = new MyItemReader(location).readByID(inputStream,fList.get(i));
+            //finalList.add(item);
+        }
+    }
 }
 
 

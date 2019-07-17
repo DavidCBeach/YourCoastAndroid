@@ -17,6 +17,8 @@
 package com.example.yourcoastandroid;
 
 import android.location.Location;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -24,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,7 +37,7 @@ import java.util.Scanner;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
-public class MyItemReader {
+public class MyItemReader implements Serializable {
 
     /*
      * This matches only once in whole input,
@@ -54,6 +57,40 @@ public class MyItemReader {
     Double distance = 0.0;
 
     private static final String REGEX_INPUT_BOUNDARY_BEGINNING = "\\A";
+
+    public MyItem readByID(InputStream inputStream, int ID) throws JSONException {
+        String json = new Scanner(inputStream).useDelimiter(REGEX_INPUT_BOUNDARY_BEGINNING).next();
+        JSONArray array = new JSONArray(json);
+
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject object = array.getJSONObject(i);
+            if (object.getInt("ID")==ID){
+                String title = null;
+                String name = null;
+                String description = null;
+
+                double lat = object.getDouble("LATITUDE");
+                double lng = object.getDouble("LONGITUDE");
+
+                int id = object.getInt("ID");
+                Integer snippet = object.getInt("ID");
+                String ssnippet = snippet.toString();
+                if (!object.isNull("NameMobileWeb")) {
+                    title = object.getString("NameMobileWeb");
+                    name = object.getString("NameMobileWeb");
+                }
+
+                if (!object.isNull("DescriptionMobileWeb")) {
+                    description = object.getString("DescriptionMobileWeb");
+                }
+                distance = getDistance(userLat, userLon, lat, lng);
+                Double dis = round(distance, 1);
+
+                return new MyItem(lat, lng, title, ssnippet, id, name, description, dis);
+            }
+        }
+        return null;
+    }
 
     public List<MyItem> read(InputStream inputStream) throws JSONException {
 

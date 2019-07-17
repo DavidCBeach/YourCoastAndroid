@@ -16,10 +16,14 @@
 
 package com.example.yourcoastandroid;
 
+import android.os.Parcel;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.ClusterItem;
 
-public class MyItem implements ClusterItem, Comparable<MyItem> {
+import java.io.Serializable;
+
+public class MyItem implements ClusterItem, Comparable<MyItem>, Serializable {
     private final LatLng mPosition;
     private String mTitle;
     private String mSnippet;
@@ -53,6 +57,21 @@ public class MyItem implements ClusterItem, Comparable<MyItem> {
         lDescriptionMobileWeb = description;
         lID = id;
         lDistance = distance;
+    }
+
+    protected MyItem(Parcel in) {
+        mPosition = in.readParcelable(LatLng.class.getClassLoader());
+        mTitle = in.readString();
+        mSnippet = in.readString();
+        mID = in.readInt();
+        lNameMobileWeb = in.readString();
+        lDescriptionMobileWeb = in.readString();
+        lID = in.readInt();
+        if (in.readByte() == 0) {
+            lDistance = null;
+        } else {
+            lDistance = in.readDouble();
+        }
     }
 
     @Override
