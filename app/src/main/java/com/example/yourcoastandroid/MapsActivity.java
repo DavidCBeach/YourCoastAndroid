@@ -601,16 +601,16 @@ public class MapsActivity extends AppCompatActivity
 
 
     public void filterIdToMyItem(Location location) throws JSONException{
-        MyItem item;
-        //items = new MyItemReader(location).read(inputStream);
-
-        Log.d("Running Location","I'm at the filterIdToMyItem()");
-        for(int i=0;i<fList.size();i++){
-
-            Log.d("Index Location: ", "index: " + i);
-            item = new MyItemReader(location).readByID(inputStream,fList.get(i));
-            //finalList.add(item);
-        }
+//        MyItem item;
+//        //items = new MyItemReader(location).read(inputStream);
+//
+//        Log.d("Running Location","I'm at the filterIdToMyItem()");
+//        for(int i=0;i<fList.size();i++){
+//
+//            Log.d("Index Location: ", "index: " + i);
+//            item = new MyItemReader(location).readByID(inputStream,fList.get(i));
+//            //finalList.add(item);
+//        }
     }
 }
 

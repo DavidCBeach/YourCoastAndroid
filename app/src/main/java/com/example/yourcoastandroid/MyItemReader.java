@@ -17,8 +17,6 @@
 package com.example.yourcoastandroid;
 
 import android.location.Location;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -29,13 +27,10 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
 public class MyItemReader implements Serializable {
 
@@ -58,13 +53,14 @@ public class MyItemReader implements Serializable {
 
     private static final String REGEX_INPUT_BOUNDARY_BEGINNING = "\\A";
 
-    public MyItem readByID(InputStream inputStream, int ID) throws JSONException {
+    public List<MyItem> readByID(InputStream inputStream, ArrayList<Integer> ID) throws JSONException {
         String json = new Scanner(inputStream).useDelimiter(REGEX_INPUT_BOUNDARY_BEGINNING).next();
         JSONArray array = new JSONArray(json);
+        List<MyItem> items = new ArrayList<MyItem>();
 
         for (int i = 0; i < array.length(); i++) {
             JSONObject object = array.getJSONObject(i);
-            if (object.getInt("ID")==ID){
+            if (ID.contains(object.getInt("ID"))){
                 String title = null;
                 String name = null;
                 String description = null;
@@ -86,10 +82,10 @@ public class MyItemReader implements Serializable {
                 distance = getDistance(userLat, userLon, lat, lng);
                 Double dis = round(distance, 1);
 
-                return new MyItem(lat, lng, title, ssnippet, id, name, description, dis);
+                items.add(new MyItem(lat, lng, title, ssnippet, id, name, description, dis));
             }
         }
-        return null;
+        return items;
     }
 
     public List<MyItem> read(InputStream inputStream) throws JSONException {
