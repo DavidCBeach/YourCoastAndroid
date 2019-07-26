@@ -30,6 +30,7 @@ public class FilterItem implements ClusterItem, Comparable<FilterItem>{
     private int lID;
     private Double lDistance;
     private String mFee;
+    private String mParking;
 
 
     public FilterItem(double lat, double lng) {
@@ -44,7 +45,7 @@ public class FilterItem implements ClusterItem, Comparable<FilterItem>{
         lDistance = 0.0;
     }
 
-    public FilterItem(double lat, double lng, String title, String snippet, int id, String name, String description, Double distance, String fee) {
+    public FilterItem(double lat, double lng, String title, String snippet, int id, String name, String description, Double distance, String fee, String parking) {
         mPosition = new LatLng(lat, lng);
         mTitle = title;
         mSnippet = snippet;
@@ -55,6 +56,7 @@ public class FilterItem implements ClusterItem, Comparable<FilterItem>{
         lID = id;
         lDistance = distance;
         mFee = fee;
+        mParking = parking;
     }
 
     @Override
@@ -77,6 +79,8 @@ public class FilterItem implements ClusterItem, Comparable<FilterItem>{
     public Double getDistance(){return lDistance;}
 
     public String getFee(){return mFee;}
+
+    public String getParking() {return mParking;}
 
     /**
      * Set the title of the marker

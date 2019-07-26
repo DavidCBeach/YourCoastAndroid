@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.example.yourcoastandroid.R.menu.menu_filters;
 
@@ -40,6 +41,7 @@ public class FilterActivity extends AppCompatActivity implements Serializable {
 
     private List<FilterItem> items = new ArrayList<>();
     private transient ArrayList<Integer> filteredList = new ArrayList<>();
+    private transient List<Integer> dupFreeList = new ArrayList<>();
     private List<MyItem> testFilter = new ArrayList<>();
     public HashMap<String, Integer> switchChecker = new HashMap<>();
 
@@ -59,6 +61,13 @@ public class FilterActivity extends AppCompatActivity implements Serializable {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // do something, the isChecked will be
                 // true if the switch is in the On position
+                addFilters();
+                logCheck();
+            }
+        });
+        parkingSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 addFilters();
                 logCheck();
             }
@@ -107,8 +116,17 @@ public class FilterActivity extends AppCompatActivity implements Serializable {
                     }
                 }
             }
+            if(item.getParking().contains("Yes")){
+                for(MyItem myItem : testFilter) {
+                    if(item.getName().contains(myItem.getName())){
+                        filteredList.add(myItem.getID());
+                    }
+                }
+            }
         }
     }
+
+
 
     //Checks if filteredList is getting the correct elements
     public void logCheck(){

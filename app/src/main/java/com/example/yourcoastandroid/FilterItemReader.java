@@ -61,6 +61,7 @@ public class FilterItemReader {
             String name = null;
             String description = null;
             String fee = null;
+            String parking = null;
 
             JSONObject object = array.getJSONObject(i);
             double lat = object.getDouble("LATITUDE");
@@ -74,16 +75,13 @@ public class FilterItemReader {
                 name = object.getString("NameMobileWeb");
             }
 
-            if (!object.isNull("DescriptionMobileWeb")) {
-                description = object.getString("DescriptionMobileWeb");
-            }
+            if (!object.isNull("DescriptionMobileWeb")) { description = object.getString("DescriptionMobileWeb"); }
+            if(!object.isNull("FEE")){ fee = object.getString("FEE"); }
+            if(!object.isNull("PARKING")){ parking = object.getString("PARKING"); }
 
-            if(!object.isNull("FEE")){
-                fee = object.getString("FEE");
-            }
             distance = getDistance(userLat, userLon, lat, lng);
             Double dis = round(distance, 1);
-            items.add(new FilterItem(lat, lng, title, ssnippet, id, name, description, dis,fee));
+            items.add(new FilterItem(lat, lng, title, ssnippet, id, name, description, dis,fee,parking));
         }
         return items;
     }
