@@ -50,6 +50,18 @@ public class FilterActivity extends AppCompatActivity implements Serializable {
     Switch campgroundSwitch;
     Switch strollerSwitch;
     Switch volleyballSwitch;
+    Switch sandySwitch;
+    Switch rockySwitch;
+    Switch stairSwitch;
+    Switch pathSwitch;
+    Switch bluffTrailSwitch;
+    Switch bluffParkSwitch;
+    Switch dunesSwitch;
+    Switch fishingSwitch;
+    Switch wildlifeSwitch;
+    Switch boatingSwitch;
+
+
 
 
 
@@ -71,6 +83,17 @@ public class FilterActivity extends AppCompatActivity implements Serializable {
     boolean campgroundSwitched;
     boolean strollerSwitched;
     boolean volleyballSwitched;
+    boolean sandySwitched;
+    boolean rockySwitched;
+    boolean stairSwitched;
+    boolean pathSwitched;
+    boolean bluffTrailSwitched;
+    boolean bluffParkSwitched;
+    boolean dunesSwitched;
+    boolean fishingSwitched;
+    boolean wildlifeSwitched;
+    boolean boatingSwitched;
+
 
 
 
@@ -168,6 +191,76 @@ public class FilterActivity extends AppCompatActivity implements Serializable {
                 volleyballSwitched = isChecked;
             }
         });
+        sandySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                sandySwitched = isChecked;
+            }
+        });
+        stairSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                stairSwitched = isChecked;
+            }
+        });
+        pathSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                pathSwitched = isChecked;
+            }
+        });
+        rockySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                rockySwitched = isChecked;
+            }
+        });
+        bluffTrailSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                bluffTrailSwitched = isChecked;
+            }
+        });
+        bluffParkSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                bluffParkSwitched = isChecked;
+            }
+        });
+        fishingSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                fishingSwitched = isChecked;
+            }
+        });
+        tidepoolesSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                tidepoolesSwitched = isChecked;
+            }
+        });
+        dunesSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                dunesSwitched = isChecked;
+            }
+        });
+        wildlifeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                wildlifeSwitched = isChecked;
+            }
+        });
+        boatingSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                boatingSwitched = isChecked;
+            }
+        });
+
+
+
+
 
 
 
@@ -206,39 +299,30 @@ public class FilterActivity extends AppCompatActivity implements Serializable {
     public void viewById() {
         moneyImage = findViewById(R.id.Money);
         feeSwitch = findViewById(R.id.feeSwitch);
-        feeSwitch.setChecked(false);
-
         parkingImage = findViewById(R.id.Parking);
         parkingSwitch = findViewById(R.id.parkingSwitch);
-        parkingSwitch.setChecked(false);
-
         disabledSwitch = findViewById(R.id.disAccessSwitch);
-        disabledSwitch.setChecked(false);
-
         bluffSwitch = findViewById(R.id.bluffSwitch);
-        bluffSwitch.setChecked(false);
-
         tidepoolesSwitch = findViewById(R.id.tidepoolSwitch);
-        tidepoolesSwitch.setChecked(false);
-
         bikeSwitch = findViewById(R.id.bikePathSwitch);
-        bikeSwitch.setChecked(false);
-
         visitorSwitch = findViewById(R.id.visitorCenterSwitch);
-        visitorSwitch.setChecked(false);
-
         restroomsSwitch = findViewById(R.id.restroomsSwitch);
-        restroomsSwitch.setChecked(false);
         picnicSwitch = findViewById(R.id.picnicSwitch);
-        picnicSwitch.setChecked(false);
         petSwitch = findViewById(R.id.petSwitch);
-        petSwitch.setChecked(false);
         campgroundSwitch = findViewById(R.id.campSwitch);
-        campgroundSwitch.setChecked(false);
         strollerSwitch = findViewById(R.id.strollerSwitch);
-        strollerSwitch.setChecked(false);
         volleyballSwitch = findViewById(R.id.volleyballSwitch);
-        volleyballSwitch.setChecked(false);
+        sandySwitch = findViewById(R.id.sandyBeachSwitch);
+        rockySwitch = findViewById(R.id.rockyShoreSwitch);
+        stairSwitch = findViewById(R.id.stairsSwitch);
+        pathSwitch = findViewById(R.id.pathSwitch);
+        bluffTrailSwitch = findViewById(R.id.blufftopTrailsSwitch);
+        bluffParkSwitch = findViewById(R.id.blufftopParkSwitch);
+        dunesSwitch = findViewById(R.id.dunesSwitch);
+        fishingSwitch = findViewById(R.id.fishingSwitch);
+        wildlifeSwitch = findViewById(R.id.wildLifeSwitch);
+        boatingSwitch = findViewById(R.id.boatingSwitch);
+
 
 
 
@@ -256,96 +340,75 @@ public class FilterActivity extends AppCompatActivity implements Serializable {
         for(FilterItem item : items){
             boolean addToApply = true;
             if(feeSwitched && item.getFee().contains("Yes")){
-                for(MyItem myItem : testFilter) {
-                    if(item.getName().contains(myItem.getName())){
                         addToApply = false;
-                    }
-                }
             }
             if(parkingSwitched && !item.getParking().contains("Yes")){
-                for(MyItem myItem : testFilter) {
-                    if(item.getName().contains(myItem.getName())){
                         addToApply = false;
-                    }
-                }
             }
             if(disabledSwitched && !item.getDisabled().contains("Yes")){
-                for(MyItem myItem : testFilter) {
-                    if(item.getName().contains(myItem.getName())){
                         addToApply = false;
-                    }
-                }
             }
             if(bluffSwitched && !item.getBluff().contains("Yes")){
-                for(MyItem myItem : testFilter) {
-                    if(item.getName().contains(myItem.getName())){
                         addToApply = false;
-                    }
-                }
             }
             if(tidepoolesSwitched && !item.getTidepooles().contains("Yes")){
-                for(MyItem myItem : testFilter) {
-                    if(item.getName().contains(myItem.getName())){
                         addToApply = false;
-                    }
-                }
             }
             if(bikeSwitched && !item.getBike().contains("Yes")){
-                for(MyItem myItem : testFilter) {
-                    if(item.getName().contains(myItem.getName())){
                         addToApply = false;
-                    }
-                }
             }
             if(visitorSwitched && !item.getVisitor().contains("Yes")){
-                for(MyItem myItem : testFilter) {
-                    if(item.getName().contains(myItem.getName())){
                         addToApply = false;
-                    }
-                }
             }
             if(restroomsSwitched && !item.getRestrooms().contains("Yes")){
-                for(MyItem myItem : testFilter) {
-                    if(item.getName().contains(myItem.getName())){
                         addToApply = false;
-                    }
-                }
             }
             if(picnicSwitched && !item.getPicnic().contains("Yes")){
-                for(MyItem myItem : testFilter) {
-                    if(item.getName().contains(myItem.getName())){
                         addToApply = false;
-                    }
-                }
             }
             if(petSwitched && !item.getPet().contains("Yes")){
-                for(MyItem myItem : testFilter) {
-                    if(item.getName().contains(myItem.getName())){
                         addToApply = false;
-                    }
-                }
             }
             if(campgroundSwitched && !item.getCampground().contains("Yes")){
-                for(MyItem myItem : testFilter) {
-                    if(item.getName().contains(myItem.getName())){
                         addToApply = false;
-                    }
-                }
             }
             if(strollerSwitched && !item.getStroller().contains("Yes")){
-                for(MyItem myItem : testFilter) {
-                    if(item.getName().contains(myItem.getName())){
                         addToApply = false;
-                    }
-                }
             }
             if(volleyballSwitched && !item.getVolleyball().contains("Yes")){
-                for(MyItem myItem : testFilter) {
-                    if(item.getName().contains(myItem.getName())){
                         addToApply = false;
-                    }
-                }
             }
+            if(sandySwitched && !item.getSandy().contains("Yes")){
+                        addToApply = false;
+            }
+            if(rockySwitched && !item.getRocky().contains("Yes")){
+                        addToApply = false;
+            }
+            if(stairSwitched && !item.getStair().contains("Yes")){
+                        addToApply = false;
+            }
+            if(pathSwitched && !item.getPath().contains("Yes")){
+                        addToApply = false;
+            }
+            if(bluffTrailSwitched && !item.getBluffTrail().contains("Yes")){
+                        addToApply = false;
+            }
+            if(bluffParkSwitched && !item.getBluffPark().contains("Yes")){
+                        addToApply = false;
+            }
+            if(dunesSwitched && !item.getDunes().contains("Yes")){
+                        addToApply = false;
+            }
+            if(fishingSwitched && !item.getFishing().contains("Yes")){
+                        addToApply = false;
+            }
+            if(wildlifeSwitched && !item.getWildlife().contains("Yes")){
+                        addToApply = false;
+            }
+            if(boatingSwitched && !item.getBoating().contains("Yes")){
+                        addToApply = false;
+            }
+
             if(addToApply){
                 filteredList.add(item.getID());
             }

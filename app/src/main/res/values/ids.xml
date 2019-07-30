@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="Money" type="id"/>
-    <item name="btn_take" type="id"/>
-    <item name="btn_list" type="id"/>
-    <item name="btn_load" type="id"/>
-    <item name="tv_message" type="id"/>
-    <item name="iv_photo" type="id"/>
+    <item name="VisitorCenter" type="id"></item>
+    <item name="BikePath" type="id"></item>
+    <item name="Restrooms" type="id"></item>
+    <item name="PicnicArea" type="id"></item>
+    <item name="PetFriendly" type="id"></item>
+    <item name="Campground" type="id"></item>
+    <item name="StrollerFriendly" type="id"></item>
+    <item name="SandyBeach" type="id"></item>
+    <item name="RockyShore" type="id"></item>
+    <item name="blufftopTrails" type="id"></item>
 </resources>
