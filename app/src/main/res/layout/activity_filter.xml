@@ -3,16 +3,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10sp" >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <ImageView
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:src="@drawable/money"
-            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
             android:id="@+id/Money"/>
 
         <Switch
@@ -23,19 +35,21 @@
             android:text="No Fees"
             android:textSize="20dp"
             android:paddingRight="30dp"
+            android:theme= "@style/SwitchTheme"
             android:thumbTint="@color/colorPrimary"
             android:id="@+id/feeSwitch"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <ImageView
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:src="@drawable/parking"
-            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
             android:id="@+id/Parking"/>
 
         <Switch
@@ -46,7 +60,275 @@
             android:text="Parking"
             android:textSize="20dp"
             android:paddingRight="30dp"
+            android:theme= "@style/SwitchTheme"
             android:thumbTint="@color/colorPrimary"
             android:id="@+id/parkingSwitch"/>
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/accessible"
+            android:layout_marginRight="10dp"
+            android:id="@+id/DisableAccess"/>
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_toRightOf="@+id/DisableAccess"
+            android:checked="false"
+            android:text="Disabled Access"
+            android:textSize="20dp"
+            android:paddingRight="30dp"
+            android:theme= "@style/SwitchTheme"
+            android:thumbTint="@color/colorPrimary"
+            android:id="@+id/disAccessSwitch"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/bluff"
+            android:layout_marginRight="10dp"
+            android:id="@+id/Bluff"/>
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_toRightOf="@+id/Bluff"
+            android:checked="false"
+            android:text="Bluff"
+            android:textSize="20dp"
+            android:paddingRight="30dp"
+            android:theme= "@style/SwitchTheme"
+            android:thumbTint="@color/colorPrimary"
+            android:id="@+id/bluffSwitch"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/bluff"
+            android:layout_marginRight="10dp"
+            android:id="@+id/Tidepools"/>
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_toRightOf="@+id/Tidepools"
+            android:checked="false"
+            android:text="Tidepooles"
+            android:textSize="20dp"
+            android:paddingRight="30dp"
+            android:theme= "@style/SwitchTheme"
+            android:thumbTint="@color/colorPrimary"
+            android:id="@+id/tidepoolSwitch"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/bluff"
+            android:layout_marginRight="10dp"
+            android:id="@+id/BikePath"/>
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_toRightOf="@+id/BikePath"
+            android:checked="false"
+            android:text="Bike Path"
+            android:textSize="20dp"
+            android:paddingRight="30dp"
+            android:theme= "@style/SwitchTheme"
+            android:thumbTint="@color/colorPrimary"
+            android:id="@+id/bikePathSwitch"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/home"
+            android:layout_marginRight="10dp"
+            android:id="@+id/VisitorCenter"/>
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_toRightOf="@+id/VisitorCenter"
+            android:checked="false"
+            android:text="Visitor Center"
+            android:textSize="20dp"
+            android:paddingRight="30dp"
+            android:theme= "@style/SwitchTheme"
+            android:thumbTint="@color/colorPrimary"
+            android:id="@+id/visitorCenterSwitch"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/restroom"
+            android:layout_marginRight="10dp"
+            android:id="@+id/Restrooms"/>
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_toRightOf="@+id/Restrooms"
+            android:checked="false"
+            android:text="Restrooms"
+            android:textSize="20dp"
+            android:paddingRight="30dp"
+            android:theme= "@style/SwitchTheme"
+            android:thumbTint="@color/colorPrimary"
+            android:id="@+id/restroomsSwitch"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/basket"
+            android:layout_marginRight="10dp"
+            android:id="@+id/PicnicArea"/>
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_toRightOf="@+id/PicnicArea"
+            android:checked="false"
+            android:text="Picnic Area"
+            android:textSize="20dp"
+            android:paddingRight="30dp"
+            android:theme= "@style/SwitchTheme"
+            android:thumbTint="@color/colorPrimary"
+            android:id="@+id/picnicSwitch"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/pets"
+            android:layout_marginRight="10dp"
+            android:id="@+id/PetFriendly"/>
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_toRightOf="@+id/PetFriendly"
+            android:checked="false"
+            android:text="Pet Friendly"
+            android:textSize="20dp"
+            android:paddingRight="30dp"
+            android:theme= "@style/SwitchTheme"
+            android:thumbTint="@color/colorPrimary"
+            android:id="@+id/petSwitch"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/camp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/Campground"/>
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_toRightOf="@+id/Campground"
+            android:checked="false"
+            android:text="Campground"
+            android:textSize="20dp"
+            android:paddingRight="30dp"
+            android:theme= "@style/SwitchTheme"
+            android:thumbTint="@color/colorPrimary"
+            android:id="@+id/campSwitch"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/childfriendly"
+            android:layout_marginRight="10dp"
+            android:id="@+id/StrollerFriendly"/>
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_toRightOf="@+id/StrollerFriendly"
+            android:checked="false"
+            android:text="Stroller Friendly"
+            android:textSize="20dp"
+            android:paddingRight="30dp"
+            android:theme= "@style/SwitchTheme"
+            android:thumbTint="@color/colorPrimary"
+            android:id="@+id/strollerSwitch"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/accessible"
+            android:layout_marginRight="10dp"
+            android:id="@+id/Volleyball"/>
+
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_toRightOf="@+id/Volleyball"
+            android:checked="false"
+            android:text="Volleyball"
+            android:textSize="20dp"
+            android:paddingRight="30dp"
+            android:theme= "@style/SwitchTheme"
+            android:thumbTint="@color/colorPrimary"
+            android:id="@+id/volleyballSwitch"/>
+    </RelativeLayout>
+
 </LinearLayout>
+    </ScrollView>
+    </LinearLayout>
