@@ -59,6 +59,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.content.SharedPreferences;
 
 
 
@@ -109,6 +110,8 @@ public class MapsActivity extends AppCompatActivity
     private ArrayList<MyItem> finalList = new ArrayList<>();
 
     private InputStream inputStream;
+                
+    SharedPreferences prefs = null;
 
     //CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorlayout);
     //LinearLayout linearLayout;
@@ -119,6 +122,7 @@ public class MapsActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+            
         //setContentView(R.layout.activity_search);
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -214,7 +218,17 @@ public class MapsActivity extends AppCompatActivity
             }
         });
     }
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        prefs = getSharedPreferences("com.exmample.yourcoastandroid", MODE_PRIVATE);
+        if (prefs.getBoolean("firstrun", true)) {
+            // Do first run stuff here then set 'firstrun' as false
+            startActivity(new Intent(this, StartActivity.class));
+            // using the following line to edit/commit prefs
+            prefs.edit().putBoolean("firstrun", false).commit();
+        }
+    }
     @Override
     public void onMapReady(GoogleMap map) {
         mMap = map;
