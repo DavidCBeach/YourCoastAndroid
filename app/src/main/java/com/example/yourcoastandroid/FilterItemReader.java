@@ -73,6 +73,22 @@ public class FilterItemReader {
             String campground = null;
             String stroller = null;
             String volleyball = null;
+            String sandy = null;
+            String rocky = null;
+            String stair = null;
+            String path = null;
+            String bluffTrail = null;
+            String bluffPark = null;
+            String dunes = null;
+            String fishing = null;
+            String wildlife = null;
+            String boating = null;
+
+
+
+
+
+
 
             JSONObject object = array.getJSONObject(i);
             double lat = object.getDouble("LATITUDE");
@@ -100,12 +116,22 @@ public class FilterItemReader {
             if(!object.isNull("CAMPGROUND")){ campground = object.getString("CAMPGROUND"); }
             if(!object.isNull("EZ4STROLLERS")){ stroller = object.getString("EZ4STROLLERS"); }
             if(!object.isNull("VOLLEYBALL")){ volleyball = object.getString("VOLLEYBALL"); }
+            if(!object.isNull("SNDY_BEACH")){ sandy = object.getString("SNDY_BEACH"); }
+            if(!object.isNull("RKY_SHORE")){ rocky = object.getString("RKY_SHORE"); }
+            if(!object.isNull("STRS_BEACH")){ stair = object.getString("STRS_BEACH"); }
+            if(!object.isNull("PTH_BEACH")){ path = object.getString("PTH_BEACH"); }
+            if(!object.isNull("BLFTP_TRLS")){ bluffTrail = object.getString("BLFTP_TRLS"); }
+            if(!object.isNull("BLFTP_PRK")){ bluffPark = object.getString("BLFTP_PRK"); }
+            if(!object.isNull("DUNES")){ dunes = object.getString("DUNES"); }
+            if(!object.isNull("FISHING")){ fishing = object.getString("FISHING"); }
+            if(!object.isNull("WLDLFE_VWG")){ wildlife = object.getString("WLDLFE_VWG"); }
+            if(!object.isNull("BOATING")){ boating = object.getString("BOATING"); }
 
 
 
             distance = getDistance(userLat, userLon, lat, lng);
             Double dis = round(distance, 1);
-            items.add(new FilterItem(lat, lng, title, ssnippet, id, name, description, dis,fee,parking,disabled,bluff,tidepooles,bike,visitor,restrooms,picnic,pet,campground,stroller,volleyball));
+            items.add(new FilterItem(lat, lng, title, ssnippet, id, name, description, dis,fee,parking,disabled,bluff,tidepooles,bike,visitor,restrooms,picnic,pet,campground,stroller,volleyball,sandy,rocky,stair,path,bluffTrail,bluffPark,dunes,fishing,wildlife,boating));
         }
         return items;
     }

@@ -42,6 +42,17 @@ public class FilterItem implements ClusterItem, Comparable<FilterItem>{
     private String campground;
     private String stroller;
     private String volleyball;
+    private String sandy;
+    private String rocky;
+    private String stair;
+    private String path;
+    private String bluffTrail;
+    private String bluffPark;
+    private String dunes;
+    private String fishing;
+    private String wildlife;
+    private String boating;
+
 
 
     public FilterItem(double lat, double lng) {
@@ -56,7 +67,7 @@ public class FilterItem implements ClusterItem, Comparable<FilterItem>{
         lDistance = 0.0;
     }
 
-    public FilterItem(double lat, double lng, String title, String snippet, int id, String name, String description, Double distance, String fee, String parking,String disabled,String bluff,String tidepooles,String bike,String visitor,String restrooms,String picnic,String pet,String campground,String stroller,String volleyball) {
+    public FilterItem(double lat, double lng, String title, String snippet, int id, String name, String description, Double distance, String fee, String parking,String disabled,String bluff,String tidepooles,String bike,String visitor,String restrooms,String picnic,String pet,String campground,String stroller,String volleyball, String sandy, String rocky, String stair, String path, String bluffTrail,String bluffPark, String dunes, String fishing, String wildlife, String boating) {
         mPosition = new LatLng(lat, lng);
         mTitle = title;
         mSnippet = snippet;
@@ -79,6 +90,16 @@ public class FilterItem implements ClusterItem, Comparable<FilterItem>{
         this.campground = campground;
         this.stroller = stroller;
         this.volleyball = volleyball;
+        this.sandy = sandy;
+        this.rocky = rocky;
+        this.stair = stair;
+        this.path = path;
+        this.bluffTrail = bluffTrail;
+        this.bluffPark = bluffPark;
+        this.dunes = dunes;
+        this.fishing = fishing;
+        this.wildlife = wildlife;
+        this.boating = boating;
 
 
 
@@ -122,6 +143,20 @@ public class FilterItem implements ClusterItem, Comparable<FilterItem>{
 
     public String getStroller() {return stroller;}
     public String getVolleyball(){return volleyball;}
+
+    public String getSandy(){return sandy;}
+    public String  getRocky() {return rocky;}
+    public String  getStair() {return stair;}
+    public String  getPath() {return path;}
+    public String  getBluffTrail() {return bluffTrail;}
+    public String  getBluffPark() {return bluffPark;}
+    public String  getDunes() {return dunes;}
+    public String  getFishing() {return fishing;}
+    public String  getWildlife() {return wildlife;}
+    public String  getBoating() {return boating;}
+
+
+
 
 
 

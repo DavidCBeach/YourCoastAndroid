@@ -205,13 +205,13 @@
             android:textColor="@color/colorPrimary"/>
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="30dp"
-        android:id="@+id/phonelabel"
-        android:text="@string/phone_label"
-        android:textSize="16dp"/>
+        <TextView
+            android:id="@+id/phonelabel"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/phone_label"
+            android:textSize="16dp" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -252,7 +252,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/fee"
+            android:src="@drawable/money"
             android:id="@+id/Fee"
             android:layout_marginTop="4dp"
             />
@@ -273,7 +273,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/parking"
+            android:src="@drawable/parking"
             android:id="@+id/Parking"
             android:layout_marginTop="4dp"
             />
@@ -295,7 +295,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/disability"
+            android:src="@drawable/accessible"
             android:id="@+id/Disability"
             android:layout_marginTop="30dp"
             />
@@ -346,7 +346,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/restroom"
+            android:src="@drawable/restroom"
             android:id="@+id/Restroom"
             android:layout_marginTop="4dp"
             />
@@ -367,7 +367,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/visitor"
+            android:src="@drawable/home"
             android:id="@+id/Visitor"
             android:layout_marginTop="4dp"
             />
@@ -388,7 +388,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/dog"
+            android:src="@drawable/pets"
             android:id="@+id/Dog"
             android:layout_marginTop="4dp"
             />
@@ -409,7 +409,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/stroller"
+            android:src="@drawable/childfriendly"
             android:id="@+id/Stroller"
             android:layout_marginTop="4dp"
             />
@@ -430,7 +430,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/picnic"
+            android:src="@drawable/basket"
             android:id="@+id/Picnic"
             android:layout_marginTop="4dp"
             />
@@ -451,7 +451,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/campground"
+            android:src="@drawable/camp"
             android:id="@+id/Camp"
             android:layout_marginTop="4dp"
             />
@@ -472,7 +472,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/terrain"
+            android:src="@drawable/sandybeach"
             android:id="@+id/Sand"
             android:layout_marginTop="4dp"
             />
@@ -493,7 +493,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/terrain"
+            android:src="@drawable/bluff"
             android:id="@+id/Dune"
             android:layout_marginTop="4dp"
             />
@@ -514,7 +514,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/terrain"
+            android:src="@drawable/bluff"
             android:id="@+id/Rocky"
             android:layout_marginTop="4dp"
             />
@@ -535,7 +535,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/terrain"
+            android:src="@drawable/bluff"
             android:id="@+id/Bluff"
             android:layout_marginTop="4dp"
             />
@@ -556,7 +556,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/stairs"
+            android:src="@drawable/stairs"
             android:id="@+id/Stairs"
             android:layout_marginTop="4dp"
             />
@@ -577,7 +577,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/stairs"
+            android:src="@drawable/stairs"
             android:id="@+id/Path"
             android:layout_marginTop="4dp"
             />
@@ -598,7 +598,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/hiker"
+            android:src="@drawable/stairs"
             android:id="@+id/BlufftopTrail"
             android:layout_marginTop="4dp"
             />
@@ -619,7 +619,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/picnic"
+            android:src="@drawable/basket"
             android:id="@+id/BlufftopPark"
             android:layout_marginTop="4dp"
             />
@@ -640,7 +640,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/wildlife"
+            android:src="@drawable/viewing"
             android:id="@+id/Wildlife"
             android:layout_marginTop="4dp"
             />
@@ -661,7 +661,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/tidepool"
+            android:src="@drawable/bluff"
             android:id="@+id/Tidepool"
             android:layout_marginTop="4dp"
             />
@@ -682,7 +682,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/volleyball"
+            android:src="@drawable/social"
             android:id="@+id/Volleyball"
             android:layout_marginTop="4dp"
             />
@@ -703,7 +703,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/fishing"
+            android:src="@drawable/fishing"
             android:id="@+id/Fishing"
             android:layout_marginTop="4dp"
             />
@@ -724,7 +724,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/boating"
+            android:src="@drawable/boating"
             android:id="@+id/Boating"
             android:layout_marginTop="4dp"
             />
