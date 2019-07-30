@@ -45,7 +45,6 @@ public class MyItemReader implements Serializable {
      * http://stackoverflow.com/a/5445161/2183804
      */
     public MyItemReader(Location location){
-        Log.d("readerlocationfound", location.toString());
         userLat = location.getLatitude();
         userLon = location.getLongitude();
     }
