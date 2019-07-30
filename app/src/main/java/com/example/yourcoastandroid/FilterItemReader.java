@@ -17,8 +17,6 @@
 package com.example.yourcoastandroid;
 
 import android.location.Location;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -26,25 +24,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
-public class MyItemReader implements Serializable {
-
+public class FilterItemReader {
     /*
      * This matches only once in whole input,
      * so Scanner.next returns whole InputStream as a String.
      * http://stackoverflow.com/a/5445161/2183804
      */
-    public MyItemReader(Location location){
+    public FilterItemReader(Location location){
         Log.d("readerlocationfound", location.toString());
         userLat = location.getLatitude();
         userLon = location.getLongitude();
@@ -58,53 +51,28 @@ public class MyItemReader implements Serializable {
 
     private static final String REGEX_INPUT_BOUNDARY_BEGINNING = "\\A";
 
-    public List<MyItem> readByID(InputStream inputStream, ArrayList<Integer >ID) throws JSONException {
+    public List<FilterItem> read(InputStream inputStream) throws JSONException {
+
+        List<FilterItem> items = new ArrayList<>();
         String json = new Scanner(inputStream).useDelimiter(REGEX_INPUT_BOUNDARY_BEGINNING).next();
-        JSONArray array = new JSONArray(json);
-        List<MyItem> items = new ArrayList<MyItem>();
-        for (int i = 0; i < array.length(); i++) {
-            JSONObject object = array.getJSONObject(i);
-            if (ID.contains(object.getInt("ID"))){
-                String title = null;
-                String name = null;
-                String description = null;
-
-                double lat = object.getDouble("LATITUDE");
-                double lng = object.getDouble("LONGITUDE");
-
-                int id = object.getInt("ID");
-                Integer snippet = object.getInt("ID");
-                String ssnippet = snippet.toString();
-                if (!object.isNull("NameMobileWeb")) {
-                    title = object.getString("NameMobileWeb");
-                    name = object.getString("NameMobileWeb");
-                }
-
-                if (!object.isNull("DescriptionMobileWeb")) {
-                    description = object.getString("DescriptionMobileWeb");
-                }
-                distance = getDistance(userLat, userLon, lat, lng);
-                Double dis = round(distance, 1);
-
-                items.add(new MyItem(lat, lng, title, ssnippet, id, name, description, dis));
-            }
-        }
-        return items;
-    }
-
-    public List<MyItem> read(InputStream inputStream) throws JSONException {
-
-        List<MyItem> items = new ArrayList<MyItem>();
-        Scanner myScanner = new Scanner(inputStream);
-        String json = new String();
-        json =myScanner.useDelimiter(REGEX_INPUT_BOUNDARY_BEGINNING).next();
-
-
         JSONArray array = new JSONArray(json);
         for (int i = 0; i < array.length(); i++) {
             String title = null;
             String name = null;
             String description = null;
+            String fee = null;
+            String parking = null;
+            String disabled = null;
+            String bluff = null;
+            String tidepooles = null;
+            String bike = null;
+            String visitor = null;
+            String restrooms = null;
+            String picnic = null;
+            String pet = null;
+            String campground = null;
+            String stroller = null;
+            String volleyball = null;
 
             JSONObject object = array.getJSONObject(i);
             double lat = object.getDouble("LATITUDE");
@@ -118,12 +86,26 @@ public class MyItemReader implements Serializable {
                 name = object.getString("NameMobileWeb");
             }
 
-            if (!object.isNull("DescriptionMobileWeb")) {
-                description = object.getString("DescriptionMobileWeb");
-            }
+            if (!object.isNull("DescriptionMobileWeb")) { description = object.getString("DescriptionMobileWeb"); }
+            if(!object.isNull("FEE")){ fee = object.getString("FEE"); }
+            if(!object.isNull("PARKING")){ parking = object.getString("PARKING"); }
+            if(!object.isNull("DSABLDACSS")){ disabled = object.getString("DSABLDACSS"); }
+            if(!object.isNull("BLUFF")){ bluff = object.getString("BLUFF"); }
+            if(!object.isNull("TIDEPOOL")){ tidepooles = object.getString("TIDEPOOL"); }
+            if(!object.isNull("BIKE_PATH")){ bike = object.getString("BIKE_PATH"); }
+            if(!object.isNull("VISTOR_CTR")){ visitor = object.getString("VISTOR_CTR"); }
+            if(!object.isNull("RESTROOMS")){ restrooms = object.getString("RESTROOMS"); }
+            if(!object.isNull("PCNC_AREA")){ picnic = object.getString("PCNC_AREA"); }
+            if(!object.isNull("DOG_FRIENDLY")){ pet = object.getString("DOG_FRIENDLY"); }
+            if(!object.isNull("CAMPGROUND")){ campground = object.getString("CAMPGROUND"); }
+            if(!object.isNull("EZ4STROLLERS")){ stroller = object.getString("EZ4STROLLERS"); }
+            if(!object.isNull("VOLLEYBALL")){ volleyball = object.getString("VOLLEYBALL"); }
+
+
+
             distance = getDistance(userLat, userLon, lat, lng);
             Double dis = round(distance, 1);
-            items.add(new MyItem(lat, lng, title, ssnippet, id, name, description, dis));
+            items.add(new FilterItem(lat, lng, title, ssnippet, id, name, description, dis,fee,parking,disabled,bluff,tidepooles,bike,visitor,restrooms,picnic,pet,campground,stroller,volleyball));
         }
         return items;
     }
