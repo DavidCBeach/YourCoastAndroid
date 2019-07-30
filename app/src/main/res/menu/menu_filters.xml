@@ -5,7 +5,6 @@
     <item
         android:id="@+id/apply_action"
         android:title="Apply"
-        android:icon="@drawable/ic_add_black_24dp"
         app:showAsAction="always" />
 
 </menu>
