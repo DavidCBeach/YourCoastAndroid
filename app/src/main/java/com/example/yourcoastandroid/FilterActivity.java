@@ -3,8 +3,6 @@ package com.example.yourcoastandroid;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +10,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.Switch;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -24,20 +21,18 @@ import org.json.JSONException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import static com.example.yourcoastandroid.R.menu.menu_filters;
 
 public class FilterActivity extends AppCompatActivity implements Serializable {
-    Switch feeSwitch;
-    ImageView moneyImage;
-
-    Switch parkingSwitch;
-    ImageView parkingImage;
+    Switch feeSwitch, parkingSwitch, disabledSwitch,
+            bluffSwitch, tidePoolsSwitch, bikePathSwitch, visitorCenterSwitch, restroomSwitch,
+            picnicAreaSwitch, dogFriendlySwitch, campGroundSwitch, strollerFriendlySwitch,
+            volleyballSwitch, sandyBeachSwitch, rockyShoreSwitch, stairsToBeachSwitch,
+            pathToBeachSwitch, bluffTopTrailsSwitch, bluffTopParkSwitch, dunesSwitch, fishingSwitch,
+            wildlifeViewingSwitch, boatingSwitch;
 
     private List<FilterItem> items = new ArrayList<>();
     private transient ArrayList<Integer> filteredList = new ArrayList<>();
@@ -98,13 +93,74 @@ public class FilterActivity extends AppCompatActivity implements Serializable {
     }
 
     public void viewById() {
-        moneyImage = findViewById(R.id.Money);
         feeSwitch = findViewById(R.id.feeSwitch);
         feeSwitch.setChecked(false);
 
-        parkingImage = findViewById(R.id.Parking);
         parkingSwitch = findViewById(R.id.parkingSwitch);
         parkingSwitch.setChecked(false);
+
+        disabledSwitch = findViewById(R.id.disAccessSwitch);
+        disabledSwitch.setChecked(false);
+
+        bluffSwitch = findViewById(R.id.bluffSwitch);
+        bluffSwitch.setChecked(false);
+
+        tidePoolsSwitch = findViewById(R.id.tidepoolSwitch);
+        tidePoolsSwitch.setChecked(false);
+
+        bikePathSwitch = findViewById(R.id.bikePathSwitch);
+        bikePathSwitch.setChecked(false);
+
+        visitorCenterSwitch = findViewById(R.id.visitorCenterSwitch);
+        visitorCenterSwitch.setChecked(false);
+
+        restroomSwitch = findViewById(R.id.restroomsSwitch);
+        restroomSwitch.setChecked(false);
+
+        picnicAreaSwitch = findViewById(R.id.picnicSwitch);
+        picnicAreaSwitch.setChecked(false);
+
+        dogFriendlySwitch = findViewById(R.id.petSwitch);
+        dogFriendlySwitch.setChecked(false);
+
+        campGroundSwitch = findViewById(R.id.campSwitch);
+        campGroundSwitch.setChecked(false);
+
+        strollerFriendlySwitch = findViewById(R.id.strollerSwitch);
+        strollerFriendlySwitch.setChecked(false);
+
+        volleyballSwitch = findViewById(R.id.volleyballSwitch);
+        volleyballSwitch.setChecked(false);
+
+        sandyBeachSwitch = findViewById(R.id.sandyBeachSwitch);
+        sandyBeachSwitch.setChecked(false);
+
+        rockyShoreSwitch = findViewById(R.id.rockyShoreSwitch);
+        rockyShoreSwitch.setChecked(false);
+
+        stairsToBeachSwitch = findViewById(R.id.stairsSwitch);
+        stairsToBeachSwitch.setChecked(false);
+
+        pathToBeachSwitch = findViewById(R.id.pathSwitch);
+        pathToBeachSwitch.setChecked(false);
+
+        bluffTopTrailsSwitch = findViewById(R.id.blufftopTrailsSwitch);
+        bluffTopTrailsSwitch.setChecked(false);
+
+        bluffTopParkSwitch = findViewById(R.id.blufftopParkSwitch);
+        bluffTopParkSwitch.setChecked(false);
+
+        dunesSwitch = findViewById(R.id.dunesSwitch);
+        dunesSwitch.setChecked(false);
+
+        fishingSwitch = findViewById(R.id.fishingSwitch);
+        fishingSwitch.setChecked(false);
+
+        wildlifeViewingSwitch = findViewById(R.id.wildLifeSwitch);
+        wildlifeViewingSwitch.setChecked(false);
+
+        boatingSwitch = findViewById(R.id.boatingSwitch);
+        boatingSwitch.setChecked(false);
     }
 
     public void addFilters(){
@@ -125,8 +181,6 @@ public class FilterActivity extends AppCompatActivity implements Serializable {
             }
         }
     }
-
-
 
     //Checks if filteredList is getting the correct elements
     public void logCheck(){
@@ -174,6 +228,7 @@ public class FilterActivity extends AppCompatActivity implements Serializable {
         InputStream inputStream = getResources().openRawResource(R.raw.access_points);
         testFilter = new MyItemReader(location).read(inputStream);
     }
+
     private void readItemsF(Location location) throws JSONException {
         InputStream inputStream = getResources().openRawResource(R.raw.access_points);
         items = new FilterItemReader(location).read(inputStream);
