@@ -67,6 +67,153 @@ public class FilterActivity extends AppCompatActivity implements Serializable {
                 logCheck();
             }
         });
+        disabledSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        bluffSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        tidePoolsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        bikePathSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        visitorCenterSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        restroomSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        picnicAreaSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        dogFriendlySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        campGroundSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        strollerFriendlySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        volleyballSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        sandyBeachSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        rockyShoreSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        stairsToBeachSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        pathToBeachSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        bluffTopTrailsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        bluffTopParkSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        dunesSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        fishingSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        wildlifeViewingSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
+        boatingSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                addFilters();
+                logCheck();
+            }
+        });
     }
 
     @Override
@@ -83,8 +230,6 @@ public class FilterActivity extends AppCompatActivity implements Serializable {
         switch(item.getItemId()){
             case R.id.apply_action:
                 Intent intent = new Intent(FilterActivity.this, MapsActivity.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putSerializable("list",filteredList);
                 intent.putIntegerArrayListExtra("filter",filteredList);
                 startActivity(intent);
                 return true;
