@@ -20,11 +20,9 @@ public class InfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
+
         centerTitle();
-
-
         webViewInfoPage = findViewById(R.id.webViewInfoPage);
-
         loadHTMLPage();
     }
 
@@ -46,7 +44,6 @@ public class InfoActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        // Is item is selected, if so do correlated action
         switch(item.getItemId())
         {
             case android.R.id.home:

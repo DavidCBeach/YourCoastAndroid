@@ -14,13 +14,11 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/close_black_24dp"
-            android:onClick="photobigno"
-            />
+            android:onClick="photobigno"/>
         <WebView
             android:id="@+id/photobig"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
         </WebView>
     </RelativeLayout>
 
@@ -33,7 +31,6 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical" >
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -53,8 +50,7 @@
         android:textColor="@color/colorAccent"
         android:textAlignment="center"
         android:text="@string/example"
-        android:textSize="25sp"
-        />
+        android:textSize="25sp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,8 +60,7 @@
         android:textColor="@color/colorAccent"
         android:textAlignment="center"
         android:text="@string/examplesmall"
-        android:textSize="15sp"
-        />
+        android:textSize="15sp"/>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -84,40 +79,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
-    <!--all I changed here was wrap_parent to match_parent-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_height="match_parent">
-
-
-        <!--This is just a reference-->
-
-        <!--<WebView-->
-            <!--android:id="@+id/webViewInfoPage"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent" />-->
-
-        <!--all I changed here was TextView to WebView-->
 
         <WebView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/photo1"
             android:layout_alignParentLeft="true"
-            android:layout_marginEnd="5dp"
-            >
+            android:layout_marginEnd="5dp">
             <Button
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/expand_read_24dp"
                 android:onClick="photo1click"
-                android:id="@+id/photo1button"
-                />
+                android:id="@+id/photo1button"/>
         </WebView>
-
 
         <WebView
             android:layout_width="wrap_content"
@@ -131,10 +111,8 @@
                 android:layout_alignParentRight="true"
                 android:background="@drawable/expand_read_24dp"
                 android:onClick="photo2click"
-                android:id="@+id/photo2button"
-                />
+                android:id="@+id/photo2button"/>
         </WebView>
-
 
         <WebView
             android:layout_width="wrap_content"
@@ -148,10 +126,8 @@
                 android:layout_alignParentRight="true"
                 android:background="@drawable/expand_read_24dp"
                 android:onClick="photo3click"
-                android:id="@+id/photo3button"
-                />
+                android:id="@+id/photo3button"/>
         </WebView>
-
 
         <WebView
             android:layout_width="wrap_content"
@@ -167,11 +143,7 @@
                 android:id="@+id/photo4button"
                 />
         </WebView>
-
-
     </RelativeLayout>
-
-
 </HorizontalScrollView>
 
     <TextView
@@ -192,8 +164,7 @@
             android:layout_toLeftOf="@+id/directionsbutton"
             android:layout_alignParentLeft="true"
             android:textSize="18dp"
-            android:textColor="@android:color/black"
-            />
+            android:textColor="@android:color/black"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -224,8 +195,7 @@
             android:textColor="@android:color/black"
             android:layout_marginTop="10dp"
             android:layout_toLeftOf="@+id/callbutton"
-            android:layout_alignParentLeft="true"
-            />
+            android:layout_alignParentLeft="true"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -254,8 +224,7 @@
             android:layout_height="20dp"
             android:src="@drawable/money"
             android:id="@+id/Fee"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -275,8 +244,7 @@
             android:layout_height="20dp"
             android:src="@drawable/parking"
             android:id="@+id/Parking"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -297,8 +265,7 @@
             android:layout_height="20dp"
             android:src="@drawable/accessible"
             android:id="@+id/Disability"
-            android:layout_marginTop="30dp"
-            />
+            android:layout_marginTop="30dp"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -348,8 +315,7 @@
             android:layout_height="20dp"
             android:src="@drawable/restroom"
             android:id="@+id/Restroom"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -369,8 +335,7 @@
             android:layout_height="20dp"
             android:src="@drawable/home"
             android:id="@+id/Visitor"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -390,8 +355,7 @@
             android:layout_height="20dp"
             android:src="@drawable/pets"
             android:id="@+id/Dog"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -411,8 +375,7 @@
             android:layout_height="20dp"
             android:src="@drawable/childfriendly"
             android:id="@+id/Stroller"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -432,8 +395,7 @@
             android:layout_height="20dp"
             android:src="@drawable/basket"
             android:id="@+id/Picnic"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -453,8 +415,7 @@
             android:layout_height="20dp"
             android:src="@drawable/camp"
             android:id="@+id/Camp"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -474,8 +435,7 @@
             android:layout_height="20dp"
             android:src="@drawable/sandybeach"
             android:id="@+id/Sand"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -495,8 +455,7 @@
             android:layout_height="20dp"
             android:src="@drawable/bluff"
             android:id="@+id/Dune"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -516,8 +475,7 @@
             android:layout_height="20dp"
             android:src="@drawable/bluff"
             android:id="@+id/Rocky"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -537,8 +495,7 @@
             android:layout_height="20dp"
             android:src="@drawable/bluff"
             android:id="@+id/Bluff"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -558,8 +515,7 @@
             android:layout_height="20dp"
             android:src="@drawable/stairs"
             android:id="@+id/Stairs"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -579,8 +535,7 @@
             android:layout_height="20dp"
             android:src="@drawable/stairs"
             android:id="@+id/Path"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -600,8 +555,7 @@
             android:layout_height="20dp"
             android:src="@drawable/stairs"
             android:id="@+id/BlufftopTrail"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -621,8 +575,7 @@
             android:layout_height="20dp"
             android:src="@drawable/basket"
             android:id="@+id/BlufftopPark"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -642,8 +595,7 @@
             android:layout_height="20dp"
             android:src="@drawable/viewing"
             android:id="@+id/Wildlife"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -663,8 +615,7 @@
             android:layout_height="20dp"
             android:src="@drawable/bluff"
             android:id="@+id/Tidepool"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -684,8 +635,7 @@
             android:layout_height="20dp"
             android:src="@drawable/social"
             android:id="@+id/Volleyball"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -705,8 +655,7 @@
             android:layout_height="20dp"
             android:src="@drawable/fishing"
             android:id="@+id/Fishing"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -726,8 +675,7 @@
             android:layout_height="20dp"
             android:src="@drawable/boating"
             android:id="@+id/Boating"
-            android:layout_marginTop="4dp"
-            />
+            android:layout_marginTop="4dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -787,17 +735,6 @@
             android:textColor="@color/colorPrimary"
             android:layout_marginRight="5dp"/>
     </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
 </LinearLayout>
 </LinearLayout>
 </ScrollView>

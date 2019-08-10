@@ -13,7 +13,6 @@
         android:textSize="18sp"
         android:padding="5dp"/>
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,7 +38,6 @@
         android:text="@string/p3"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/content_pi2"
-
         android:padding="5dp"/>
     <TextView
         android:layout_width="wrap_content"
@@ -48,7 +46,6 @@
         android:text="@string/p4"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/content_pi3"
-
         android:padding="5dp"/>
     <TextView
         android:layout_width="wrap_content"
@@ -57,7 +54,6 @@
         android:text="@string/p5"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/content_pi4"
-
         android:padding="5dp"/>
     <TextView
         android:layout_width="wrap_content"
@@ -66,7 +62,6 @@
         android:text="@string/photoinfocontent"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/content_pi5"
-
         android:padding="5dp"/>
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -74,12 +69,10 @@
         android:layout_width="fill_parent"
         android:orientation="horizontal"
         android:weightSum="1.0"
-        android:layout_below="@id/content_p6"
-        >
+        android:layout_below="@id/content_p6">
     <Button
         android:layout_width="0dp"
         android:layout_weight=".475"
-
         android:layout_height="wrap_content"
         android:text="@string/no"
         android:id="@+id/notaccept"
@@ -95,6 +88,4 @@
         android:layout_marginTop="30dp"
         android:onClick="ClickOk"/>
     </LinearLayout>
-
-
 </RelativeLayout>
