@@ -24,6 +24,7 @@ import org.json.JSONException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -101,6 +102,7 @@ public class FilterActivity extends AppCompatActivity implements Serializable {
 
     private List<FilterItem> items = new ArrayList<>();
     private transient ArrayList<Integer> filteredList = new ArrayList<>();
+    boolean[] filterset  = new boolean[24];
     private transient List<Integer> dupFreeList = new ArrayList<>();
     private List<MyItem> testFilter = new ArrayList<>();
     public HashMap<String, Integer> switchChecker = new HashMap<>();
@@ -116,6 +118,106 @@ public class FilterActivity extends AppCompatActivity implements Serializable {
 
         viewById();
         getUserLocation();
+        filterset = getIntent().getBooleanArrayExtra("filtersused");
+        if(filterset[0]){
+            feeSwitched = true;
+            feeSwitch.setChecked(true);
+        }
+        if(filterset[1]){
+            parkingSwitched = true;
+            parkingSwitch.setChecked(true);
+
+        }
+        if(filterset[2]){
+            disabledSwitched = true;
+            disabledSwitch.setChecked(true);
+
+        }
+        if(filterset[3]){
+            bluffSwitched = true;
+            bluffSwitch.setChecked(true);
+        }
+        if(filterset[4]){
+            tidepoolesSwitched = true;
+            tidepoolesSwitch.setChecked(true);
+        }
+        if(filterset[5]){
+            bikeSwitched = true;
+            bikeSwitch.setChecked(true);
+        }
+        if(filterset[6]){
+            visitorSwitched = true;
+            visitorSwitch.setChecked(true);
+        }
+        if(filterset[7]){
+            restroomsSwitched = true;
+            restroomsSwitch.setChecked(true);
+        }
+        if(filterset[8]){
+            picnicSwitched = true;
+            picnicSwitch.setChecked(true);
+        }
+        if(filterset[9]){
+            petSwitched = true;
+            petSwitch.setChecked(true);
+        }
+        if(filterset[10]){
+            campgroundSwitched = true;
+            campgroundSwitch.setChecked(true);
+        }if(filterset[11]){
+            strollerSwitched = true;
+            strollerSwitch.setChecked(true);
+        }if(filterset[12]){
+            volleyballSwitched = true;
+            volleyballSwitch.setChecked(true);
+        }if(filterset[13]){
+            sandySwitched = true;
+            sandySwitch.setChecked(true);
+        }if(filterset[14]){
+            stairSwitched = true;
+            stairSwitch.setChecked(true);
+        }
+        if(filterset[15]){
+            pathSwitched = true;
+            pathSwitch.setChecked(true);
+        }
+        if(filterset[16]){
+            rockySwitched = true;
+            rockySwitch.setChecked(true);
+        }
+        if(filterset[17]){
+            bluffTrailSwitched = true;
+            bluffTrailSwitch.setChecked(true);
+        }
+        if(filterset[18]){
+            bluffParkSwitched = true;
+            bluffParkSwitch.setChecked(true);
+        }if(filterset[19]){
+            fishingSwitched = true;
+            fishingSwitch.setChecked(true);
+        }if(filterset[20]){
+            tidepoolesSwitched = true;
+            tidepoolesSwitch.setChecked(true);
+        }if(filterset[21]){
+            dunesSwitched = true;
+            dunesSwitch.setChecked(true);
+        }
+        if(filterset[22]){
+            wildlifeSwitched = true;
+            wildlifeSwitch.setChecked(true);
+        }
+        if(filterset[23]){
+            boatingSwitched = true;
+            boatingSwitch.setChecked(true);
+        }
+
+
+
+
+
+
+
+
 
 
 
@@ -290,6 +392,36 @@ public class FilterActivity extends AppCompatActivity implements Serializable {
 //                Bundle bundle = new Bundle();
 //                bundle.putSerializable("list",filteredList);
                 intent.putIntegerArrayListExtra("filter",filteredList);
+
+
+                filterset[0] = feeSwitched;
+                filterset[1] = parkingSwitched;
+                filterset[2] = disabledSwitched;
+                filterset[3] = bluffSwitched;
+                filterset[4] = tidepoolesSwitched;
+                filterset[5] = bikeSwitched;
+                filterset[6] = visitorSwitched;
+                filterset[7] = restroomsSwitched;
+                filterset[8] = picnicSwitched;
+                filterset[9] = petSwitched;
+                filterset[10] = campgroundSwitched;
+                filterset[11] = strollerSwitched;
+                filterset[12] = volleyballSwitched;
+                filterset[13] = sandySwitched;
+                filterset[14] = stairSwitched;
+                filterset[15] = pathSwitched;
+                filterset[16] = rockySwitched;
+                filterset[17] = bluffTrailSwitched;
+                filterset[18] = bluffParkSwitched;
+                filterset[19] = fishingSwitched;
+                filterset[20] = tidepoolesSwitched;
+                filterset[21] = dunesSwitched;
+                filterset[22] = wildlifeSwitched;
+                filterset[23] = boatingSwitched;
+
+
+
+                intent.putExtra("filtersused", filterset);
                 startActivity(intent);
                 return true;
         }

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -25,10 +26,12 @@ public class PhotoPickActivity extends AppCompatActivity
     // static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
     static final int SELECT_A_PHOTO = 2;
+    private File photoFile;
 
     Button btn_take, btn_submit, btn_choose;
     TextView tv_message;
     ImageView iv_photo;
+    Uri selectedPhoto;
     // Name of photo file saved by camera
     String currentPhotoPath;
 
@@ -69,11 +72,12 @@ public class PhotoPickActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-        // Go to email to choose photo just taken
+                // Go to email to choose photo just taken
 
                 String url = "mailto:publicaccess@coastal.ca.gov?";
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
+
 
                 //***************************
 
@@ -106,7 +110,7 @@ public class PhotoPickActivity extends AppCompatActivity
         if (takePictureIntent.resolveActivity(getPackageManager()) != null)
         {
             // Create the File where the photo should go
-            File photoFile = null;
+            photoFile = null;
             try
             {
                 photoFile = createImageFile();
@@ -138,20 +142,21 @@ public class PhotoPickActivity extends AppCompatActivity
             // Ensures an appropriate sized image is uploaded
             // to image view with as little memory as possible
             Glide.with(this).load(currentPhotoPath).into(iv_photo);
-
+            iv_photo.setTag(currentPhotoPath);
             // Show file name in text view
             // tv_message.setText(currentPhotoPath);
         }
 
-        if (requestCode == SELECT_A_PHOTO && resultCode == RESULT_OK)
+        else if (requestCode == SELECT_A_PHOTO && resultCode == RESULT_OK)
         {
             // Get photo from gallery
-            Uri selectedPhoto = data.getData();
+            selectedPhoto = data.getData();
 
             // Ensures an appropriate sized image is uploaded
             // to image view with as little memory as possible
-            Glide.with(this).load(selectedPhoto).into(iv_photo);
 
+            Glide.with(this).load(selectedPhoto).into(iv_photo);
+            iv_photo.setTag(selectedPhoto);
             // Show file name in text view
             // tv_message.setText(selectedPhoto.toString());
         }

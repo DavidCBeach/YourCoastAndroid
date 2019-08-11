@@ -52,6 +52,7 @@ import org.json.JSONException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import android.app.SearchManager;
@@ -110,7 +111,9 @@ public class MapsActivity extends AppCompatActivity
     private ArrayList<MyItem> finalList = new ArrayList<>();
 
     private InputStream inputStream;
-                
+
+    private boolean[] filterset  = new boolean[24];
+
     SharedPreferences prefs = null;
 
     //CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorlayout);
@@ -133,6 +136,13 @@ public class MapsActivity extends AppCompatActivity
             String query = intent.getStringExtra(SearchManager.QUERY);
         }
 
+        try {
+            filterset = intent.getBooleanArrayExtra("filtersused");
+        }catch(NullPointerException e) {System.out.println("Serialization is null");}
+        if(filterset == null){
+            filterset = new boolean[24];
+            Arrays.fill(filterset,Boolean.FALSE);
+        }
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -214,7 +224,11 @@ public class MapsActivity extends AppCompatActivity
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MapsActivity.this, FilterActivity.class));
+                Intent intent = new Intent(MapsActivity.this, FilterActivity.class);
+                System.out.println("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
+                System.out.println(filterset);
+                intent.putExtra("filtersused", filterset);
+                startActivity(intent);
             }
         });
     }

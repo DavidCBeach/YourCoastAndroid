@@ -366,9 +366,14 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
         // This launches the PhotoPickActivity
 
-            Intent intent = new Intent(getBaseContext(), PhotoPickActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(getBaseContext(), PhotoPickActivity.class);
+//            startActivity(intent);
 
+            // launches email
+        String url = "mailto:publicaccess@coastal.ca.gov?";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 
 
