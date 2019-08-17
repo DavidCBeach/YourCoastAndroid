@@ -2,16 +2,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10sp" >
+    >
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+         >
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp">
 
 
 
@@ -34,7 +37,7 @@
                     android:checked="false"
                     android:text="No Fees"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/feeSwitch"/>
@@ -59,7 +62,7 @@
                     android:checked="false"
                     android:text="Parking"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/parkingSwitch"/>
@@ -83,7 +86,7 @@
                     android:checked="false"
                     android:text="Disabled Access"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/disAccessSwitch"/>
@@ -107,7 +110,7 @@
                     android:checked="false"
                     android:text="Bluff"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/bluffSwitch"/>
@@ -131,7 +134,7 @@
                     android:checked="false"
                     android:text="Tidepooles"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/tidepoolSwitch"/>
@@ -155,7 +158,7 @@
                     android:checked="false"
                     android:text="Bike Path"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/bikePathSwitch"/>
@@ -179,7 +182,7 @@
                     android:checked="false"
                     android:text="Visitor Center"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/visitorCenterSwitch"/>
@@ -203,7 +206,7 @@
                     android:checked="false"
                     android:text="Restrooms"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/restroomsSwitch"/>
@@ -227,7 +230,7 @@
                     android:checked="false"
                     android:text="Picnic Area"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/picnicSwitch"/>
@@ -251,7 +254,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/PetFriendly"
                     android:checked="false"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:text="Pet Friendly"
                     android:textSize="20dp"
                     android:theme="@style/SwitchTheme"
@@ -276,7 +279,7 @@
                     android:checked="false"
                     android:text="Campground"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/campSwitch"/>
@@ -300,7 +303,7 @@
                     android:checked="false"
                     android:text="Stroller Friendly"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/strollerSwitch"/>
@@ -324,7 +327,7 @@
                     android:checked="false"
                     android:text="Volleyball"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/volleyballSwitch"/>
@@ -348,7 +351,7 @@
                     android:checked="false"
                     android:text="Sandy Beach"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/sandyBeachSwitch"/>
@@ -372,7 +375,7 @@
                     android:checked="false"
                     android:text="Rocky Shore"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/rockyShoreSwitch"/>
@@ -396,7 +399,7 @@
                     android:checked="false"
                     android:text="Stairs to Beach"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/stairsSwitch"/>
@@ -420,7 +423,7 @@
                     android:checked="false"
                     android:text="Path to Beach"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/pathSwitch"/>
@@ -444,7 +447,7 @@
                     android:checked="false"
                     android:text="Blufftop Trails"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/blufftopTrailsSwitch"/>
@@ -468,7 +471,7 @@
                     android:checked="false"
                     android:text="Blufftop Park"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/blufftopParkSwitch"/>
@@ -492,7 +495,7 @@
                     android:checked="false"
                     android:text="Dunes"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/dunesSwitch"/>
@@ -516,7 +519,7 @@
                     android:checked="false"
                     android:text="Fishing"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/fishingSwitch"/>
@@ -540,7 +543,7 @@
                     android:checked="false"
                     android:text="Wildlife Viewing"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/wildLifeSwitch"/>
@@ -564,7 +567,7 @@
                     android:checked="false"
                     android:text="Boating"
                     android:textSize="20dp"
-                    android:paddingRight="30dp"
+                    android:paddingRight="20dp"
                     android:theme= "@style/SwitchTheme"
                     android:thumbTint="@color/colorPrimary"
                     android:id="@+id/boatingSwitch"/>

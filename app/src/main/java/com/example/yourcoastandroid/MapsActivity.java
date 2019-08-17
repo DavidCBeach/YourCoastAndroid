@@ -450,8 +450,8 @@ public class MapsActivity extends AppCompatActivity
     }
 
     private void showMissingPermissionError() {
-        PermissionUtils.PermissionDeniedDialog
-                .newInstance(true).show(getSupportFragmentManager(), "dialog");
+        PermissionUtils.RationaleDialog.newInstance(LOCATION_PERMISSION_REQUEST_CODE, true)
+                .show(this.getSupportFragmentManager(), "dialog");
     }
 
     @Override
