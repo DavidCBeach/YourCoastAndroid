@@ -110,7 +110,7 @@ public abstract class PermissionUtils {
             super.onDismiss(dialog);
             if (mFinishActivity) {
                 Toast.makeText(getActivity(),
-                        "YourCoast applications closed due to no user location",
+                        "YourCoast Requires User Location",
                         Toast.LENGTH_LONG)
                         .show();
                 getActivity().finish();
