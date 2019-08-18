@@ -17,8 +17,10 @@ public abstract class PermissionUtils {
     public static void requestPermission(AppCompatActivity activity, int requestId,
                                          String permission, boolean finishActivity) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
+            ActivityCompat.requestPermissions(activity, new String[]{permission}, requestId);
             PermissionUtils.RationaleDialog.newInstance(requestId, finishActivity)
                     .show(activity.getSupportFragmentManager(), "dialog");
+            //activity.finish();
         } else {
             ActivityCompat.requestPermissions(activity, new String[]{permission}, requestId);
 
@@ -95,19 +97,12 @@ public abstract class PermissionUtils {
             final int requestCode = arguments.getInt(ARGUMENT_PERMISSION_REQUEST_CODE);
             mFinishActivity = arguments.getBoolean(ARGUMENT_FINISH_ACTIVITY);
 
-            return new AlertDialog.Builder(getActivity())
-                    .setMessage(R.string.permission_rationale_location)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions(getActivity(),
-                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                    requestCode);
-                            mFinishActivity = false;
-                        }
-                    })
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .create();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("YourCoast requires user location to function. " +
+                    "Please go to your device's settings and change permission settings for YourCoast to allow the application to access your Location.");
+            // Create the AlertDialog object and return it
+            return builder.create();
+
         }
 
         @Override
@@ -115,8 +110,8 @@ public abstract class PermissionUtils {
             super.onDismiss(dialog);
             if (mFinishActivity) {
                 Toast.makeText(getActivity(),
-                        R.string.permission_required_toast,
-                        Toast.LENGTH_SHORT)
+                        "YourCoast Requires User Location",
+                        Toast.LENGTH_LONG)
                         .show();
                 getActivity().finish();
             }
