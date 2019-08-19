@@ -1,4 +1,4 @@
-package com.example.yourcoastandroid;
+package com.yourcoast.yourcoastandroid;
 
 import android.Manifest;
 import android.app.AlertDialog;

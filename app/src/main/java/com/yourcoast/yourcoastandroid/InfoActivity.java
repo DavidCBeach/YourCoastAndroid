@@ -1,4 +1,4 @@
-package com.example.yourcoastandroid;
+package com.yourcoast.yourcoastandroid;
 
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;

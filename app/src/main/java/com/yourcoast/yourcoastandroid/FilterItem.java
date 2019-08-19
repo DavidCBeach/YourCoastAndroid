@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.yourcoastandroid;
+package com.yourcoast.yourcoastandroid;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.ClusterItem;

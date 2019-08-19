@@ -1,4 +1,4 @@
-package com.example.yourcoastandroid;
+package com.yourcoast.yourcoastandroid;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

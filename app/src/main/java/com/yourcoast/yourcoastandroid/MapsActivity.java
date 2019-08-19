@@ -1,6 +1,6 @@
-package com.example.yourcoastandroid;
+package com.yourcoast.yourcoastandroid;
 
-import com.example.yourcoastandroid.AccessPointData.ListItemAdapter;
+import com.yourcoast.yourcoastandroid.AccessPointData.ListItemAdapter;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -64,7 +64,7 @@ import android.content.SharedPreferences;
 
 
 
-import static com.example.yourcoastandroid.R.menu.menu_maps;
+import static com.yourcoast.yourcoastandroid.R.menu.menu_maps;
 
 public class MapsActivity extends AppCompatActivity
         implements

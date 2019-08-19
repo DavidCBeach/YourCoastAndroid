@@ -1,4 +1,4 @@
-package com.example.yourcoastandroid;
+package com.yourcoast.yourcoastandroid;
 
 
 

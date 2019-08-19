@@ -1,4 +1,4 @@
-package com.example.yourcoastandroid.AccessPointData;
+package com.yourcoast.yourcoastandroid.AccessPointData;
 
 import android.util.Log;
 

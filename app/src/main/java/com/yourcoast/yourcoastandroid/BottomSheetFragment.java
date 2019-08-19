@@ -1,4 +1,4 @@
-package com.example.yourcoastandroid;
+package com.yourcoast.yourcoastandroid;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;

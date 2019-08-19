@@ -1,4 +1,4 @@
-package com.example.yourcoastandroid;
+package com.yourcoast.yourcoastandroid;
 
 import android.app.SearchManager;
 import android.content.Intent;
@@ -13,8 +13,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.example.yourcoastandroid.AccessPointData.CCCAccPtDataStructure;
-import com.example.yourcoastandroid.AccessPointData.CCCDataClient;
+import com.yourcoast.yourcoastandroid.AccessPointData.CCCAccPtDataStructure;
+import com.yourcoast.yourcoastandroid.AccessPointData.CCCDataClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

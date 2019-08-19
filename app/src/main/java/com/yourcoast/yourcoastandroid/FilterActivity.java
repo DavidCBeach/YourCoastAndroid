@@ -1,4 +1,4 @@
-package com.example.yourcoastandroid;
+package com.yourcoast.yourcoastandroid;
 
 import android.content.Intent;
 import android.location.Location;
@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.example.yourcoastandroid.R.menu.menu_filters;
+import static com.yourcoast.yourcoastandroid.R.menu.menu_filters;
 
 public class FilterActivity extends AppCompatActivity implements Serializable {
     Switch feeSwitch;

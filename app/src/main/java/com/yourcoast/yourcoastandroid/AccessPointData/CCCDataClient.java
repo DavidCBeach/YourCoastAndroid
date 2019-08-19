@@ -1,4 +1,4 @@
-package com.example.yourcoastandroid.AccessPointData;
+package com.yourcoast.yourcoastandroid.AccessPointData;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.yourcoastandroid.R;
+import com.yourcoast.yourcoastandroid.R;
 
 import java.util.ArrayList;
 import java.util.List;

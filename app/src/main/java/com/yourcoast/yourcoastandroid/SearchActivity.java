@@ -1,4 +1,4 @@
-package com.example.yourcoastandroid;
+package com.yourcoast.yourcoastandroid;
 
 import android.content.Intent;
 import android.location.Location;
@@ -11,7 +11,7 @@ import android.util.Log;
 import android.widget.Filter;
 import android.widget.SearchView;
 
-import com.example.yourcoastandroid.AccessPointData.SearchItemAdapter;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,12 +26,12 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class SearchActivity extends AppCompatActivity implements SearchItemAdapter.onItemListener{
+public class SearchActivity extends AppCompatActivity implements com.yourcoast.yourcoastandroid.AccessPointData.SearchItemAdapter.onItemListener{
 
     private List<MyItem> items;
     private List<MyItem> filteredList = new ArrayList<>();
     private ClusterManager<MyItem> mClusterManager;
-    private SearchItemAdapter adapter;
+    private com.yourcoast.yourcoastandroid.AccessPointData.SearchItemAdapter adapter;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private FusedLocationProviderClient mFusedLocationProviderClient;
@@ -159,7 +159,7 @@ public class SearchActivity extends AppCompatActivity implements SearchItemAdapt
     private void setList(ArrayList<MyItem> list){
         //sorts array by ascending distance
         Collections.sort(list);
-        adapter = new SearchItemAdapter(list, this);
+        adapter = new com.yourcoast.yourcoastandroid.AccessPointData.SearchItemAdapter(list, this);
         recyclerView.setAdapter(adapter);
     }
 }

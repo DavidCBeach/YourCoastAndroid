@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.yourcoastandroid;
+package com.yourcoast.yourcoastandroid;
 
 import android.location.Location;
 import android.util.Log;

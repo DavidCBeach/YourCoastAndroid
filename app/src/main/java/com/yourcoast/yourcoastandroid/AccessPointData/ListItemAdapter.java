@@ -1,4 +1,4 @@
-package com.example.yourcoastandroid.AccessPointData;
+package com.yourcoast.yourcoastandroid.AccessPointData;
 
 import android.graphics.Color;
 import android.os.Handler;
@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.example.yourcoastandroid.MyItem;
-import com.example.yourcoastandroid.R;
+import com.yourcoast.yourcoastandroid.MyItem;
+import com.yourcoast.yourcoastandroid.R;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
