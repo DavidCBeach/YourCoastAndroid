@@ -90,55 +90,55 @@ public class DetailItemReader {
                 } else {
                     FEE = false;
                 }
-                 temp = object.getString("PARKING");
+                temp = object.getString("PARKING");
                 if(temp.equals("Yes")){
                     PARKING = true;
                 } else {
                     PARKING = false;
                 }
-                 temp = object.getString("DSABLDACSS");
+                temp = object.getString("DSABLDACSS");
                 if(temp.equals("Yes")){
                     DSABLDACSS = true;
                 } else {
                     DSABLDACSS = false;
                 }
-                 temp = object.getString("RESTROOMS");
+                temp = object.getString("RESTROOMS");
                 if(temp.equals("Yes")){
                     RESTROOMS = true;
                 } else {
                     RESTROOMS = false;
                 }
-                 temp = object.getString("VISTOR_CTR");
+                temp = object.getString("VISTOR_CTR");
                 if(temp.equals("Yes")){
                     VISTOR_CTR = true;
                 } else {
                     VISTOR_CTR = false;
                 }
-                 temp = object.getString("DOG_FRIENDLY");
+                temp = object.getString("DOG_FRIENDLY");
                 if(temp.equals("Yes")){
                     DOG_FRIENDLY = true;
                 } else {
                     DOG_FRIENDLY = false;
                 }
-                 temp = object.getString("EZ4STROLLERS");
+                temp = object.getString("EZ4STROLLERS");
                 if(temp.equals("Yes")){
                     EZ4STROLLERS = true;
                 } else {
                     EZ4STROLLERS = false;
                 }
-                 temp = object.getString("PCNC_AREA");
+                temp = object.getString("PCNC_AREA");
                 if(temp.equals("Yes")){
                     PCNC_AREA = true;
                 } else {
                     PCNC_AREA = false;
                 }
-                 temp = object.getString("CAMPGROUND");
+                temp = object.getString("CAMPGROUND");
                 if(temp.equals("Yes")){
                     CAMPGROUND = true;
                 } else {
                     CAMPGROUND = false;
                 }
-                 temp = object.getString("SNDY_BEACH");
+                temp = object.getString("SNDY_BEACH");
                 if(temp.equals("Yes")){
                     SNDY_BEACH = true;
                 } else {
@@ -154,13 +154,13 @@ public class DetailItemReader {
                 } else {
                     RKY_SHORE = false;
                 }
-                 temp = object.getString("BLUFF");
+                temp = object.getString("BLUFF");
                 if(temp.equals("Yes")){
                     BLUFF = true;
                 } else {
                     BLUFF = false;
                 }
-                 temp = object.getString("STRS_BEACH");
+                temp = object.getString("STRS_BEACH");
                 if(temp.equals("Yes")){
                     STRS_BEACH = true;
                 } else {
@@ -186,13 +186,13 @@ public class DetailItemReader {
                 } else {
                     WLDLFE_VWG = false;
                 }
-                 temp = object.getString("TIDEPOOL");
+                temp = object.getString("TIDEPOOL");
                 if(temp.equals("Yes")){
                     TIDEPOOL = true;
                 } else {
                     TIDEPOOL = false;
                 }
-                 temp = object.getString("VOLLEYBALL");
+                temp = object.getString("VOLLEYBALL");
                 if(temp.equals("Yes")){
                     VOLLEYBALL = true;
                 } else {
@@ -210,12 +210,12 @@ public class DetailItemReader {
                 }
 
                 item = new DetailItem(title, ssnippet, id, District,
-                 CountyNum,
-                 COUNTY,
-                 NameMobileWeb,
-                 LocationMobileWeb, DescriptionMobileWeb, PHONE_NMBR, LIST_ORDER, GEOGR_AREA, LATITUDE, LONGITUDE,
+                        CountyNum,
+                        COUNTY,
+                        NameMobileWeb,
+                        LocationMobileWeb, DescriptionMobileWeb, PHONE_NMBR, LIST_ORDER, GEOGR_AREA, LATITUDE, LONGITUDE,
                         Photo_1,Photo_2,Photo_3,Photo_4, Bch_whlchr, BIKE_PATH, BT_FACIL_TYPE,
-                 FEE, PARKING, DSABLDACSS, RESTROOMS, VISTOR_CTR, DOG_FRIENDLY, EZ4STROLLERS, PCNC_AREA, CAMPGROUND,
+                        FEE, PARKING, DSABLDACSS, RESTROOMS, VISTOR_CTR, DOG_FRIENDLY, EZ4STROLLERS, PCNC_AREA, CAMPGROUND,
                         SNDY_BEACH, DUNES, RKY_SHORE, BLUFF, STRS_BEACH, PTH_BEACH,BLFTP_TRLS, BLFTP_PRK,WLDLFE_VWG,
                         TIDEPOOL, VOLLEYBALL, FISHING, BOATING);
             }
