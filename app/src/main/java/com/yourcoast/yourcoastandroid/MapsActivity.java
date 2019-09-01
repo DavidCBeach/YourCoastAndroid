@@ -125,7 +125,19 @@ public class MapsActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-            
+
+
+
+
+        //Test
+
+        DatabaseUtil dbu = new DatabaseUtil();
+        dbu.getLocation(this);
+
+
+
+
+
         //setContentView(R.layout.activity_search);
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
