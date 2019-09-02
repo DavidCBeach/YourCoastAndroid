@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Location;
 import android.provider.BaseColumns;
 import android.support.v7.widget.RecyclerView;
 
@@ -22,16 +23,21 @@ import com.yourcoast.yourcoastandroid.AccessPointData.CCCDataClient;
 
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
 public class DatabaseUtil {
-    private FeedReaderDbHelper dbHelper;
+
     private String locations_url = "https://api.coastal.ca.gov/access/v1/locations";
     private CCCDataClient adapter;
     private RecyclerView recyclerView;
+    Double userLat;
+    Double userLon;
 
 
     public void UpdateData(){
@@ -40,18 +46,19 @@ public class DatabaseUtil {
 
     }
 
-    private void Write(JsonElement content) {
+    private void Write(JsonElement content, Activity activity) {
+        FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(activity);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        SimpleDateFormat mdformat = new SimpleDateFormat("MM/dd/yyyy");
 
         JsonObject jo = content.getAsJsonObject();
 
-        values.put(FeedReaderContract.FeedEntry._ID , jo.get("ID").toString());
+
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DISTRICT , jo.get("DISTRICT").toString());
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_CountyNum , jo.get("CountyNum").toString());
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_COUNTY , jo.get("COUNTY").toString());
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DescriptionMobileWeb , jo.get("DescriptionMobileWeb").toString());
+        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_NameMobileWeb , jo.get("NameMobileWeb").toString());
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_PHONE_NMBR , jo.get("PHONE_NMBR").toString());
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_FEE , jo.get("FEE").toString());
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_PARKING , jo.get("PARKING").toString());
@@ -60,7 +67,7 @@ public class DatabaseUtil {
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_VISTOR_CTR , jo.get("VISTOR_CTR").toString());
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DOG_FRIENDLY , jo.get("DOG_FRIENDLY").toString());
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_EZ4STROLLERS , jo.get("EZ4STROLLERS").toString());
-        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_PCNC_AREA , jo.get("PCNC_AREA ").toString());
+        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_PCNC_AREA , jo.get("PCNC_AREA").toString());
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_CAMPGROUND , jo.get("CAMPGROUND").toString());
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_SNDY_BEACH , jo.get("SNDY_BEACH").toString());
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DUNES , jo.get("DUNES").toString());
@@ -96,7 +103,7 @@ public class DatabaseUtil {
         db.close();
     }
 
-    public void getLocation(Activity activity){
+    public void getLocation(final Activity activity){
         //volley string request
         StringRequest stringRequest = new StringRequest(Request.Method.GET, locations_url,
                 new Response.Listener<String>() {
@@ -105,7 +112,7 @@ public class DatabaseUtil {
                         Gson g = new Gson();
                         JsonArray ja = g.fromJson(response, JsonArray.class);
                         for(JsonElement r : ja){
-                            Write(r);
+                            Write(r, activity);
                         }
 
                         System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
@@ -126,5 +133,117 @@ public class DatabaseUtil {
                     }
                 });
         VolleySingleton.getInstance(activity).addToRequestQueue(stringRequest);
+    }
+
+
+    private List<MyItem> Read(Activity activity){
+        List<MyItem> items = new ArrayList<MyItem>();
+        FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(activity);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String[] projection = {
+                BaseColumns._ID,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_DISTRICT ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_CountyNum ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_COUNTY ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_DescriptionMobileWeb ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_NameMobileWeb ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_PHONE_NMBR ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_FEE ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_PARKING ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_DSABLDACSS ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_RESTROOMS ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_VISTOR_CTR ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_DOG_FRIENDLY ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_EZ4STROLLERS ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_PCNC_AREA ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_CAMPGROUND ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_SNDY_BEACH ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_DUNES ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_RKY_SHORE ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_BLUFF ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_STRS_BEACH ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_PTH_BEACH ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_BLFTP_TRLS ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_BLFTP_PRK ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_WLDLFE_VWG ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_TIDEPOOL ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_VOLLEYBALL ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_FISHING ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_BOATING ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_LIST_ORDER ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_GEOGR_AREA ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_LATITUDE ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_LONGITUDE ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_Photo_1 ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_Photo_2 ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_Photo_3 ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_Photo_4 ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_Bch_whlchr ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_BIKE_PATH ,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_BT_FACIL_TYPE
+        };
+
+        String selection = "";
+        String[] selectionArgs = {};
+        String sortOrder = "";
+
+
+        Cursor cursor = db.query(
+                FeedReaderContract.FeedEntry.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                sortOrder
+        );
+
+        Double distance = 0.0;
+        String contents = new String();
+        ArrayList<String> listCon = new ArrayList();
+        while(cursor.moveToNext()) {
+            String title = cursor.getString(
+                    cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_NameMobileWeb));
+            String name = cursor.getString(
+                    cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_NameMobileWeb));
+            String description = cursor.getString(
+                    cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_DescriptionMobileWeb));
+            Integer id = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_ID));
+            double lat = cursor.getFloat(
+                    cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_LATITUDE));
+            double lng = cursor.getFloat(
+                    cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_LONGITUDE));
+
+            String ssnippet = Integer.toString(id);
+
+            distance = getDistance(userLat, userLon, lat, lng);
+            Double dis = round(distance, 1);
+            items.add(new MyItem(lat, lng, title, ssnippet, id, name, description, dis));
+
+        }
+        cursor.close();
+        db.close();
+
+        return items;
+
+    }
+    public MyItemReader(Location location){
+        userLat = location.getLatitude();
+        userLon = location.getLongitude();
+    }
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
+    double earthRadius = 3956;
+    public double getDistance(double lat1, double long1, double lat2, double long2) {
+        double distance = Math.acos(Math.sin(lat2 * Math.PI / 180.0) * Math.sin(lat1 * Math.PI / 180.0) +
+                Math.cos(lat2 * Math.PI / 180.0) * Math.cos(lat1 * Math.PI / 180.0) *
+                        Math.cos((long1 - long2) * Math.PI / 180.0)) * earthRadius;
+        return distance;
     }
 }

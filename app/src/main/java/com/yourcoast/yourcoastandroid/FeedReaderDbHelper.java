@@ -7,11 +7,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class FeedReaderDbHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + FeedReaderContract.FeedEntry.TABLE_NAME + " (" +
-                    FeedReaderContract.FeedEntry._ID + " INTEGER PRIMARY KEY," +
+                    FeedReaderContract.FeedEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
     FeedReaderContract.FeedEntry.COLUMN_NAME_DISTRICT + " TEXT," +
     FeedReaderContract.FeedEntry.COLUMN_NAME_CountyNum + " TEXT," +
     FeedReaderContract.FeedEntry.COLUMN_NAME_COUNTY + " TEXT," +
     FeedReaderContract.FeedEntry.COLUMN_NAME_DescriptionMobileWeb + " TEXT," +
+    FeedReaderContract.FeedEntry.COLUMN_NAME_NameMobileWeb + " TEXT," +
     FeedReaderContract.FeedEntry.COLUMN_NAME_PHONE_NMBR + " TEXT," +
     FeedReaderContract.FeedEntry.COLUMN_NAME_FEE + " TEXT," +
     FeedReaderContract.FeedEntry.COLUMN_NAME_PARKING + " TEXT," +
@@ -37,8 +38,8 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
     FeedReaderContract.FeedEntry.COLUMN_NAME_BOATING + " TEXT," +
     FeedReaderContract.FeedEntry.COLUMN_NAME_LIST_ORDER + " TEXT," +
     FeedReaderContract.FeedEntry.COLUMN_NAME_GEOGR_AREA + " TEXT," +
-    FeedReaderContract.FeedEntry.COLUMN_NAME_LATITUDE + " INTEGER," +
-    FeedReaderContract.FeedEntry.COLUMN_NAME_LONGITUDE + " INTEGER," +
+    FeedReaderContract.FeedEntry.COLUMN_NAME_LATITUDE + " DECIMAL," +
+    FeedReaderContract.FeedEntry.COLUMN_NAME_LONGITUDE + " DECIMAL," +
     FeedReaderContract.FeedEntry.COLUMN_NAME_Photo_1 + " TEXT," +
     FeedReaderContract.FeedEntry.COLUMN_NAME_Photo_2 + " TEXT," +
     FeedReaderContract.FeedEntry.COLUMN_NAME_Photo_3 + " TEXT," +
@@ -51,7 +52,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
             "DROP TABLE IF EXISTS " + FeedReaderContract.FeedEntry.TABLE_NAME;
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 5;
+    public static final int DATABASE_VERSION = 7;
     public static final String DATABASE_NAME = "FeedReader.db";
 
     public FeedReaderDbHelper(Context context) {

@@ -17,6 +17,7 @@ public final class FeedReaderContract {
         public static final String COLUMN_NAME_CountyNum = "CountyNum";
         public static final String COLUMN_NAME_COUNTY = "NameMobileWeb";
         public static final String COLUMN_NAME_DescriptionMobileWeb = "DescriptionMobileWeb";
+        public static final String COLUMN_NAME_NameMobileWeb = "NameMobileWeb";
         public static final String COLUMN_NAME_PHONE_NMBR = "PHONE_NMBR";
         public static final String COLUMN_NAME_FEE = "FEE";
         public static final String COLUMN_NAME_PARKING = "PARKING";

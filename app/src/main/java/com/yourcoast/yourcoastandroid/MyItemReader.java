@@ -106,19 +106,18 @@ public class MyItemReader implements Serializable {
             String description = null;
 
             JSONObject object = array.getJSONObject(i);
-            double lat = object.getDouble("LATITUDE");
-            double lng = object.getDouble("LONGITUDE");
+            double lat =;
+            double lng = ;
 
-            int id = object.getInt("ID");
-            Integer snippet = object.getInt("ID");
-            String ssnippet = snippet.toString();
+            int id = ; ;
+            String ssnippet = id;
             if (!object.isNull("NameMobileWeb")) {
-                title = object.getString("NameMobileWeb");
-                name = object.getString("NameMobileWeb");
+                title = ;
+                name = ;
             }
 
             if (!object.isNull("DescriptionMobileWeb")) {
-                description = object.getString("DescriptionMobileWeb");
+                description = ;
             }
             distance = getDistance(userLat, userLon, lat, lng);
             Double dis = round(distance, 1);
