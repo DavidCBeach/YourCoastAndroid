@@ -39,11 +39,13 @@ public class DatabaseUtil {
     Double userLat;
     Double userLon;
 
-
-    public void UpdateData(){
-
-
-
+    public DatabaseUtil(Location location){
+        userLat = location.getLatitude();
+        userLon = location.getLongitude();
+    }
+    public DatabaseUtil(){
+        userLat = null;
+        userLon = null;
     }
 
     private void Write(JsonElement content, Activity activity) {
@@ -136,7 +138,7 @@ public class DatabaseUtil {
     }
 
 
-    private List<MyItem> Read(Activity activity){
+    public List<MyItem> Read(Activity activity){
         List<MyItem> items = new ArrayList<MyItem>();
         FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(activity);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -200,8 +202,6 @@ public class DatabaseUtil {
         );
 
         Double distance = 0.0;
-        String contents = new String();
-        ArrayList<String> listCon = new ArrayList();
         while(cursor.moveToNext()) {
             String title = cursor.getString(
                     cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_NameMobileWeb));
@@ -210,7 +210,7 @@ public class DatabaseUtil {
             String description = cursor.getString(
                     cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_DescriptionMobileWeb));
             Integer id = cursor.getInt(
-                    cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_ID));
+                    cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry._ID));
             double lat = cursor.getFloat(
                     cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_LATITUDE));
             double lng = cursor.getFloat(
@@ -225,14 +225,9 @@ public class DatabaseUtil {
         }
         cursor.close();
         db.close();
-
         return items;
+    }
 
-    }
-    public MyItemReader(Location location){
-        userLat = location.getLatitude();
-        userLon = location.getLongitude();
-    }
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
         BigDecimal bd = new BigDecimal(value);

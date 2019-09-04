@@ -91,40 +91,40 @@ public class MyItemReader implements Serializable {
         return items;
     }
 
-    public List<MyItem> read(InputStream inputStream) throws JSONException {
-
-        List<MyItem> items = new ArrayList<MyItem>();
-        Scanner myScanner = new Scanner(inputStream);
-        String json = new String();
-        json =myScanner.useDelimiter(REGEX_INPUT_BOUNDARY_BEGINNING).next();
-
-
-        JSONArray array = new JSONArray(json);
-        for (int i = 0; i < array.length(); i++) {
-            String title = null;
-            String name = null;
-            String description = null;
-
-            JSONObject object = array.getJSONObject(i);
-            double lat =;
-            double lng = ;
-
-            int id = ; ;
-            String ssnippet = id;
-            if (!object.isNull("NameMobileWeb")) {
-                title = ;
-                name = ;
-            }
-
-            if (!object.isNull("DescriptionMobileWeb")) {
-                description = ;
-            }
-            distance = getDistance(userLat, userLon, lat, lng);
-            Double dis = round(distance, 1);
-            items.add(new MyItem(lat, lng, title, ssnippet, id, name, description, dis));
-        }
-        return items;
-    }
+//    public List<MyItem> read(InputStream inputStream) throws JSONException {
+//
+//        List<MyItem> items = new ArrayList<MyItem>();
+//        Scanner myScanner = new Scanner(inputStream);
+//        String json = new String();
+//        json =myScanner.useDelimiter(REGEX_INPUT_BOUNDARY_BEGINNING).next();
+//
+//
+//        JSONArray array = new JSONArray(json);
+//        for (int i = 0; i < array.length(); i++) {
+//            String title = null;
+//            String name = null;
+//            String description = null;
+//
+//            JSONObject object = array.getJSONObject(i);
+//            //double lat =;
+//            //double lng = ;
+//
+//            int id = ; ;
+//            //String ssnippet = id;
+//            if (!object.isNull("NameMobileWeb")) {
+//                title = ;
+//                name = ;
+//            }
+//
+//            if (!object.isNull("DescriptionMobileWeb")) {
+//                description = ;
+//            }
+//            //distance = getDistance(userLat, userLon, lat, lng);
+//            Double dis = round(distance, 1);
+//            ///.add(new MyItem(lat, lng, title, ssnippet, id, name, description, dis));
+//        }
+//        return items;
+//    }
 
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();

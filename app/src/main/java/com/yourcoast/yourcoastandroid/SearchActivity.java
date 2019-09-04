@@ -152,7 +152,7 @@ public class SearchActivity extends AppCompatActivity implements com.yourcoast.y
 
     private void readItems(Location location) throws JSONException {
         InputStream inputStream = getResources().openRawResource(R.raw.access_points);
-        items = new MyItemReader(location).read(inputStream);
+        items = new DatabaseUtil(location).Read(this);
     }
 
     //creates list

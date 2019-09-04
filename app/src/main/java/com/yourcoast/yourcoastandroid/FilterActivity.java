@@ -593,7 +593,7 @@ public class FilterActivity extends AppCompatActivity implements Serializable {
 
     private void readItems(Location location) throws JSONException {
         InputStream inputStream = getResources().openRawResource(R.raw.access_points);
-        testFilter = new MyItemReader(location).read(inputStream);
+        testFilter = new DatabaseUtil(location).Read(this);
     }
     private void readItemsF(Location location) throws JSONException {
         InputStream inputStream = getResources().openRawResource(R.raw.access_points);

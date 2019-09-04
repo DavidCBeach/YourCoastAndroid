@@ -127,15 +127,10 @@ public class MapsActivity extends AppCompatActivity
         setContentView(R.layout.activity_maps);
 
 
-
-
         //Test
 
         DatabaseUtil dbu = new DatabaseUtil();
         dbu.getLocation(this);
-
-
-
 
 
         //setContentView(R.layout.activity_search);
@@ -369,18 +364,18 @@ public class MapsActivity extends AppCompatActivity
         logCheck();
         if(fList != null){
             if(!fList.isEmpty()) {
-                items = new MyItemReader(location).readByID(inputStream,fList);
+                items = new DatabaseUtil(location).Read(this);
                 Log.d("FinalListSize", "finalList Size: " + items.size());
                 mClusterManager.addItems(items);
             }   else {
-                items = new MyItemReader(location).read(inputStream);
+                items = new DatabaseUtil(location).Read(this);
                 //creates recyclerview
                 //setList();
                 mClusterManager.addItems(items);
             }
         }
         else {
-            items = new MyItemReader(location).read(inputStream);
+            items = new DatabaseUtil(location).Read(this);
             //creates recyclerview
             //setList();
             mClusterManager.addItems(items);
