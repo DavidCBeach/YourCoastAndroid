@@ -113,10 +113,13 @@ public class DatabaseUtil {
                     public void onResponse(String response) {
                         Gson g = new Gson();
                         JsonArray ja = g.fromJson(response, JsonArray.class);
+                        FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(activity);
+                        SQLiteDatabase db = dbHelper.getWritableDatabase();
+                        db.execSQL("delete from "+ FeedReaderContract.FeedEntry.TABLE_NAME);
+                        db.close();
                         for(JsonElement r : ja){
                             Write(r, activity);
                         }
-
                         System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 //                        //response is json object, parse using GSON
 //                        GsonBuilder builder = new GsonBuilder();
@@ -217,7 +220,9 @@ public class DatabaseUtil {
                     cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_LONGITUDE));
 
             String ssnippet = Integer.toString(id);
-
+            title = title.substring(1,title.length()-1);
+            name = name.substring(1,name.length()-1);
+            description = description.substring(1,description.length()-1);
             distance = getDistance(userLat, userLon, lat, lng);
             Double dis = round(distance, 1);
             items.add(new MyItem(lat, lng, title, ssnippet, id, name, description, dis));
