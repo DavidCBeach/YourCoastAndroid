@@ -13,6 +13,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
     FeedReaderContract.FeedEntry.COLUMN_NAME_COUNTY + " TEXT," +
     FeedReaderContract.FeedEntry.COLUMN_NAME_DescriptionMobileWeb + " TEXT," +
     FeedReaderContract.FeedEntry.COLUMN_NAME_NameMobileWeb + " TEXT," +
+    FeedReaderContract.FeedEntry.COLUMN_NAME_LocationMobileWeb + " TEXT," +
     FeedReaderContract.FeedEntry.COLUMN_NAME_PHONE_NMBR + " TEXT," +
     FeedReaderContract.FeedEntry.COLUMN_NAME_FEE + " TEXT," +
     FeedReaderContract.FeedEntry.COLUMN_NAME_PARKING + " TEXT," +
@@ -52,7 +53,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
             "DROP TABLE IF EXISTS " + FeedReaderContract.FeedEntry.TABLE_NAME;
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 9;
+    public static final int DATABASE_VERSION = 11;
     public static final String DATABASE_NAME = "FeedReader.db";
 
     public FeedReaderDbHelper(Context context) {

@@ -69,10 +69,8 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         InputStream inputStream = getResources().openRawResource(R.raw.access_points);
         try {
 
-            details = detailItemReader.read(id, inputStream );
+            details = new DatabaseUtil().ReadbyID(this,id);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
