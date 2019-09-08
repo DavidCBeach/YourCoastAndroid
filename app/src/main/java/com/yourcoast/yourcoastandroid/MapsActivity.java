@@ -1,5 +1,12 @@
 package com.yourcoast.yourcoastandroid;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.yourcoast.yourcoastandroid.AccessPointData.ListItemAdapter;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -21,9 +28,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -127,10 +136,8 @@ public class MapsActivity extends AppCompatActivity
         setContentView(R.layout.activity_maps);
 
 
-        //Test
 
-        DatabaseUtil dbu = new DatabaseUtil();
-        dbu.getLocation(this);
+
 
 
         //setContentView(R.layout.activity_search);
@@ -242,13 +249,34 @@ public class MapsActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        prefs = getSharedPreferences("com.exmample.yourcoastandroid", MODE_PRIVATE);
+        prefs = getSharedPreferences("com.yourcoast.yourcoastandroid", MODE_PRIVATE);
         if (prefs.getBoolean("firstrun", true)) {
             // Do first run stuff here then set 'firstrun' as false
             startActivity(new Intent(this, StartActivity.class));
-            // using the following line to edit/commit prefs
             prefs.edit().putBoolean("firstrun", false).commit();
         }
+        final Activity activity = this;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, locations_url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        if (!prefs.getString("olddata", "").equals(response)) {
+                            // Do first run stuff here then set 'firstrun' as false
+                            DatabaseUtil dbu = new DatabaseUtil();
+                            dbu.getLocation(response, activity);
+                            prefs.edit().putString("olddata", response).commit();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+
     }
     @Override
     public void onMapReady(GoogleMap map) {

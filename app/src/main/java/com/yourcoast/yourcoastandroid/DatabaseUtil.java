@@ -3,11 +3,14 @@ package com.yourcoast.yourcoastandroid;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.provider.BaseColumns;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -21,6 +24,7 @@ import com.google.gson.JsonObject;
 import com.yourcoast.yourcoastandroid.AccessPointData.CCCAccPtDataStructure;
 import com.yourcoast.yourcoastandroid.AccessPointData.CCCDataClient;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
@@ -30,6 +34,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class DatabaseUtil {
 
@@ -55,7 +61,7 @@ public class DatabaseUtil {
 
         JsonObject jo = content.getAsJsonObject();
 
-
+        values.put(BaseColumns._ID , jo.get("ID").toString());
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DISTRICT , jo.get("DISTRICT").toString());
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_CountyNum , jo.get("CountyNum").toString());
         values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_COUNTY , jo.get("COUNTY").toString());
@@ -106,21 +112,18 @@ public class DatabaseUtil {
         db.close();
     }
 
-    public void getLocation(final Activity activity){
-        //volley string request
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, locations_url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Gson g = new Gson();
-                        JsonArray ja = g.fromJson(response, JsonArray.class);
-                        FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(activity);
-                        SQLiteDatabase db = dbHelper.getWritableDatabase();
-                        db.execSQL("delete from "+ FeedReaderContract.FeedEntry.TABLE_NAME);
-                        db.close();
-                        for(JsonElement r : ja){
-                            Write(r, activity);
-                        }
+    public void getLocation(String response, Activity activity){
+
+
+        Gson g = new Gson();
+        JsonArray ja = g.fromJson(response, JsonArray.class);
+        FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(activity);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.execSQL("delete from "+ FeedReaderContract.FeedEntry.TABLE_NAME);
+        db.close();
+        for(JsonElement r : ja){
+            Write(r, activity);
+        }
 
 //                        //response is json object, parse using GSON
 //                        GsonBuilder builder = new GsonBuilder();
@@ -130,16 +133,9 @@ public class DatabaseUtil {
 //                        //ArrayList<CCCAccPtDataStructure> list = (ArrayList<CCCAccPtDataStructure>) Arrays.asList(gson.fromJson(response, CCCAccPtDataStructure[].class));
 //                        adapter = new CCCDataClient(list);
 //                        recyclerView.setAdapter(adapter);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                });
-        VolleySingleton.getInstance(activity).addToRequestQueue(stringRequest);
     }
+
+
 
 
     public List<MyItem> Read(Activity activity){
@@ -235,7 +231,7 @@ public class DatabaseUtil {
     }
 
     public DetailItem ReadbyID(Activity activity, String Id){
-        List<MyItem> items = new ArrayList<MyItem>();
+        Log.d("snake",Id);
         FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(activity);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String District;
@@ -307,14 +303,9 @@ public class DatabaseUtil {
                 sortOrder
         );
         DetailItem item = new DetailItem();
-        Double distance = 0.0;
         while(cursor.moveToNext()) {
             String title = cursor.getString(
                     cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_NameMobileWeb));
-            String name = cursor.getString(
-                    cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_NameMobileWeb));
-            String description = cursor.getString(
-                    cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_DescriptionMobileWeb));
             Integer id = cursor.getInt(
                     cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry._ID));
             double lat = cursor.getFloat(
@@ -324,12 +315,12 @@ public class DatabaseUtil {
 
             String ssnippet = Integer.toString(id);
             title = title.substring(1,title.length()-1);
-            name = name.substring(1,name.length()-1);
-            description = description.substring(1,description.length()-1);
-            distance = getDistance(userLat, userLon, lat, lng);
-            Double dis = round(distance, 1);
-            CountyNum=  Integer.getInteger(cursor.getString(
-                    cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_CountyNum)));
+
+
+
+
+
+
 
             Integer snippet = id;
             ssnippet =  id.toString();
@@ -384,7 +375,7 @@ public class DatabaseUtil {
 
 
 
-
+            Log.d("snake",LocationMobileWeb);
 
 
 
@@ -557,9 +548,9 @@ public class DatabaseUtil {
             } else {
                 BOATING = false;
             }
-
+            Log.d("value",title);
             item = new DetailItem(title, ssnippet, id, District,
-                    CountyNum,
+                    -1,
                     COUNTY,
                     NameMobileWeb,
                     LocationMobileWeb, DescriptionMobileWeb, PHONE_NMBR, LIST_ORDER, GEOGR_AREA, LATITUDE, LONGITUDE,
@@ -567,11 +558,13 @@ public class DatabaseUtil {
                     FEE, PARKING, DSABLDACSS, RESTROOMS, VISTOR_CTR, DOG_FRIENDLY, EZ4STROLLERS, PCNC_AREA, CAMPGROUND,
                     SNDY_BEACH, DUNES, RKY_SHORE, BLUFF, STRS_BEACH, PTH_BEACH,BLFTP_TRLS, BLFTP_PRK,WLDLFE_VWG,
                     TIDEPOOL, VOLLEYBALL, FISHING, BOATING);
+            Log.d("brgotr", String.valueOf(item));
         }
 
 
         cursor.close();
         db.close();
+        Log.d("brgotr", String.valueOf(item));
         return item;
     }
 

@@ -68,17 +68,15 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         DetailItemReader detailItemReader = new DetailItemReader();
         InputStream inputStream = getResources().openRawResource(R.raw.access_points);
         try {
-
             details = new DatabaseUtil().ReadbyID(this,id);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         //centerTitle();
         //getActionBar().setDisplayHomeAsUpEnabled(false);
 
         //System.out.println(details.RESTROOMS);
         TextView textViewToChange = (TextView) findViewById(R.id.address);
+        Log.d("snake", String.valueOf(details));
         textViewToChange.setText(details.LocationMobileWeb.toString());
         textViewToChange = (TextView) findViewById(R.id.titlecard);
         textViewToChange.setText(details.NameMobileWeb.toString());
@@ -188,13 +186,18 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         if(!details.BOATING){
             RelativeLayout item =  findViewById(R.id.BoatingLayout);
             ((ViewManager)item.getParent()).removeView(item);
+
+        }
+            loadXMLPage();
+
+            SupportMapFragment mapFragment =
+                    (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+            mapFragment.getMapAsync(this);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        loadXMLPage();
 
-        SupportMapFragment mapFragment =
-                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
 
     }
 
