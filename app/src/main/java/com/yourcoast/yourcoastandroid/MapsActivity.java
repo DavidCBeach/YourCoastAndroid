@@ -266,6 +266,8 @@ public class MapsActivity extends AppCompatActivity
                             DatabaseUtil dbu = new DatabaseUtil();
                             dbu.getLocation(response, activity);
                             prefs.edit().putString("olddata", response).commit();
+                            //adapter = new ListItemAdapter(itemsInView, new ListItemAdapter());
+                            recyclerView.setAdapter(adapter);
                         }
                     }
                 },
