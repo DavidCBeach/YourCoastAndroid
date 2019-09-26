@@ -28,5 +28,9 @@
     <style name="SwitchTheme" parent="Theme.AppCompat.Light">
         <item name="android:colorControlActivated">@color/colorPrimary</item>
     </style>
-
+    <style name="WallSearchView" parent="Widget.AppCompat.SearchView">
+        ...
+        <item name="iconifiedByDefault">false</item>
+        <item name="colorControlActivated">#858585</item>
+    </style>
 </resources>

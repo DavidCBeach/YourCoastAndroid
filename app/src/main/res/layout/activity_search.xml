@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:iconifiedByDefault="false"
-        android:queryHint="Search...">
+        android:queryHint="Search..."
+        android:textCursorDrawable="@null"
+        android:theme="@style/WallSearchView">
 
     </SearchView>
 
