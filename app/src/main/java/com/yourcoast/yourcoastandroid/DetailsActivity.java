@@ -59,6 +59,8 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
     private FragmentManager fm = getSupportFragmentManager();
     private PhotoInfoDialog photoDialogFragment = new PhotoInfoDialog();
     private PhotoPickActivity photoPicker = new PhotoPickActivity();
+    private int PhotoNumber;
+    private int PhotoLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,13 +198,14 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        setSwipes();
 
 
     }
 
     private void loadXMLPage()
     {
+        PhotoNumber = 0;
         if(details.Photo_1.equals("")){
             TextView scroll =  findViewById(R.id.photos);
             ((ViewManager)scroll.getParent()).removeView(scroll);
@@ -214,6 +217,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             item.setInitialScale(90);
             item.loadUrl(details.Photo_1);
             System.out.println("Photo1");
+            PhotoNumber += 1;
 
         }
         if(details.Photo_2.equals("")){
@@ -224,6 +228,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             item.setInitialScale(90);
             item.loadUrl(details.Photo_2);
             System.out.println("Photo2");
+            PhotoNumber += 1;
         }
         if(details.Photo_3.equals("")){
             WebView item =  findViewById(R.id.photo3);
@@ -233,6 +238,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             item.setInitialScale(90);
             item.loadUrl(details.Photo_3);
             System.out.println("Photo3");
+            PhotoNumber += 1;
         }
         if(details.Photo_4.equals("")){
             WebView item =  findViewById(R.id.photo4);
@@ -242,11 +248,8 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
             item.setInitialScale(90);
             item.loadUrl(details.Photo_4);
             System.out.println("Photo4");
+            PhotoNumber += 1;
         }
-
-
-
-
     }
 
     @Override
@@ -426,7 +429,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         item.getSettings().setBuiltInZoomControls(true);
         item.getSettings().setDisplayZoomControls(false);
         zoom(item);
-
+        PhotoLocation = 0;
     }
     private void zoom(final WebView item){
         final Handler handler = new Handler();
@@ -449,6 +452,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         item.getSettings().setBuiltInZoomControls(true);
         item.getSettings().setDisplayZoomControls(false);
         zoom(item);
+        PhotoLocation = 1;
     }
     public void photo3click(View view) {
 
@@ -461,6 +465,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         item.getSettings().setBuiltInZoomControls(true);
         item.getSettings().setDisplayZoomControls(false);
         zoom(item);
+        PhotoLocation = 2;
     }
     public void photo4click(View view) {
 
@@ -473,6 +478,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         item.getSettings().setBuiltInZoomControls(true);
         item.getSettings().setDisplayZoomControls(false);
         zoom(item);
+        PhotoLocation = 3;
     }
 
     public void photobigno(View view) {
@@ -480,6 +486,34 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         sv.setVisibility(View.VISIBLE);
         RelativeLayout item =  findViewById(R.id.photobigcon);
         item.setVisibility(View.GONE);
+
+    }
+
+//maybe make photo viewing a whole new activity
+    private void setSwipes(){
+        RelativeLayout rl = findViewById(R.id.photobigcon);
+        rl.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
+
+            public void onSwipeRight() {
+                SwipeRight();
+            }
+            public void onSwipeLeft() {
+                SwipeLeft();
+            }
+        });
+
+    }
+    private void SwipeRight() {
+        if(PhotoLocation >= 1){
+            PhotoLocation--;
+            //change to the previous photo
+        }
+    }
+    private void SwipeLeft()  {
+        if(PhotoLocation < PhotoNumber){
+            PhotoLocation++;
+            //change to the next photo
+        }
 
     }
 }
