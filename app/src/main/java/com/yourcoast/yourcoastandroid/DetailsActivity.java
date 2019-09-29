@@ -414,7 +414,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         }
     }
 
-
+    //TODO: make it like the slide back and forth in taskdoday? or maybe do it like ths slides?
     public void photo1click(View view) {
 
         ScrollView sv = findViewById(R.id.scroll);
