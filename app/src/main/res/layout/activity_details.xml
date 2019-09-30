@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
+        android:backgroundTint="@color/black"
         android:id="@+id/photobigcon">
         <Button
             android:layout_width="50dp"

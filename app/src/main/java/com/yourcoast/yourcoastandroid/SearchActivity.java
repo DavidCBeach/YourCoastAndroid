@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
+//TODO: make search with descriptions being searchable
 public class SearchActivity extends AppCompatActivity implements com.yourcoast.yourcoastandroid.AccessPointData.SearchItemAdapter.onItemListener{
 
     private List<MyItem> items;

@@ -6,6 +6,7 @@
     <color name="colorPrimary">#27a2f8</color>
     <color name="colorPrimaryDark">#27a2f8</color>
     <color name="colorAccent">#ffffff</color>
+    <color name="black">#000000</color>
 
 
     <color name="bg_mainactivity">#d4e6e3</color>

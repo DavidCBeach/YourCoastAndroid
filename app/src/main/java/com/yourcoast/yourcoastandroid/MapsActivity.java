@@ -302,6 +302,7 @@ public class MapsActivity extends AppCompatActivity
         mClusterManager = new ClusterManager<>(this, mMap);
         CustomRenderer customRenderer = new CustomRenderer();
         mClusterManager.setRenderer(customRenderer);
+        mClusterManager.setOnClusterClickListener(mClusterClickListener);
         mMap.setOnCameraIdleListener(this);
         mMap.setOnMarkerClickListener(this);
         mMap.setOnInfoWindowClickListener(this);

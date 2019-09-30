@@ -425,6 +425,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         WebView item =  findViewById(R.id.photobig);
         RelativeLayout layout = findViewById(R.id.photobigcon);
         layout.setVisibility(View.VISIBLE);
+        layout.setBackground(getDrawable(R.color.black));
         item.loadUrl(details.Photo_1);
         item.getSettings().setBuiltInZoomControls(true);
         item.getSettings().setDisplayZoomControls(false);
@@ -448,6 +449,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         WebView item =  findViewById(R.id.photobig);
         RelativeLayout layout = findViewById(R.id.photobigcon);
         layout.setVisibility(View.VISIBLE);
+        layout.setBackground(getDrawable(R.color.black));
         item.loadUrl(details.Photo_2);
         item.getSettings().setBuiltInZoomControls(true);
         item.getSettings().setDisplayZoomControls(false);
@@ -461,6 +463,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         WebView item =  findViewById(R.id.photobig);
         RelativeLayout layout = findViewById(R.id.photobigcon);
         layout.setVisibility(View.VISIBLE);
+        layout.setBackground(getDrawable(R.color.black));
         item.loadUrl(details.Photo_3);
         item.getSettings().setBuiltInZoomControls(true);
         item.getSettings().setDisplayZoomControls(false);
@@ -474,6 +477,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
         WebView item =  findViewById(R.id.photobig);
         RelativeLayout layout = findViewById(R.id.photobigcon);
         layout.setVisibility(View.VISIBLE);
+        layout.setBackground(getDrawable(R.color.black));
         item.loadUrl(details.Photo_4);
         item.getSettings().setBuiltInZoomControls(true);
         item.getSettings().setDisplayZoomControls(false);
@@ -491,7 +495,7 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
 //maybe make photo viewing a whole new activity
     private void setSwipes(){
-        RelativeLayout rl = findViewById(R.id.photobigcon);
+        WebView rl = findViewById(R.id.photobig);
         rl.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
 
             public void onSwipeRight() {
@@ -504,15 +508,41 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
 
     }
     private void SwipeRight() {
+        //Toast.makeText(this, "swiperight", Toast.LENGTH_SHORT).show();
         if(PhotoLocation >= 1){
             PhotoLocation--;
-            //change to the previous photo
+            if(PhotoLocation == 0){
+                photo1click(findViewById(R.id.photobigcon));
+            }
+            if(PhotoLocation == 1){
+                photo2click(findViewById(R.id.photobigcon));
+            }
+            if(PhotoLocation == 2){
+                photo3click(findViewById(R.id.photobigcon));
+            }
+            if(PhotoLocation == 3){
+                photo4click(findViewById(R.id.photobigcon));
+            }
+            SlideAnimationUtil.slideInFromLeft(getApplicationContext(), findViewById(R.id.photobig));
         }
     }
     private void SwipeLeft()  {
-        if(PhotoLocation < PhotoNumber){
+        //Toast.makeText(this, "swipeleft", Toast.LENGTH_SHORT).show();
+        if(PhotoLocation < PhotoNumber-1){
             PhotoLocation++;
-            //change to the next photo
+            if(PhotoLocation == 0){
+                photo1click(findViewById(R.id.photobigcon));
+            }
+            if(PhotoLocation == 1){
+                photo2click(findViewById(R.id.photobigcon));
+            }
+            if(PhotoLocation == 2){
+                photo3click(findViewById(R.id.photobigcon));
+            }
+            if(PhotoLocation == 3){
+                photo4click(findViewById(R.id.photobigcon));
+            }
+            SlideAnimationUtil.slideInFromRight(getApplicationContext(), findViewById(R.id.photobig));
         }
 
     }
