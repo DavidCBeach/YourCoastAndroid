@@ -30,20 +30,21 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.My
     @NonNull
     @Override
     public SearchItemAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.search_item,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item_view,viewGroup,false);
         return new MyViewHolder(view, onItemListener);
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView NameMobileWeb, Distance;
+        TextView NameMobileWeb, Distance, Desciptor;
         onItemListener onItemListener;
         CardView cardView;
 
         public MyViewHolder(@NonNull View itemView, onItemListener onItemListener) {
             super(itemView);
 
-            NameMobileWeb = (TextView)itemView.findViewById(R.id.location);
-            Distance = (TextView)itemView.findViewById(R.id.Distance);
+            NameMobileWeb = (TextView)itemView.findViewById(R.id.nameMobileWeb);
+            Desciptor = (TextView)itemView.findViewById(R.id.descriptionMobileWeb);
+            Distance = (TextView)itemView.findViewById(R.id.distance);
             this.onItemListener = onItemListener;
             itemView.setOnClickListener(this);
 
@@ -66,6 +67,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.My
             Log.d("list", "index: " + i + " id: " + list.get(i).getID() + " name: " + list.get(i).getName());
             viewHolder.NameMobileWeb.setText(list.get(i).getName());
             viewHolder.Distance.setText(new StringBuilder().append(String.valueOf(list.get(i).getDistance())).append(distance).toString());
+            viewHolder.Desciptor.setText(list.get(i).getDescription());
     }
   
     @Override

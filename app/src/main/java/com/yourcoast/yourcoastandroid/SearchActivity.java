@@ -100,7 +100,7 @@ public class SearchActivity extends AppCompatActivity implements com.yourcoast.y
                     for(MyItem item : items){
                         try {
                             //name match condition
-                            if (item.getName().toLowerCase().contains(charString.toLowerCase())) { filtered.add(item); }
+                            if ((item.getName()+item.getDescription()).toLowerCase().contains(charString.toLowerCase())) { filtered.add(item); }
                         }catch(IndexOutOfBoundsException index){
                             throw index;
                         }
@@ -151,7 +151,6 @@ public class SearchActivity extends AppCompatActivity implements com.yourcoast.y
     }
 
     private void readItems(Location location) throws JSONException {
-        InputStream inputStream = getResources().openRawResource(R.raw.access_points);
         items = new DatabaseUtil(location).Read(this);
     }
 
